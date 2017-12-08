@@ -26285,3 +26285,14 @@
 [    729360] [{"locked":false},{"locked":false},{"locked":false},{"locked":false},{"locked":false}]
 [    881985] Sending heartbeat to live-internal.fivem.net:30110
 [   1062016] Sending heartbeat to live-internal.fivem.net:30110
+[   1157610] hitch warning: frame time of 170 milliseconds
+[   1162782] hitch warning: frame time of 270 milliseconds
+[   1162907] hitch warning: frame time of 1117 milliseconds
+[   1166828] hitch warning: frame time of 197 milliseconds
+[   1166985] hitch warning: frame time of 2932 milliseconds
+[   1167188] hitch warning: frame time of 171 milliseconds
+[   1176891] Stopping resource radio
+[   1176922] Started resource radio
+[   1209875] Stopping resource radio
+[   1209907] Started resource radio
+[   1242032] Sending heartbeat to live-internal.fivem.net:30110
