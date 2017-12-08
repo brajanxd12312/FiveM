@@ -1,0 +1,11 @@
+The file spawnpoints.xml MUST (M U S T) go in your root data folder.
+
+Aka the same folder where your server.cfg is.
+
+This is not negotiable..
+
+
+
+ALSO
+
+You CANNOT rename the folders (e.g. fiskeymods-leo MUST stay fiskeymods-leo and MUST not be in any additional subfolders)

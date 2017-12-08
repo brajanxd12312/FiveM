@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<AccessSettings>
+  <Police>
+    <Off>0</Off>
+    <General>6</General>
+    <Advanced>7</Advanced>
+    <Senior>8</Senior>
+    <Dispatch>9</Dispatch>
+  </Police>
+  <Fire>
+    <Off>0</Off>
+    <General>3</General>
+    <Advanced>4</Advanced>
+    <Admin>5</Admin>
+  </Fire>
+</AccessSettings>

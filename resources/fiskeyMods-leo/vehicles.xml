@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Police>
+  <Vehicle>
+    <ModelName>POLICE</ModelName>
+    <SpotOffset>
+      <X>-1.2</X>
+      <Y>0.4</Y>
+      <Z>2.6</Z>
+    </SpotOffset>
+	<Extra />
+  </Vehicle>
+  <Vehicle>
+    <ModelName>POLICE2</ModelName>
+    <SpotOffset>
+      <X>-0.8</X>
+      <Y>-1.1</Y>
+      <Z>0.7</Z>
+    </SpotOffset>
+	<Extra />
+  </Vehicle>
+  <Vehicle>
+    <ModelName>POLICE3</ModelName>
+    <SpotOffset>
+      <X>-0.9</X>
+      <Y>0.8</Y>
+      <Z>0.7</Z>
+    </SpotOffset>
+	<Extra />
+  </Vehicle>
+  <Vehicle>
+    <ModelName>POLICE4</ModelName>
+    <SpotOffset>
+      <X>-0.8</X>
+      <Y>-0.8</Y>
+      <Z>1.1</Z>
+    </SpotOffset>
+	<Extra />
+  </Vehicle>
+  <Vehicle>
+    <ModelName>SHERIFF</ModelName>
+    <SpotOffset>
+      <X>-0.9</X>
+      <Y>0.4</Y>
+      <Z>0.8</Z>
+    </SpotOffset>
+    <Extras>
+      <Extra>1</Extra>
+    </Extras>
+  </Vehicle>
+  <Vehicle>
+    <ModelName>SHERIFF2</ModelName>
+    <SpotOffset>
+      <X>-0.9</X>
+      <Y>-0.8</Y>
+      <Z>0.8</Z>
+    </SpotOffset>
+	<Extra />
+  </Vehicle>
+  <Vehicle>
+    <ModelName>FBI</ModelName>
+    <SpotOffset>
+      <X>-0.8</X>
+      <Y>1.0</Y>
+      <Z>0.7</Z>
+    </SpotOffset>
+	<Extra />
+  </Vehicle>
+  <Vehicle>
+    <ModelName>FBI2</ModelName>
+    <SpotOffset>
+      <X>-0.9</X>
+      <Y>1.4</Y>
+      <Z>0.9</Z>
+    </SpotOffset>
+	<Extra />
+  </Vehicle>
+  <Vehicle>
+    <ModelName>PRANGER</ModelName>
+    <SpotOffset>
+      <X>-1.0</X>
+      <Y>1.0</Y>
+      <Z>1.0</Z>
+    </SpotOffset>
+	<Extra />
+  </Vehicle>
+</Police>
