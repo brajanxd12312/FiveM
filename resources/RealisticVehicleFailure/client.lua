@@ -19,11 +19,11 @@ local displayBlips = true					-- Show blips for mechanics locations
 
 -- id=446 for wrench icon, id=72 for spraycan icon
 local mechanics = {
-	{name="Mechanic", id=446, r=20.0, x=-337.0,  y=-135.0,  z=39.0},	-- LSC Burton
-	{name="Mechanic", id=446, r=20.0, x=-1155.0, y=-2007.0, z=13.0},	-- LSC by airport
-	{name="Mechanic", id=446, r=20.0, x=734.0,   y=-1085.0, z=22.0},	-- LSC La Mesa
-	{name="Mechanic", id=446, r=20.0, x=1177.0,  y=2640.0,  z=37.0},	-- LSC Harmony
-	{name="Mechanic", id=446, r=20.0, x=108.0,   y=6624.0,  z=31.0},	-- LSC Paleto Bay
+	--{name="Mechanic", id=446, r=20.0, x=-337.0,  y=-135.0,  z=39.0},	-- LSC Burton
+	--{name="Mechanic", id=446, r=20.0, x=-1155.0, y=-2007.0, z=13.0},	-- LSC by airport
+	--{name="Mechanic", id=446, r=20.0, x=734.0,   y=-1085.0, z=22.0},	-- LSC La Mesa
+	--{name="Mechanic", id=446, r=20.0, x=1177.0,  y=2640.0,  z=37.0},	-- LSC Harmony
+	--{name="Mechanic", id=446, r=20.0, x=108.0,   y=6624.0,  z=31.0},	-- LSC Paleto Bay
 	{name="Mechanic", id=446, r=15.0, x=538.0,   y=-183.0,  z=54.0},	-- Mechanic Hawic
 	{name="Mechanic", id=446, r=10.0, x=1774.0,  y=3333.0,  z=41.0},	-- Mechanic Sandy Shores Airfield
 	{name="Mechanic", id=446, r=10.0, x=1143.0,  y=-776.0,  z=57.0},	-- Mechanic Mirror Park
