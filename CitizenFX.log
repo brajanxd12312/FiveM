@@ -25653,3 +25653,635 @@
 [  57669313] hitch warning: frame time of 198 milliseconds
 [  57714407] Connecting: ● LOLYOU
 [  57716250] Sending heartbeat to live-internal.fivem.net:30110
+[         0] Initializing Mono
+[        31] Initializing Mono completed
+[        94] Hello!
+[       344] Failed to get instance for guid a7242855-0350-4cb5-a0fe-61021e7eafaa and iid 567634c6-3bdd-4d0e-af39-7472aed479b7: System.InvalidOperationException: Sequence contains no matching element
+[       390]   at System.Linq.Enumerable.First[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Func`2[T,TResult] predicate) [0x00011] in <48501e5f32e8491e924f8b8beae3e4f6>:0 
+[       390]   at CitizenFX.Core.RuntimeManager.CreateObjectInstance (System.Guid guid, System.Guid iid) [0x00014] in C:\gl\builds\4ff63adb\0\cfx\fivem\code\client\clrcore\RuntimeManager.cs:39 
+[       422] Found new resource Discord in C:/Users\Administrator\Desktop\FiveM/resources//Discord
+[       437] Found new resource drag in C:/Users\Administrator\Desktop\FiveM/resources//drag
+[       484] Found new resource fiskeyMods-civilian in C:/Users\Administrator\Desktop\FiveM/resources//fiskeyMods-civilian
+[       500] Found new resource fiskeyMods-leo in C:/Users\Administrator\Desktop\FiveM/resources//fiskeyMods-leo
+[       515] Found new resource fiskeyMods-whitelist in C:/Users\Administrator\Desktop\FiveM/resources//fiskeyMods-whitelist
+[       531] Found new resource five-race in C:/Users\Administrator\Desktop\FiveM/resources//five-race
+[       547] Found new resource fivem in C:/Users\Administrator\Desktop\FiveM/resources//fivem
+[       547] Found new resource fivem-awesome1501 in C:/Users\Administrator\Desktop\FiveM/resources//fivem-awesome1501
+[       594] Found new resource fivem-map-hipster in C:/Users\Administrator\Desktop\FiveM/resources//fivem-map-hipster
+[       609] Found new resource fivem-map-skater in C:/Users\Administrator\Desktop\FiveM/resources//fivem-map-skater
+[       625] Found new resource FiveM-Material_Load-Loading-Screen in C:/Users\Administrator\Desktop\FiveM/resources//FiveM-Material_Load-Loading-Screen
+[       640] Found new resource fs_freemode in C:/Users\Administrator\Desktop\FiveM/resources//fs_freemode
+[       703] Found new resource heli-race in C:/Users\Administrator\Desktop\FiveM/resources//heli-race
+[       719] Found new resource MapMaker in C:/Users\Administrator\Desktop\FiveM/resources//MapMaker
+[       719] Found new resource radio in C:/Users\Administrator\Desktop\FiveM/resources//radio
+[       797] Resource loading for radio failed:
+[       812] Could not parse resource metadata file C:/Users\Administrator\Desktop\FiveM/resources//radio/__resource.lua: ...inistrator\Desktop\FiveM/resources//radio/__resource.lua:4: '}' expected near 'name'
+[       828] Found new resource RealisticVehicleFailure in C:/Users\Administrator\Desktop\FiveM/resources//RealisticVehicleFailure
+[       890] Found new resource rolesFX in C:/Users\Administrator\Desktop\FiveM/resources//rolesFX
+[       906] Found new resource runcode in C:/Users\Administrator\Desktop\FiveM/resources//runcode
+[       922] Found new resource vSync in C:/Users\Administrator\Desktop\FiveM/resources//vSync
+[       937] Found new resource wk_wrs in C:/Users\Administrator\Desktop\FiveM/resources//wk_wrs
+[       984] Found new resource race in C:/Users\Administrator\Desktop\FiveM/resources//[gamemodes]/race
+[      1000] Found new resource race-test in C:/Users\Administrator\Desktop\FiveM/resources//[gamemodes]/race-test
+[      1015] Found new resource channelfeed in C:/Users\Administrator\Desktop\FiveM/resources//[gameplay]/channelfeed
+[      1094] Found new resource irc in C:/Users\Administrator\Desktop\FiveM/resources//[gameplay]/irc
+[      1109] Found new resource obituary in C:/Users\Administrator\Desktop\FiveM/resources//[gameplay]/obituary
+[      1109] Found new resource obituary-deaths in C:/Users\Administrator\Desktop\FiveM/resources//[gameplay]/obituary-deaths
+[      1140] Found new resource playernames in C:/Users\Administrator\Desktop\FiveM/resources//[gameplay]/playernames
+[      1203] Found new resource mapmanager in C:/Users\Administrator\Desktop\FiveM/resources//[managers]/mapmanager
+[      1219] Found new resource 2016-chp-megapack in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/2016-chp-megapack
+[      1234] Found new resource belair in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/belair
+[      1297] Found new resource bmw in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/bmw
+[      1297] Found new resource botruck in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/botruck
+[      1328] Found new resource corvette in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/corvette
+[      1344] Found new resource hoonigan_ford in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/hoonigan_ford
+[      1344] Found new resource kia_cadenza in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/kia_cadenza
+[      1406] Found new resource milsim in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/milsim
+[      1406] Found new resource modses in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/modses
+[      1422] Found new resource mustang in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/mustang
+[      1437] Resource loading for mustang failed:
+[      1484] Could not open resource metadata file C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/mustang/__resource.lua.
+[      1515] Found new resource oldgauntlet in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/oldgauntlet
+[      1531] Found new resource port-police-pack in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/port-police-pack
+[      1625] Found new resource rapidgtmod in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/rapidgtmod
+[      1640] Found new resource real_cars in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/real_cars
+[      1703] Found new resource teslamodel3 in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/teslamodel3
+[      1719] Found new resource teslamodels in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/teslamodels
+[      1734] Found new resource teslamodelx in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/teslamodelx
+[      1797] Found new resource titan in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/titan
+[      1812] Found new resource utility in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/utility
+[      1828] Found new resource wrangler in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/wrangler
+[      1844] Found new resource essentialmode in C:/Users\Administrator\Desktop\FiveM/resources//[shitz]/essentialmode
+[      1906] Found new resource es_admin2 in C:/Users\Administrator\Desktop\FiveM/resources//[shitz]/es_admin2
+[      1922] Found new resource baseevents in C:/Users\Administrator\Desktop\FiveM/resources//[system]/baseevents
+[      1937] Found new resource chat in C:/Users\Administrator\Desktop\FiveM/resources//[system]/chat
+[      1953] Found new resource hardcap in C:/Users\Administrator\Desktop\FiveM/resources//[system]/hardcap
+[      2000] Found new resource rconlog in C:/Users\Administrator\Desktop\FiveM/resources//[system]/rconlog
+[      2015] Found new resource scoreboard in C:/Users\Administrator\Desktop\FiveM/resources//[system]/scoreboard
+[      2031] Found new resource sessionmanager in C:/Users\Administrator\Desktop\FiveM/resources//[system]/sessionmanager
+[      2047] Found new resource spawnmanager in C:/Users\Administrator\Desktop\FiveM/resources//[system]/spawnmanager
+[      2109] Found new resource betaguns in C:/Users\Administrator\Desktop\FiveM/resources//[test]/betaguns
+[      2109] Found new resource gameInit in C:/Users\Administrator\Desktop\FiveM/resources//[test]/gameInit
+[      2140] Found new resource keks in C:/Users\Administrator\Desktop\FiveM/resources//[test]/keks
+[      2203] Found new resource coordsaver in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/coordsaver
+[      2203] Found new resource deleteveh in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/deleteveh
+[      2219] Found new resource dev in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/dev
+[      2234] Found new resource disclaimer in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/disclaimer
+[      2297] Found new resource es_AdvancedFuel in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/es_AdvancedFuel
+[      2312] Found new resource heli in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/heli
+[      2328] Found new resource InoTechRadar in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/InoTechRadar
+[      2344] Found new resource interiors in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/interiors
+[      2390] Found new resource loadipl in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/loadipl
+[      2406] Found new resource lscustoms in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/lscustoms
+[      2422] Found new resource lux_vehcontrol in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/lux_vehcontrol
+[      2437] Found new resource missionrow in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/missionrow
+[      2515] Found new resource pausemenu-title in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/pausemenu-title
+[      2531] Found new resource pv-tow in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/pv-tow
+[      2594] Found new resource RPDeath in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/RPDeath
+[      2609] Found new resource sexyspeedometer in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/sexyspeedometer
+[      2625] Found new resource sheriffpd in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/sheriffpd
+[      2640] Found new resource spawns in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/spawns
+[      2703] Found new resource vk_handsup in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/vk_handsup
+[      2719] Found new resource wastedscreen in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/wastedscreen
+[      2734] Found new resource watermark in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/watermark
+[      2797] Found new resource wk_actionmenu in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/wk_actionmenu
+[      2812] Found new resource wk_vehdamage in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/wk_vehdamage
+[      2937] Started resource sessionmanager
+[      2969] Started resource mapmanager
+[      3015] Started resource chat
+[      3031] Started resource spawnmanager
+[      3047] Started resource fivem
+[      3047] Started gametype Freeroam
+[      3125] Started resource hardcap
+[      3203] Started resource rconlog
+[      3219] Started resource scoreboard
+[      3234] Started resource playernames
+[      3297] Started resource essentialmode
+[      3328] Started resource es_admin2
+[      3328] Changing gametype from fivem to fs_freemode
+[      3344] Stopping resource fivem
+[      3500] Started resource fs_freemode
+[      3500] Started gametype fs_freemode
+[      3531] Started resource fiskeyMods-civilian
+[      6922] Loaded LEO_Server.net, Version=0.1114.2017.0, Culture=neutral, PublicKeyToken=null into ScriptDomain_1133412754
+[      7000] Instantiated instance of script LEO_Server.CopManager.
+[      7015] [FISKEY LEO SERVER]: [X] CopManager loaded successfully
+[      7094] [FISKEY LEO SERVER]: [X] Event handlers loaded successfully
+[      7437] [FISKEY LEO SERVER]: [X] 9 police vehicles loaded successfully
+[      7515] [FISKEY LEO SERVER]: Vehicle POLICE loaded; Offset: -1.2 0.4 2.6; Extras: 0
+[      7531] [FISKEY LEO SERVER]: Vehicle POLICE2 loaded; Offset: -0.8 -1.1 0.7; Extras: 0
+[      7594] [FISKEY LEO SERVER]: Vehicle POLICE3 loaded; Offset: -0.9 0.8 0.7; Extras: 0
+[      7609] [FISKEY LEO SERVER]: Vehicle POLICE4 loaded; Offset: -0.8 -0.8 1.1; Extras: 0
+[      7625] [FISKEY LEO SERVER]: Vehicle SHERIFF loaded; Offset: -0.9 0.4 0.8; Extras: 1
+[      7703] [FISKEY LEO SERVER]: Vehicle SHERIFF2 loaded; Offset: -0.9 -0.8 0.8; Extras: 0
+[      7703] [FISKEY LEO SERVER]: Vehicle FBI loaded; Offset: -0.8 1 0.7; Extras: 0
+[      7719] [FISKEY LEO SERVER]: Vehicle FBI2 loaded; Offset: -0.9 1.4 0.9; Extras: 0
+[      7734] [FISKEY LEO SERVER]: Vehicle PRANGER loaded; Offset: -1 1 1; Extras: 0
+[      7797] [FISKEY LEO SERVER]: [X] 137 search items loaded successfully
+[      7812] [FISKEY LEO SERVER]: A total of 34 spawnpoints loaded
+[      7828] [FISKEY LEO SERVER]: Loaded Successfully
+[      7844] Instantiated instance of script LEO_Server.Script.
+[      7844] Started resource fiskeyMods-leo
+[      7984] [FISKEY WHITELIST SERVER]: 4 total players added
+[      8000] Started resource fiskeyMods-whitelist
+[      8015] Started resource drag
+[      8219] Started resource FiveM-Material_Load-Loading-Screen
+[      8234] Started resource Discord
+[      8250] Started resource wk_wrs
+[      8297] Started resource five-race
+[      8328] Started resource MapMaker
+[      8344] Started resource rolesFX
+[      8406] Write /pos2 ingame to save the coords in a .txt in server's main folder
+[      8406] Started resource coordsaver
+[      8437] Started resource deleteveh
+[      8453] Started resource dev
+[      8515] Started resource disclaimer
+[      8594] Started resource es_AdvancedFuel
+[      8625] Started resource heli
+[      8625] Started resource InoTechRadar
+[      8703] Started resource interiors
+[      8719] Started resource loadipl
+[      8734] Started resource lscustoms
+[      8797] Started resource lux_vehcontrol
+[      8797] Started resource missionrow
+[      8812] Started resource pausemenu-title
+[      8844] Started resource pv-tow
+[      8890] Started resource RPDeath
+[      8906] Started resource sexyspeedometer
+[      8922] Started resource sheriffpd
+[      8937] Started resource vSync
+[      9000] Started resource spawns
+[      9015] Started resource vk_handsup
+[      9031] Started resource wastedscreen
+[      9094] Started resource watermark
+[      9109] Started resource wk_actionmenu
+[      9140] Started resource RealisticVehicleFailure
+[      9203] Started resource radio
+[      9234] Started resource 2016-chp-megapack
+[      9250] Started resource belair
+[      9281] Started resource bmw
+[      9297] Started resource botruck
+[      9312] Started resource corvette
+[      9328] Started resource hoonigan_ford
+[      9344] Started resource kia_cadenza
+[      9390] Started resource milsim
+[      9406] Started resource modses
+[      9422] Started resource oldgauntlet
+[      9437] Started resource rapidgtmod
+[     14125] Started resource real_cars
+[     14140] Started resource teslamodels
+[     14156] Started resource titan
+[     14203] Started resource utility
+[     14219] Started resource wrangler
+[     14234] Started resource port-police-pack
+[     14328] Resolved live-internal.fivem.net:30110 to 151.80.44.223:30110
+[     14344] Sending heartbeat to live-internal.fivem.net:30110
+[     14359] Started resource fivem-map-skater
+[     14390] Started map fivem-map-skater
+[     14406] -------------------------------------------------------------
+[     14406] --- No errors detected, essentialmode is setup properly. ---
+[     14422] -------------------------------------------------------------
+[     14437] 
+[     14453] Current version: 5.0.0
+[     14484] Updater version: 5.0.0
+[     14500] 
+[     14515] Everything is fine!
+[     14515] 
+[     14609] hitch warning: frame time of 320 milliseconds
+[     64109] Connecting: DevoutRain2500
+[     72219] Sending heartbeat to live-internal.fivem.net:30110
+[     72281] [FISKEY LEO SERVER]: Player disconnecting DevoutRain2500
+[     72515] Connecting: DevoutRain2500
+[         0] Initializing Mono
+[        15] Initializing Mono completed
+[        47] Hello!
+[       343] Failed to get instance for guid a7242855-0350-4cb5-a0fe-61021e7eafaa and iid 567634c6-3bdd-4d0e-af39-7472aed479b7: System.InvalidOperationException: Sequence contains no matching element
+[       359]   at System.Linq.Enumerable.First[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Func`2[T,TResult] predicate) [0x00011] in <48501e5f32e8491e924f8b8beae3e4f6>:0 
+[       359]   at CitizenFX.Core.RuntimeManager.CreateObjectInstance (System.Guid guid, System.Guid iid) [0x00014] in C:\gl\builds\4ff63adb\0\cfx\fivem\code\client\clrcore\RuntimeManager.cs:39 
+[       375] Found new resource Discord in C:/Users\Administrator\Desktop\FiveM/resources//Discord
+[       453] Found new resource drag in C:/Users\Administrator\Desktop\FiveM/resources//drag
+[       468] Found new resource fiskeyMods-civilian in C:/Users\Administrator\Desktop\FiveM/resources//fiskeyMods-civilian
+[       484] Found new resource fiskeyMods-leo in C:/Users\Administrator\Desktop\FiveM/resources//fiskeyMods-leo
+[       531] Found new resource fiskeyMods-whitelist in C:/Users\Administrator\Desktop\FiveM/resources//fiskeyMods-whitelist
+[       547] Found new resource five-race in C:/Users\Administrator\Desktop\FiveM/resources//five-race
+[       562] Found new resource fivem in C:/Users\Administrator\Desktop\FiveM/resources//fivem
+[       562] Found new resource fivem-awesome1501 in C:/Users\Administrator\Desktop\FiveM/resources//fivem-awesome1501
+[       609] Found new resource fivem-map-hipster in C:/Users\Administrator\Desktop\FiveM/resources//fivem-map-hipster
+[       640] Found new resource fivem-map-skater in C:/Users\Administrator\Desktop\FiveM/resources//fivem-map-skater
+[       656] Found new resource FiveM-Material_Load-Loading-Screen in C:/Users\Administrator\Desktop\FiveM/resources//FiveM-Material_Load-Loading-Screen
+[       718] Found new resource fs_freemode in C:/Users\Administrator\Desktop\FiveM/resources//fs_freemode
+[       734] Found new resource heli-race in C:/Users\Administrator\Desktop\FiveM/resources//heli-race
+[       750] Found new resource MapMaker in C:/Users\Administrator\Desktop\FiveM/resources//MapMaker
+[       750] Found new resource radio in C:/Users\Administrator\Desktop\FiveM/resources//radio
+[       828] Resource loading for radio failed:
+[       828] Could not parse resource metadata file C:/Users\Administrator\Desktop\FiveM/resources//radio/__resource.lua: ...inistrator\Desktop\FiveM/resources//radio/__resource.lua:4: '}' expected near 'name'
+[       843] Found new resource RealisticVehicleFailure in C:/Users\Administrator\Desktop\FiveM/resources//RealisticVehicleFailure
+[       859] Found new resource rolesFX in C:/Users\Administrator\Desktop\FiveM/resources//rolesFX
+[       859] Found new resource runcode in C:/Users\Administrator\Desktop\FiveM/resources//runcode
+[       922] Found new resource vSync in C:/Users\Administrator\Desktop\FiveM/resources//vSync
+[       937] Found new resource wk_wrs in C:/Users\Administrator\Desktop\FiveM/resources//wk_wrs
+[       953] Found new resource race in C:/Users\Administrator\Desktop\FiveM/resources//[gamemodes]/race
+[       968] Found new resource race-test in C:/Users\Administrator\Desktop\FiveM/resources//[gamemodes]/race-test
+[      1031] Found new resource channelfeed in C:/Users\Administrator\Desktop\FiveM/resources//[gameplay]/channelfeed
+[      1047] Found new resource irc in C:/Users\Administrator\Desktop\FiveM/resources//[gameplay]/irc
+[      1062] Found new resource obituary in C:/Users\Administrator\Desktop\FiveM/resources//[gameplay]/obituary
+[      1140] Found new resource obituary-deaths in C:/Users\Administrator\Desktop\FiveM/resources//[gameplay]/obituary-deaths
+[      1140] Found new resource playernames in C:/Users\Administrator\Desktop\FiveM/resources//[gameplay]/playernames
+[      1156] Found new resource mapmanager in C:/Users\Administrator\Desktop\FiveM/resources//[managers]/mapmanager
+[      1218] Found new resource 2016-chp-megapack in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/2016-chp-megapack
+[      1234] Found new resource belair in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/belair
+[      1250] Found new resource bmw in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/bmw
+[      1265] Found new resource botruck in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/botruck
+[      1265] Found new resource corvette in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/corvette
+[      1328] Found new resource hoonigan_ford in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/hoonigan_ford
+[      1343] Found new resource kia_cadenza in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/kia_cadenza
+[      1359] Found new resource milsim in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/milsim
+[      1422] Found new resource modses in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/modses
+[      1437] Found new resource mustang in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/mustang
+[      1453] Resource loading for mustang failed:
+[      1453] Could not open resource metadata file C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/mustang/__resource.lua.
+[      1484] Found new resource oldgauntlet in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/oldgauntlet
+[      1531] Found new resource port-police-pack in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/port-police-pack
+[      1547] Found new resource rapidgtmod in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/rapidgtmod
+[      1562] Found new resource real_cars in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/real_cars
+[      1625] Found new resource teslamodel3 in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/teslamodel3
+[      1640] Found new resource teslamodels in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/teslamodels
+[      1656] Found new resource teslamodelx in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/teslamodelx
+[      1672] Found new resource titan in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/titan
+[      1734] Found new resource utility in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/utility
+[      1750] Found new resource wrangler in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/wrangler
+[      1765] Found new resource essentialmode in C:/Users\Administrator\Desktop\FiveM/resources//[shitz]/essentialmode
+[      1828] Found new resource es_admin2 in C:/Users\Administrator\Desktop\FiveM/resources//[shitz]/es_admin2
+[      1843] Found new resource baseevents in C:/Users\Administrator\Desktop\FiveM/resources//[system]/baseevents
+[      1859] Found new resource chat in C:/Users\Administrator\Desktop\FiveM/resources//[system]/chat
+[      1922] Found new resource hardcap in C:/Users\Administrator\Desktop\FiveM/resources//[system]/hardcap
+[      1937] Found new resource rconlog in C:/Users\Administrator\Desktop\FiveM/resources//[system]/rconlog
+[      1953] Found new resource scoreboard in C:/Users\Administrator\Desktop\FiveM/resources//[system]/scoreboard
+[      1968] Found new resource sessionmanager in C:/Users\Administrator\Desktop\FiveM/resources//[system]/sessionmanager
+[      2015] Found new resource spawnmanager in C:/Users\Administrator\Desktop\FiveM/resources//[system]/spawnmanager
+[      2031] Found new resource betaguns in C:/Users\Administrator\Desktop\FiveM/resources//[test]/betaguns
+[      2047] Found new resource gameInit in C:/Users\Administrator\Desktop\FiveM/resources//[test]/gameInit
+[      2062] Found new resource keks in C:/Users\Administrator\Desktop\FiveM/resources//[test]/keks
+[      2125] Found new resource coordsaver in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/coordsaver
+[      2140] Found new resource deleteveh in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/deleteveh
+[      2156] Found new resource dev in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/dev
+[      2234] Found new resource disclaimer in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/disclaimer
+[      2250] Found new resource es_AdvancedFuel in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/es_AdvancedFuel
+[      2265] Found new resource heli in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/heli
+[      2265] Found new resource InoTechRadar in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/InoTechRadar
+[      2312] Found new resource interiors in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/interiors
+[      2328] Found new resource loadipl in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/loadipl
+[      2343] Found new resource lscustoms in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/lscustoms
+[      2359] Found new resource lux_vehcontrol in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/lux_vehcontrol
+[      2375] Found new resource missionrow in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/missionrow
+[      2437] Found new resource pausemenu-title in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/pausemenu-title
+[      2453] Found new resource pv-tow in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/pv-tow
+[      2953] Found new resource RPDeath in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/RPDeath
+[      2968] Found new resource sexyspeedometer in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/sexyspeedometer
+[      2984] Found new resource sheriffpd in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/sheriffpd
+[      3000] Found new resource spawns in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/spawns
+[      3015] Found new resource vk_handsup in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/vk_handsup
+[      3031] Found new resource wastedscreen in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/wastedscreen
+[      3047] Found new resource watermark in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/watermark
+[      3062] Found new resource wk_actionmenu in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/wk_actionmenu
+[      3078] Found new resource wk_vehdamage in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/wk_vehdamage
+[      3234] Started resource sessionmanager
+[      3250] Started resource mapmanager
+[      3281] Started resource chat
+[      3312] Started resource spawnmanager
+[      3328] Started resource fivem
+[      3343] Started gametype Freeroam
+[      3359] Started resource hardcap
+[      3359] Started resource rconlog
+[      3422] Started resource scoreboard
+[      3437] Started resource playernames
+[      3468] Started resource essentialmode
+[      3531] Started resource es_admin2
+[      3547] Changing gametype from fivem to fs_freemode
+[      3562] Stopping resource fivem
+[      3734] Started resource fs_freemode
+[      3750] Started gametype fs_freemode
+[      3765] Started resource fiskeyMods-civilian
+[      5359] Loaded LEO_Server.net, Version=0.1114.2017.0, Culture=neutral, PublicKeyToken=null into ScriptDomain_1606324477
+[      5531] Instantiated instance of script LEO_Server.CopManager.
+[      5547] [FISKEY LEO SERVER]: [X] CopManager loaded successfully
+[      5562] [FISKEY LEO SERVER]: [X] Event handlers loaded successfully
+[      5812] [FISKEY LEO SERVER]: [X] 9 police vehicles loaded successfully
+[      5828] [FISKEY LEO SERVER]: Vehicle POLICE loaded; Offset: -1.2 0.4 2.6; Extras: 0
+[      5843] [FISKEY LEO SERVER]: Vehicle POLICE2 loaded; Offset: -0.8 -1.1 0.7; Extras: 0
+[      5859] [FISKEY LEO SERVER]: Vehicle POLICE3 loaded; Offset: -0.9 0.8 0.7; Extras: 0
+[      5875] [FISKEY LEO SERVER]: Vehicle POLICE4 loaded; Offset: -0.8 -0.8 1.1; Extras: 0
+[      5875] [FISKEY LEO SERVER]: Vehicle SHERIFF loaded; Offset: -0.9 0.4 0.8; Extras: 1
+[      5922] [FISKEY LEO SERVER]: Vehicle SHERIFF2 loaded; Offset: -0.9 -0.8 0.8; Extras: 0
+[      5937] [FISKEY LEO SERVER]: Vehicle FBI loaded; Offset: -0.8 1 0.7; Extras: 0
+[      5953] [FISKEY LEO SERVER]: Vehicle FBI2 loaded; Offset: -0.9 1.4 0.9; Extras: 0
+[      5953] [FISKEY LEO SERVER]: Vehicle PRANGER loaded; Offset: -1 1 1; Extras: 0
+[      6047] [FISKEY LEO SERVER]: [X] 137 search items loaded successfully
+[      6062] [FISKEY LEO SERVER]: A total of 34 spawnpoints loaded
+[      6625] [FISKEY LEO SERVER]: Loaded Successfully
+[      6828] Instantiated instance of script LEO_Server.Script.
+[      6843] Started resource fiskeyMods-leo
+[      7047] [FISKEY WHITELIST SERVER]: 4 total players added
+[      7047] Started resource fiskeyMods-whitelist
+[      7140] Started resource drag
+[      7297] Started resource FiveM-Material_Load-Loading-Screen
+[      7328] Started resource Discord
+[      7328] Started resource wk_wrs
+[      7343] Started resource five-race
+[      7422] Started resource MapMaker
+[      7437] Started resource rolesFX
+[      7453] Write /pos2 ingame to save the coords in a .txt in server's main folder
+[      7468] Started resource coordsaver
+[      7531] Started resource deleteveh
+[      7547] Started resource dev
+[      7562] Started resource disclaimer
+[      7672] Started resource es_AdvancedFuel
+[      7734] Started resource heli
+[      7750] Started resource InoTechRadar
+[      7765] Started resource interiors
+[      7812] Started resource loadipl
+[      7843] Started resource lscustoms
+[      7859] Started resource lux_vehcontrol
+[      7875] Started resource missionrow
+[      7890] Started resource pausemenu-title
+[      7937] Started resource pv-tow
+[      7953] Started resource RPDeath
+[      7968] Started resource sexyspeedometer
+[      8531] Started resource sheriffpd
+[      8547] Started resource vSync
+[      8578] Started resource spawns
+[      8625] Started resource vk_handsup
+[      8640] Started resource wastedscreen
+[      8656] Started resource watermark
+[      8672] Started resource wk_actionmenu
+[      8718] Started resource RealisticVehicleFailure
+[      8734] Started resource radio
+[      8765] Started resource 2016-chp-megapack
+[      8781] Started resource belair
+[      8828] Started resource bmw
+[      8843] Started resource botruck
+[      8859] Started resource corvette
+[      8922] Started resource hoonigan_ford
+[      8937] Started resource kia_cadenza
+[      8953] Started resource milsim
+[      8968] Started resource modses
+[      9015] Started resource oldgauntlet
+[      9031] Started resource rapidgtmod
+[      9062] Started resource real_cars
+[      9078] Started resource teslamodels
+[      9125] Started resource titan
+[      9140] Started resource utility
+[      9156] Started resource wrangler
+[      9172] Started resource port-police-pack
+[      9281] Resolved live-internal.fivem.net:30110 to 151.80.44.223:30110
+[      9281] Sending heartbeat to live-internal.fivem.net:30110
+[      9297] Started resource fivem-map-skater
+[      9328] Started map fivem-map-skater
+[      9343] -------------------------------------------------------------
+[      9343] --- No errors detected, essentialmode is setup properly. ---
+[      9359] -------------------------------------------------------------
+[      9375] 
+[      9422] Current version: 5.0.0
+[      9437] Updater version: 5.0.0
+[      9453] 
+[      9453] Everything is fine!
+[      9468] 
+[      9562] hitch warning: frame time of 292 milliseconds
+[     16218] Connecting: DevoutRain2500
+[         0] Initializing Mono
+[        32] Initializing Mono completed
+[        94] Hello!
+[       375] Failed to get instance for guid a7242855-0350-4cb5-a0fe-61021e7eafaa and iid 567634c6-3bdd-4d0e-af39-7472aed479b7: System.InvalidOperationException: Sequence contains no matching element
+[       391]   at System.Linq.Enumerable.First[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Func`2[T,TResult] predicate) [0x00011] in <48501e5f32e8491e924f8b8beae3e4f6>:0 
+[       391]   at CitizenFX.Core.RuntimeManager.CreateObjectInstance (System.Guid guid, System.Guid iid) [0x00014] in C:\gl\builds\4ff63adb\0\cfx\fivem\code\client\clrcore\RuntimeManager.cs:39 
+[       485] Found new resource Discord in C:/Users\Administrator\Desktop\FiveM/resources//Discord
+[       500] Found new resource drag in C:/Users\Administrator\Desktop\FiveM/resources//drag
+[       516] Found new resource fiskeyMods-civilian in C:/Users\Administrator\Desktop\FiveM/resources//fiskeyMods-civilian
+[       532] Found new resource fiskeyMods-leo in C:/Users\Administrator\Desktop\FiveM/resources//fiskeyMods-leo
+[       532] Found new resource fiskeyMods-whitelist in C:/Users\Administrator\Desktop\FiveM/resources//fiskeyMods-whitelist
+[       578] Found new resource five-race in C:/Users\Administrator\Desktop\FiveM/resources//five-race
+[       610] Found new resource fivem in C:/Users\Administrator\Desktop\FiveM/resources//fivem
+[       625] Found new resource fivem-awesome1501 in C:/Users\Administrator\Desktop\FiveM/resources//fivem-awesome1501
+[       672] Found new resource fivem-map-hipster in C:/Users\Administrator\Desktop\FiveM/resources//fivem-map-hipster
+[       688] Found new resource fivem-map-skater in C:/Users\Administrator\Desktop\FiveM/resources//fivem-map-skater
+[       703] Found new resource FiveM-Material_Load-Loading-Screen in C:/Users\Administrator\Desktop\FiveM/resources//FiveM-Material_Load-Loading-Screen
+[       719] Found new resource fs_freemode in C:/Users\Administrator\Desktop\FiveM/resources//fs_freemode
+[       782] Found new resource heli-race in C:/Users\Administrator\Desktop\FiveM/resources//heli-race
+[       797] Found new resource MapMaker in C:/Users\Administrator\Desktop\FiveM/resources//MapMaker
+[       813] Found new resource radio in C:/Users\Administrator\Desktop\FiveM/resources//radio
+[       828] Found new resource RealisticVehicleFailure in C:/Users\Administrator\Desktop\FiveM/resources//RealisticVehicleFailure
+[      2297] Found new resource rolesFX in C:/Users\Administrator\Desktop\FiveM/resources//rolesFX
+[      2313] Found new resource runcode in C:/Users\Administrator\Desktop\FiveM/resources//runcode
+[      2328] Found new resource vSync in C:/Users\Administrator\Desktop\FiveM/resources//vSync
+[      2344] Found new resource wk_wrs in C:/Users\Administrator\Desktop\FiveM/resources//wk_wrs
+[      2360] Found new resource race in C:/Users\Administrator\Desktop\FiveM/resources//[gamemodes]/race
+[      2391] Found new resource race-test in C:/Users\Administrator\Desktop\FiveM/resources//[gamemodes]/race-test
+[      2407] Found new resource channelfeed in C:/Users\Administrator\Desktop\FiveM/resources//[gameplay]/channelfeed
+[      2422] Found new resource irc in C:/Users\Administrator\Desktop\FiveM/resources//[gameplay]/irc
+[      2438] Found new resource obituary in C:/Users\Administrator\Desktop\FiveM/resources//[gameplay]/obituary
+[      2485] Found new resource obituary-deaths in C:/Users\Administrator\Desktop\FiveM/resources//[gameplay]/obituary-deaths
+[      2500] Found new resource playernames in C:/Users\Administrator\Desktop\FiveM/resources//[gameplay]/playernames
+[      2516] Found new resource mapmanager in C:/Users\Administrator\Desktop\FiveM/resources//[managers]/mapmanager
+[      2532] Found new resource 2016-chp-megapack in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/2016-chp-megapack
+[      2594] Found new resource belair in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/belair
+[      2610] Found new resource bmw in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/bmw
+[      2610] Found new resource botruck in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/botruck
+[      2625] Found new resource corvette in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/corvette
+[      2688] Found new resource hoonigan_ford in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/hoonigan_ford
+[      2703] Found new resource kia_cadenza in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/kia_cadenza
+[      2719] Found new resource milsim in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/milsim
+[      2735] Found new resource modses in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/modses
+[      2782] Found new resource mustang in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/mustang
+[      2813] Resource loading for mustang failed:
+[      2813] Could not open resource metadata file C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/mustang/__resource.lua.
+[      2828] Found new resource oldgauntlet in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/oldgauntlet
+[      2875] Found new resource port-police-pack in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/port-police-pack
+[      2891] Found new resource rapidgtmod in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/rapidgtmod
+[      2907] Found new resource real_cars in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/real_cars
+[      2922] Found new resource teslamodel3 in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/teslamodel3
+[      2922] Found new resource teslamodels in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/teslamodels
+[      2985] Found new resource teslamodelx in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/teslamodelx
+[      3000] Found new resource titan in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/titan
+[      3016] Found new resource utility in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/utility
+[      3016] Found new resource wrangler in C:/Users\Administrator\Desktop\FiveM/resources//[newcars]/wrangler
+[      3032] Found new resource essentialmode in C:/Users\Administrator\Desktop\FiveM/resources//[shitz]/essentialmode
+[      3094] Found new resource es_admin2 in C:/Users\Administrator\Desktop\FiveM/resources//[shitz]/es_admin2
+[      3094] Found new resource baseevents in C:/Users\Administrator\Desktop\FiveM/resources//[system]/baseevents
+[      3110] Found new resource chat in C:/Users\Administrator\Desktop\FiveM/resources//[system]/chat
+[      3125] Found new resource hardcap in C:/Users\Administrator\Desktop\FiveM/resources//[system]/hardcap
+[      3188] Found new resource rconlog in C:/Users\Administrator\Desktop\FiveM/resources//[system]/rconlog
+[      3203] Found new resource scoreboard in C:/Users\Administrator\Desktop\FiveM/resources//[system]/scoreboard
+[      3219] Found new resource sessionmanager in C:/Users\Administrator\Desktop\FiveM/resources//[system]/sessionmanager
+[      3282] Found new resource spawnmanager in C:/Users\Administrator\Desktop\FiveM/resources//[system]/spawnmanager
+[      3297] Found new resource betaguns in C:/Users\Administrator\Desktop\FiveM/resources//[test]/betaguns
+[      3313] Found new resource gameInit in C:/Users\Administrator\Desktop\FiveM/resources//[test]/gameInit
+[      3328] Found new resource keks in C:/Users\Administrator\Desktop\FiveM/resources//[test]/keks
+[      3391] Found new resource coordsaver in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/coordsaver
+[      3407] Found new resource deleteveh in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/deleteveh
+[      3422] Found new resource dev in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/dev
+[      3485] Found new resource disclaimer in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/disclaimer
+[      3500] Found new resource es_AdvancedFuel in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/es_AdvancedFuel
+[      3516] Found new resource heli in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/heli
+[      3578] Found new resource InoTechRadar in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/InoTechRadar
+[      3625] Found new resource interiors in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/interiors
+[      3641] Found new resource loadipl in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/loadipl
+[      3641] Found new resource lscustoms in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/lscustoms
+[      3688] Found new resource lux_vehcontrol in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/lux_vehcontrol
+[      3703] Found new resource missionrow in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/missionrow
+[      3735] Found new resource pausemenu-title in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/pausemenu-title
+[      3782] Found new resource pv-tow in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/pv-tow
+[      3797] Found new resource RPDeath in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/RPDeath
+[      3828] Found new resource sexyspeedometer in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/sexyspeedometer
+[      3907] Found new resource sheriffpd in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/sheriffpd
+[      3907] Found new resource spawns in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/spawns
+[      3922] Found new resource vk_handsup in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/vk_handsup
+[      3985] Found new resource wastedscreen in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/wastedscreen
+[      4000] Found new resource watermark in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/watermark
+[      4016] Found new resource wk_actionmenu in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/wk_actionmenu
+[      4078] Found new resource wk_vehdamage in C:/Users\Administrator\Desktop\FiveM/resources//[transfer_scripts]/wk_vehdamage
+[      4172] Started resource sessionmanager
+[      4203] Started resource mapmanager
+[      4219] Started resource chat
+[      4235] Started resource spawnmanager
+[      4235] Started resource fivem
+[      4282] Started gametype Freeroam
+[      4297] Started resource hardcap
+[      4328] Started resource rconlog
+[      4391] Started resource scoreboard
+[      4407] Started resource playernames
+[      4500] Started resource essentialmode
+[      4516] Started resource es_admin2
+[      4610] Changing gametype from fivem to fs_freemode
+[      4688] Stopping resource fivem
+[      4875] Started resource fs_freemode
+[      4891] Started gametype fs_freemode
+[      5000] Started resource fiskeyMods-civilian
+[      8219] Loaded LEO_Server.net, Version=0.1114.2017.0, Culture=neutral, PublicKeyToken=null into ScriptDomain_771169448
+[      8297] Instantiated instance of script LEO_Server.CopManager.
+[      8375] [FISKEY LEO SERVER]: [X] CopManager loaded successfully
+[      8422] [FISKEY LEO SERVER]: [X] Event handlers loaded successfully
+[      8844] [FISKEY LEO SERVER]: [X] 9 police vehicles loaded successfully
+[      8875] [FISKEY LEO SERVER]: Vehicle POLICE loaded; Offset: -1.2 0.4 2.6; Extras: 0
+[      8891] [FISKEY LEO SERVER]: Vehicle POLICE2 loaded; Offset: -0.8 -1.1 0.7; Extras: 0
+[      8907] [FISKEY LEO SERVER]: Vehicle POLICE3 loaded; Offset: -0.9 0.8 0.7; Extras: 0
+[      8922] [FISKEY LEO SERVER]: Vehicle POLICE4 loaded; Offset: -0.8 -0.8 1.1; Extras: 0
+[      8922] [FISKEY LEO SERVER]: Vehicle SHERIFF loaded; Offset: -0.9 0.4 0.8; Extras: 1
+[      8985] [FISKEY LEO SERVER]: Vehicle SHERIFF2 loaded; Offset: -0.9 -0.8 0.8; Extras: 0
+[      9000] [FISKEY LEO SERVER]: Vehicle FBI loaded; Offset: -0.8 1 0.7; Extras: 0
+[      9000] [FISKEY LEO SERVER]: Vehicle FBI2 loaded; Offset: -0.9 1.4 0.9; Extras: 0
+[      9016] [FISKEY LEO SERVER]: Vehicle PRANGER loaded; Offset: -1 1 1; Extras: 0
+[      9032] [FISKEY LEO SERVER]: [X] 137 search items loaded successfully
+[      9094] [FISKEY LEO SERVER]: A total of 34 spawnpoints loaded
+[      9094] [FISKEY LEO SERVER]: Loaded Successfully
+[      9110] Instantiated instance of script LEO_Server.Script.
+[      9235] Started resource fiskeyMods-leo
+[      9407] [FISKEY WHITELIST SERVER]: 4 total players added
+[      9422] Started resource fiskeyMods-whitelist
+[      9516] Started resource drag
+[      9813] Started resource FiveM-Material_Load-Loading-Screen
+[     10000] Started resource Discord
+[     10094] Started resource wk_wrs
+[     10110] Started resource five-race
+[     10282] Started resource MapMaker
+[     10313] Started resource rolesFX
+[     10328] Write /pos2 ingame to save the coords in a .txt in server's main folder
+[     10407] Started resource coordsaver
+[     10610] Started resource deleteveh
+[     10625] Started resource dev
+[     10688] Started resource disclaimer
+[     10719] Started resource es_AdvancedFuel
+[     10797] Started resource heli
+[     10813] Started resource InoTechRadar
+[     10891] Started resource interiors
+[     10985] Started resource loadipl
+[     11032] Started resource lscustoms
+[     11110] Started resource lux_vehcontrol
+[     11188] Started resource missionrow
+[     11203] Started resource pausemenu-title
+[     11219] Started resource pv-tow
+[     11282] Started resource RPDeath
+[     11297] Started resource sexyspeedometer
+[     11313] Started resource sheriffpd
+[     11391] Started resource vSync
+[     11422] Started resource spawns
+[     11500] Started resource vk_handsup
+[     11625] Started resource wastedscreen
+[     11688] Started resource watermark
+[     11719] Started resource wk_actionmenu
+[     11813] Started resource RealisticVehicleFailure
+[     11875] Started resource radio
+[     11907] Started resource 2016-chp-megapack
+[     11922] Started resource belair
+[     11922] Started resource bmw
+[     11938] Started resource botruck
+[     11985] Started resource corvette
+[     12000] Started resource hoonigan_ford
+[     12078] Started resource kia_cadenza
+[     12110] Started resource milsim
+[     12110] Started resource modses
+[     12172] Started resource oldgauntlet
+[     12203] Started resource rapidgtmod
+[     12282] Started resource real_cars
+[     12297] Started resource teslamodels
+[     12297] Started resource titan
+[     12313] Started resource utility
+[     12328] Started resource wrangler
+[     12391] Started resource port-police-pack
+[     12453] Resolved live-internal.fivem.net:30110 to 151.80.44.223:30110
+[     12469] Sending heartbeat to live-internal.fivem.net:30110
+[     12500] Started resource fivem-map-skater
+[     12516] Started map fivem-map-skater
+[     12532] -------------------------------------------------------------
+[     12594] --- No errors detected, essentialmode is setup properly. ---
+[     12610] -------------------------------------------------------------
+[     12610] 
+[     12625] Current version: 5.0.0
+[     12625] Updater version: 5.0.0
+[     12688] 
+[     12688] Everything is fine!
+[     12703] 
+[     12797] hitch warning: frame time of 339 milliseconds
+[     17907] Connecting: DevoutRain2500
+[     19422] Sending heartbeat to live-internal.fivem.net:30110
+[     61078] Total ambient scenarios sent to client 1: 39
+[     61110] Sending CI settings to player: 1
+[     61672] [FISKEY WHITELIST SERVER]: GetPlayerAccessLevels for player: 1 ID: steam:110000108527a21 Returning event: LEO:CLIENT_ReturnAccessLevels
+[     61703] [FISKEY LEO SERVER]: Sending player DevoutRain2500 vehicle POLICE -1.2 0.4 2.6 
+[     61703] [FISKEY LEO SERVER]: Sending player DevoutRain2500 vehicle POLICE2 -0.8 -1.1 0.7 
+[     61719] [FISKEY LEO SERVER]: Sending player DevoutRain2500 vehicle POLICE3 -0.9 0.8 0.7 
+[     61735] [FISKEY LEO SERVER]: Sending player DevoutRain2500 vehicle POLICE4 -0.8 -0.8 1.1 
+[     61782] [FISKEY LEO SERVER]: Sending player DevoutRain2500 vehicle SHERIFF -0.9 0.4 0.8 1
+[     61797] [FISKEY LEO SERVER]: Sending player DevoutRain2500 vehicle SHERIFF2 -0.9 -0.8 0.8 
+[     61813] [FISKEY LEO SERVER]: Sending player DevoutRain2500 vehicle FBI -0.8 1 0.7 
+[     61813] [FISKEY LEO SERVER]: Sending player DevoutRain2500 vehicle FBI2 -0.9 1.4 0.9 
+[     61828] [FISKEY LEO SERVER]: Sending player DevoutRain2500 vehicle PRANGER -1 1 1 
+[     61875] hitch warning: frame time of 823 milliseconds
+[     62407] [{"locked":false},{"locked":false},{"locked":false},{"locked":false},{"locked":false}]
+[    126969] Stopping resource radio
+[    126985] Started resource radio
+[    170750] Stopping resource radio
+[    170766] Started resource radio
+[    199438] Sending heartbeat to live-internal.fivem.net:30110
+[    235485] Stopping resource radio
+[    235500] Started resource radio
+[    379469] Sending heartbeat to live-internal.fivem.net:30110
+[    559485] Sending heartbeat to live-internal.fivem.net:30110
+[    674469] Connecting: MoMo
+[    701953] Sending heartbeat to live-internal.fivem.net:30110
+[    727953] Total ambient scenarios sent to client 2: 39
+[    728000] Sending CI settings to player: 2
+[    728110] [FISKEY WHITELIST SERVER]: GetPlayerAccessLevels for player: 2 ID: steam:110000109e4a4cd Returning event: LEO:CLIENT_ReturnAccessLevels
+[    728125] [FISKEY WHITELIST SERVER]: **ERROR** Player with id {steam:110000109e4a4cd} not found in list, check to make sure their steamID is correct
+[    728188] [FISKEY LEO SERVER]: Sending player MoMo vehicle POLICE -1.2 0.4 2.6 
+[    728203] [FISKEY LEO SERVER]: Sending player MoMo vehicle POLICE2 -0.8 -1.1 0.7 
+[    728219] [FISKEY LEO SERVER]: Sending player MoMo vehicle POLICE3 -0.9 0.8 0.7 
+[    728235] [FISKEY LEO SERVER]: Sending player MoMo vehicle POLICE4 -0.8 -0.8 1.1 
+[    728282] [FISKEY LEO SERVER]: Sending player MoMo vehicle SHERIFF -0.9 0.4 0.8 1
+[    728297] [FISKEY LEO SERVER]: Sending player MoMo vehicle SHERIFF2 -0.9 -0.8 0.8 
+[    728313] [FISKEY LEO SERVER]: Sending player MoMo vehicle FBI -0.8 1 0.7 
+[    728328] [FISKEY LEO SERVER]: Sending player MoMo vehicle FBI2 -0.9 1.4 0.9 
+[    728328] [FISKEY LEO SERVER]: Sending player MoMo vehicle PRANGER -1 1 1 
+[    728391] hitch warning: frame time of 439 milliseconds
+[    729360] [{"locked":false},{"locked":false},{"locked":false},{"locked":false},{"locked":false}]
+[    881985] Sending heartbeat to live-internal.fivem.net:30110
+[   1062016] Sending heartbeat to live-internal.fivem.net:30110
