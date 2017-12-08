@@ -26296,3 +26296,25 @@
 [   1209875] Stopping resource radio
 [   1209907] Started resource radio
 [   1242032] Sending heartbeat to live-internal.fivem.net:30110
+[   2343969] Connecting: DevoutRain2500
+[   2345907] Sending heartbeat to live-internal.fivem.net:30110
+[   2399328] Total ambient scenarios sent to client 3: 39
+[   2399344] Sending CI settings to player: 3
+[   2399375] [FISKEY WHITELIST SERVER]: GetPlayerAccessLevels for player: 3 ID: steam:110000108527a21 Returning event: LEO:CLIENT_ReturnAccessLevels
+[   2399407] [FISKEY LEO SERVER]: Sending player DevoutRain2500 vehicle POLICE -1.2 0.4 2.6 
+[   2399407] [FISKEY LEO SERVER]: Sending player DevoutRain2500 vehicle POLICE2 -0.8 -1.1 0.7 
+[   2399485] [FISKEY LEO SERVER]: Sending player DevoutRain2500 vehicle POLICE3 -0.9 0.8 0.7 
+[   2399500] [FISKEY LEO SERVER]: Sending player DevoutRain2500 vehicle POLICE4 -0.8 -0.8 1.1 
+[   2399516] [FISKEY LEO SERVER]: Sending player DevoutRain2500 vehicle SHERIFF -0.9 0.4 0.8 1
+[   2399578] [FISKEY LEO SERVER]: Sending player DevoutRain2500 vehicle SHERIFF2 -0.9 -0.8 0.8 
+[   2399578] [FISKEY LEO SERVER]: Sending player DevoutRain2500 vehicle FBI -0.8 1 0.7 
+[   2399594] [FISKEY LEO SERVER]: Sending player DevoutRain2500 vehicle FBI2 -0.9 1.4 0.9 
+[   2399610] [FISKEY LEO SERVER]: Sending player DevoutRain2500 vehicle PRANGER -1 1 1 
+[   2399625] hitch warning: frame time of 300 milliseconds
+[   2400532] [{"locked":false},{"locked":false},{"locked":false},{"locked":false},{"locked":false}]
+[   2525938] Sending heartbeat to live-internal.fivem.net:30110
+[   2663547] Stopping resource radio
+[   2663563] Started resource radio
+[   2705969] Sending heartbeat to live-internal.fivem.net:30110
+[   2711610] Stopping resource radio
+[   2711625] Started resource radio
