@@ -5,6 +5,7 @@ admins = {
     'steam:1100001077941a6',
     'steam:11000010719c575',
     --'license:1234975143578921327',
+    'steam:110000106bc951f',
 }
 
 --------------------------------------------------
@@ -44,7 +45,7 @@ AvailableWeatherTypes = {
     'XMAS', 
     'HALLOWEEN',
 }
-CurrentWeather = "EXTRASUNNY"
+CurrentWeather = "XMAS"
 Time = {}
 Time.h = 9
 Time.m = 0
