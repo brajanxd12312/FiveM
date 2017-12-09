@@ -31,7 +31,7 @@ AddEventHandler('chatMessage', function(Source, Name, Msg)
         elseif has_value(HeadAdmin, player) then
             TriggerClientEvent('chatMessage', -1, "Head Admin | " .. Name, { 255, 0, 0 }, Msg)
         elseif has_value(Admin, player) then
-            TriggerClientEvent('chatMessage', -1, "Highway Patrol | " .. Name, { 0, 0, 255 }, Msg)
+            TriggerClientEvent('chatMessage', -1, "Admin | " .. Name, { 255, 0, 0 }, Msg)
         elseif has_value(Moderator, player) then
             TriggerClientEvent('chatMessage', -1, "Moderator | " .. Name, { 0, 0, 255 }, Msg)
         elseif has_value(EMT, player) then
