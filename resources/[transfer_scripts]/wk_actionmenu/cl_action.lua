@@ -53,34 +53,25 @@ RegisterNUICallback( "ButtonClick", function( data, cb )
 
 	elseif ( data == "button2" ) then 
 		TriggerEvent("chatMessage", "DEBUG", {244, 179, 66}, "Button: ^2 2 ^0pressed.")
-		TriggerEvent('wk:fixVehicle', -1)
-		TriggerEvent("chatMessage", "DEBUG", {244, 179, 66}, "^2 Vehicle Fixed.")
+		--TriggerEvent('wk:fixVehicle', -1)
+		TriggerEvent("chatMessage", "DEBUG", {244, 179, 66}, "^2 Button Disabled.")
 		
-        TriggerEvent("es:removedMoney", 500)
+        --TriggerEvent("es:removedMoney", 500)
 		
 		-- Display notification
-		SetNotificationTextEntry("STRING")
-		AddTextComponentString('~g~Your vehicle has been fixed.~w~ Please try to RP it out next time or visit a customs shop.')
+		--SetNotificationTextEntry("STRING")
+		--AddTextComponentString('~g~Your vehicle has been fixed.~w~ Please try to RP it out next time or visit a customs shop.')
     	--SetNotificationMessage number values: 0+4+5+6= none, 1= message bubble, 2= mail icon, 3= add_friend, 7= reply, 8= RP, 9+10+_= $
 		
-		SetNotificationMessage("CHAR_MP_MORS_MUTUAL", "CHAR_MP_MORS_MUTUAL", true, 9, "Mors Mutual", "Vehicle Fixed!")
-		DrawNotification(false, true)
+		--SetNotificationMessage("CHAR_MP_MORS_MUTUAL", "CHAR_MP_MORS_MUTUAL", true, 9, "Mors Mutual", "Vehicle Fixed!")
+		--DrawNotification(false, true)
 		-- BUTTON 3 OR CVPI LSPD
 
 	elseif ( data == "button3" ) then 
 		TriggerEvent("chatMessage", "DEBUG", {244, 179, 66}, "Button: ^2 3 ^0pressed.")
-		local hash = GetHashKey("police")
-
-		RequestModel(hash)
-
-		while not HasModelLoaded(hash) do
-			RequestModel(hash)
-			Citizen.Wait(0)
-		end
-
-		local coords = GetOffsetFromEntityInWorldCoords(GetPlayerPed(-1), 0, 5.0, 0)
-		local vehicle = CreateVehicle(hash, coords, GetEntityHeading(GetPlayerPed(-1)), true, false)
+		TriggerEvent('VehicleSpawn', playerID, 'police')
 		TriggerEvent("chatMessage", "DEBUG", {244, 179, 66}, "^2Vehicle Spawned Successfully ^0(^1POLICE^0).")
+			
 		-- Display notification
 		SetNotificationTextEntry("STRING")
 		AddTextComponentString('POOF! Your car has arrived!')
