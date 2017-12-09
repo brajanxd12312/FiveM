@@ -56,7 +56,7 @@ I cannot promise it does though, I recommend utilizing steam IDs.
 
 -- Enable/Disable auto-kicking
 -- Toggle this to false if you don't want to use this whitelist to kick people
-EnableKicking = false
+EnableKicking = true
 
 -- DeniedMessage -> The message sent to the player if they are denied access for not being whitelisted
 DeniedMessage = "You are not whitelisted..."
