@@ -433,7 +433,7 @@ Citizen.CreateThread( function()
 	while true do 
 		-- Control ID 20 is the 'Z' key by default 
 		-- Use https://wiki.fivem.net/wiki/Controls to find a different key 
-		if ( IsControlJustReleased( 0, 29 ) or IsDisabledControlJustReleased( 0, 29 ) ) and GetLastInputMethod( 0 ) then 
+		if ( IsControlJustReleased( 0, 246 ) or IsDisabledControlJustReleased( 0, 246 ) ) and GetLastInputMethod( 0 ) then 
 			ToggleActionMenu()
 		end 
 
