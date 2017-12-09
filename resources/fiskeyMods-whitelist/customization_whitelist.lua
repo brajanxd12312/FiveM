@@ -67,6 +67,7 @@ table.insert(players, {"steam:110000108527a21", 9, 5})
 table.insert(players, {"steam:1100001077941a6", 8, 4})
 table.insert(players, {"steam:110000106bc951f", 8, 4})
 table.insert(players, {"steam:11000010719c575", 8, 4})
+table.insert(players, {"steam:1100001119f573b", 7, 4})
 
 
 
