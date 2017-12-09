@@ -9,7 +9,7 @@
 local Owner = {"steam:110000108527a21","ip:72.185.13.172",}
 local HeadAdmin = {"steam:","ip:",}
 local Admin = {"steam:1100001077941a6","ip:",}
-local Moderator = {"steam:11000010719c575","ip:","steam:110000106bc951f",}
+local Moderator = {"steam:11000010719c575","ip:173.64.2.21 26","steam:110000106bc951f",}
 local EMT = {"steam:","ip:",}
 local Sheriff = {"steam:","ip:",}
 local Moderator = {"steam:","ip:",}
