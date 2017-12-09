@@ -1,16 +1,10 @@
-Citizen.CreateThread(function()
-    while true do
-	Citizen.Wait(0)
-	
-		local playerPed = GetPlayerPed(-1)
-		local playerVeh = GetVehiclePedIsIn(playerPed, false)
-
-		if DoesEntityExist(playerVeh) then
-			DisplayRadar(true)
-		else
-			DisplayRadar(false)
-		end
-    end
-end)
-
---attempt to disable radar
+--[[ if not HasAnimSetLoaded("MOVE_M@DRUNK@VERYDRUNK") then
+	RequestAnimSet("MOVE_M@DRUNK@VERYDRUNK")
+	while not HasAnimSetLoaded("MOVE_M@DRUNK@VERYDRUNK") do
+		Citizen.Wait(0)
+	end
+end
+SetPedIsDrunk(GetPlayerPed(-1), true)
+ShakeGameplayCam("DRUNK_SHAKE", 2.0)
+SetPedConfigFlag(GetPlayerPed(-1), 100, true)
+SetPedMovementClipset(GetPlayerPed(-1), "MOVE_M@DRUNK@VERYDRUNK", 2.0) ]]
