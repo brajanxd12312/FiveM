@@ -45,11 +45,11 @@ AddEventHandler("LSC:buttonSelected", function(name, button)
     TriggerEvent('es:getPlayerFromId', source, function(user)
         local player = user.getIdentifier()
         if button.price then
-            if (tonumber(user.getMoney()) <= tonumber(button.price)) then
-                TriggerClientEvent("LSC:buttonSelected", source,name, button, true)
+            if (tonumber(user.getMoney()) >= tonumber(button.price)) then
+                TriggerClientEvent("LSC:buttonSelected", source, name, button, true)
                 user.removeMoney(tonumber(button.price))
             else
-                TriggerClientEvent("LSC:buttonSelected", source,name, button, false)
+                TriggerClientEvent("LSC:buttonSelected", source, name, button, false)
             end
         end
     end)
