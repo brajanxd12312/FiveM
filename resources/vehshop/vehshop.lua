@@ -318,7 +318,7 @@ function ShowVehshopBlips(bool)
 			-- 60 58 137
 			SetBlipSprite(blip,326)
 			BeginTextCommandSetBlipName("STRING")
-			AddTextComponentString('Vehicle shop')
+			AddTextComponentString('Rent-A-Car')
 			EndTextCommandSetBlipName(blip)
 			SetBlipAsShortRange(blip,true)
 			SetBlipAsMissionCreatorBlip(blip,true)
@@ -679,14 +679,16 @@ function ButtonSelected(button)
 		elseif btn == "Vans" then
 			OpenMenu('vans')
 		end
+		
 	elseif this == "compacts" or this == "coupes" or this == "sedans" or this == "sports" or this == "sportsclassics" or this == "super" or this == "muscle" or this == "offroad" or this == "suvs" or this == "vans" or this == "industrial" or this == "cycles" or this == "motorcycles" then
-		--if playermoney >= button.costs then
-			vehicle_price = 0--button.costs
+		if user.getMoney >= button.costs then
+			vehicle_price = button.costs then
+			user.removeMoney(button.costs)
 			boughtcar = true
 			CloseCreator()
-		--else
-		--	Notify('~r~Not enough money')
-		--end
+		else
+			Notify('~r~Not enough money')
+		end
 	end
 end
 
