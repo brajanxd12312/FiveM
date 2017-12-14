@@ -1,6 +1,6 @@
 Setup = {}
 
-Setup.ServerName = "Qauntum Gaming"
+Setup.ServerName = "My Server"
 Setup.DisplayWelcomeNotification = true
 Setup.blips = true
 Setup.Money = 500000
