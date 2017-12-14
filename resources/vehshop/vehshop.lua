@@ -1,6 +1,6 @@
 local vehshop = {
 	opened = false,
-	title = "Vehicle Shop",
+	title = "Rent-A-Car",
 	currentmenu = "main",
 	lastmenu = nil,
 	currentpos = nil,

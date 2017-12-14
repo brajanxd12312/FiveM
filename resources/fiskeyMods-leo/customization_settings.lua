@@ -46,7 +46,7 @@ local drugChance = 10				-- This value will adjust the chance of drugs being fou
 -- RADAR/COMPASS
 -- DEFAULT: true, true, true
 
-local isCompassEnabled = true			-- This value toggles the availability of the compass
+local isCompassEnabled = false			-- This value toggles the availability of the compass
 local isRadarEnabled = false		-- This value toggles the availability of the radar feature
 local isRadarInImperial = true		-- This value toggles MPH/KMH for the radar system
 
