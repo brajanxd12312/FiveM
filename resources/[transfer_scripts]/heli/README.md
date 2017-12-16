@@ -1,6 +1,8 @@
 # FiveM - heli by mraes
 Version 1.3 - 2017/06/09
 
+Updated 12/15/2017 to use: (https://forum.fivem.net/t/release-heli-script/24094/98)
+
 Instructions:
  * Download resource
  * Add heli entry to your citmp-server.yml AutoStartResources
