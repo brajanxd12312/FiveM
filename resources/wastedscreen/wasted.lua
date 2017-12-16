@@ -20,6 +20,7 @@ Citizen.CreateThread(function()
 					PushScaleformMovieFunction(scaleform, "SHOW_SHARD_WASTED_MP_MESSAGE")
 					BeginTextComponent("STRING")
 					AddTextComponentString("~r~wasted")
+					AddTextComponentString("boop")
 					EndTextComponent()
 					PopScaleformMovieFunctionVoid()
 
