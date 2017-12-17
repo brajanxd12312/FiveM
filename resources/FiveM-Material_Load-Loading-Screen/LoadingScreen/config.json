@@ -9,7 +9,7 @@
 		"useBoldText" : "true",
 		"serverTitle" : "Quantum Gaming",
 		"playAudioInBackground" : "true",
-		"audioPath" : "audio/gtavthemesong.ogg",
+		"audioPath" : "audio/xmas.ogg",
 		"audioVolume" : "0.2"
 	},
 	{
@@ -25,7 +25,7 @@
 		"servers1" : "Website: www.quantumgaming.org",
 		"servers2" : "Teamspeak: ts.quantumgaming.org",
 		"servers3" : "Discord: http://discord.gg/JbMPza6",
-		"servers4" : "Documentation: Coming soon...",
+		"servers4" : "",
 		"servers5" : "",
 		"servers6" : "",
 		"servers7" : ""
