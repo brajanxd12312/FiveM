@@ -10,7 +10,7 @@ local Owner = {"steam:110000108527a21","ip:72.185.13.172",}
 local HeadAdmin = {"steam:","ip:",}
 local Admin = {"steam:1100001077941a6","ip:",}
 local Moderator = {"steam:11000010719c575","ip:173.64.2.21 26","steam:110000106bc951f",}
-local EMT = {"steam:","ip:",}
+local Normal = {"steam:11000010c3e98b8","ip:",}
 local Sheriff = {"steam:","ip:",}
 local Moderator = {"steam:","ip:",}
 local StateTroopers = {"steam:","ip:",}
@@ -34,8 +34,8 @@ AddEventHandler('chatMessage', function(Source, Name, Msg)
             TriggerClientEvent('chatMessage', -1, "Admin | " .. Name, { 255, 0, 0 }, Msg)
         elseif has_value(Moderator, player) then
             TriggerClientEvent('chatMessage', -1, "Moderator | " .. Name, { 0, 0, 255 }, Msg)
-        elseif has_value(EMT, player) then
-            TriggerClientEvent('chatMessage', -1, "EMT | " .. Name, { 0, 0, 255 }, Msg)
+        elseif has_value(Normal, player) then
+            TriggerClientEvent('chatMessage', -1, "Normal | " .. Name, { 0, 0, 255 }, Msg)
         elseif has_value(Sheriff, player) then
             TriggerClientEvent('chatMessage', -1, "Sheriff's Department | " .. Name, { 0, 0, 255 }, Msg)
 	    elseif has_value(Moderator, player) then
@@ -47,7 +47,7 @@ AddEventHandler('chatMessage', function(Source, Name, Msg)
 		elseif has_value(ScriptCreator, player) then
             TriggerClientEvent('chatMessage', -1, "Chat Roles Creator | " .. Name, { 0, 255, 43 }, Msg)
         else
-            TriggerClientEvent('chatMessage', -1, "User | " .. Name, { 235, 214, 51 }, Msg)
+            TriggerClientEvent('chatMessage', -1, "Guest | " .. Name, { 235, 214, 51 }, Msg)
         end
             
     end
