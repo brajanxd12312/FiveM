@@ -45,7 +45,7 @@ AvailableWeatherTypes = {
     'XMAS', 
     'HALLOWEEN',
 }
-CurrentWeather = "XMAS"
+CurrentWeather = "CLEAR"
 Time = {}
 Time.h = 9
 Time.m = 0
