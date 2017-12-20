@@ -1,15 +1,15 @@
 [
 	{
-		"useBackgroundColour" : "false",
+		"useBackgroundColour" : "true",
 		"backgroundColour" : "20,20,20",
-		"useBackgroundImage" : "true",
+		"useBackgroundImage" : "false",
 		"backgroundImagePath" : "images/PGTA5581573386.png",
 		"useTextColour" : "false",
 		"textColour" : "0,0,0",
 		"useBoldText" : "true",
 		"serverTitle" : "Quantum Gaming",
 		"playAudioInBackground" : "true",
-		"audioPath" : "audio/xmas.ogg",
+		"audioPath" : "audio/gtavthemesong.ogg",
 		"audioVolume" : "0.2"
 	},
 	{
