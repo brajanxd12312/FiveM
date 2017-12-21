@@ -5,14 +5,14 @@
 
 
     <Item>
-      <modelName>2015polstang</modelName>
-      <colors>
+    <modelName>2015POLSTANG</modelName>
+    <colors>
         <Item>
           <indices content="char_array">
-            134 
-            134 
-            0 
+            111
             0
+            1
+            156 
           </indices>
           <liveries>
             <Item value="true" />
@@ -27,10 +27,10 @@
         </Item>
         <Item>
           <indices content="char_array">
-            134 
-            134 
-            0 
+            111
             0
+            1
+            156 
           </indices>
           <liveries>
             <Item value="false" />
@@ -45,10 +45,28 @@
         </Item>
         <Item>
           <indices content="char_array">
-            134 
-            134 
-            0 
+            111
             0
+            1
+            156 
+          </indices>
+          <liveries>
+            <Item value="false" />
+            <Item value="false" />
+            <Item value="false" />
+            <Item value="false" />
+            <Item value="true" />
+            <Item value="false" />
+            <Item value="false" />
+            <Item value="false" />
+          </liveries>
+        </Item>
+        <Item>
+          <indices content="char_array">
+            111
+            0
+            1
+            156 
           </indices>
           <liveries>
             <Item value="false" />
@@ -63,10 +81,10 @@
         </Item>
         <Item>
           <indices content="char_array">
-            134 
-            134 
-            0 
+            111
             0
+            1
+            156 
           </indices>
           <liveries>
             <Item value="false" />
@@ -77,89 +95,18 @@
             <Item value="false" />
             <Item value="false" />
             <Item value="false" />
-          </liveries>
-        </Item>
-        <Item>
-          <indices content="char_array">
-            134 
-            134 
-            0 
-            0
-          </indices>
-          <liveries>
-            <Item value="false" />
-            <Item value="false" />
-            <Item value="false" />
-            <Item value="false" />
-            <Item value="true" />
-            <Item value="false" />
-            <Item value="false" />
-            <Item value="false" />
-          </liveries>
-        </Item>        <Item>
-          <indices content="char_array">
-            134 
-            134 
-            0 
-            0
-          </indices>
-          <liveries>
-            <Item value="false" />
-            <Item value="false" />
-            <Item value="false" />
-            <Item value="false" />
-            <Item value="false" />
-            <Item value="true" />
-            <Item value="false" />
-            <Item value="false" />
-          </liveries>
-        </Item>
-        <Item>
-          <indices content="char_array">
-            134 
-            134 
-            0 
-            0
-          </indices>
-          <liveries>
-            <Item value="false" />
-            <Item value="false" />
-            <Item value="false" />
-            <Item value="false" />
-            <Item value="false" />
-            <Item value="false" />
-            <Item value="true" />
-            <Item value="false" />
-          </liveries>
-        </Item>
-        <Item>
-          <indices content="char_array">
-            134 
-            134 
-            0 
-            0
-          </indices>
-          <liveries>
-            <Item value="false" />
-            <Item value="false" />
-            <Item value="false" />
-            <Item value="false" />
-            <Item value="false" />
-            <Item value="false" />
-            <Item value="false" />
-            <Item value="true" />
           </liveries>
         </Item>
       </colors>
       <kits>
-        <Item>0_default_modkit</Item>
-      </kits>
+    <Item>0_default_modkit</Item>
+    </kits>
       <windowsWithExposedEdges />
       <plateProbabilities>
         <Probabilities />
       </plateProbabilities>
       <lightSettings value="1" />
-      <sirenSettings value="1" />
+      <sirenSettings value="41" />
     </Item>
 
 
