@@ -9,16 +9,16 @@
      <Item>
       <modelName>2015polstang</modelName>
       <txdName>2015polstang</txdName>
-      <handlingId>2015POLSTANG</handlingId>
-      <gameName>Mustang</gameName>
-      <vehicleMakeName>Ford</vehicleMakeName>
+      <handlingId>COQUETTE</handlingId>
+      <gameName>Corvette</gameName>
+      <vehicleMakeName>Chevy</vehicleMakeName>
       <expressionDictName>null</expressionDictName>
       <expressionName>null</expressionName>
       <animConvRoofDictName>null</animConvRoofDictName>
       <animConvRoofName>null</animConvRoofName>
       <animConvRoofWindowsAffected />
       <ptfxAssetName>null</ptfxAssetName>
-      <audioNameHash>POLICE3</audioNameHash>
+      <audioNameHash>DOMINATOR</audioNameHash>
       <layout>LAYOUT_STD_EXITFIXUP</layout>
       <coverBoundOffsets>POLICE3_COVER_OFFSET_INFO</coverBoundOffsets>
       <explosionInfo>EXPLOSION_INFO_DEFAULT</explosionInfo>
