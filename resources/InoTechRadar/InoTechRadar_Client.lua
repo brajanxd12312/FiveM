@@ -101,7 +101,6 @@ radarTypes:
 -- AIRPLANES
 _radarEnabledVehicles["titan"] = {6000, 2, 1500}
 _radarEnabledVehicles["lazer"] = {3500, 2, 250}
-_radarEnabledVehicles["polmav"] = {750, 1, 1000}
 _radarEnabledVehicles["hydra"] = {4000, 2, 500}
 _radarEnabledVehicles["besra"] = {3500, 2, 500}
 _radarEnabledVehicles["jet"] = {3000, 1, 1000}
@@ -113,6 +112,8 @@ _radarEnabledVehicles["nimbus"] = {2250, 1, 1000}
 _radarEnabledVehicles["miljet"] = {3250, 2, 1000}
 
 -- HELICOPTERS
+_radarEnabledVehicles["polmav"] = {750, 1, 1000}
+_radarEnabledVehicles["buzzard2"] = {750, 1, 1000}
 _radarEnabledVehicles["savage"] = {3800, 2, 750}
 _radarEnabledVehicles["buzzard"] = {2800, 2, 1000}
 _radarEnabledVehicles["valkyrie"] = {2500, 2, 1000}
