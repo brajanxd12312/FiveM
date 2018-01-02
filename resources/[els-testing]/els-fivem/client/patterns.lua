@@ -1,3 +1,5 @@
+els_patterns = {}
+
 function trafficAdvisor(elsVehicle, stage, pattern)
 	Citizen.CreateThread(function()
 		if (not IsEntityDead(elsVehicle) and DoesEntityExist(elsVehicle)) then
@@ -202,312 +204,82 @@ function trafficAdvisor(elsVehicle, stage, pattern)
 	end)
 end
 
-function prim_wigwag(k) 
+function getNumberOfPrimaryPatterns()
+	local count = 0
+	for k,v in pairs(els_patterns) do
+		if (v.primary ~= nil) then
+			count = count + 1
+		end
+	end
+
+	return count
+end
+
+function getNumberOfSecondaryPatterns()
+	local count = 0
+	for k,v in pairs(els_patterns) do
+		if (v.secondary ~= nil) then
+			count = count + 1
+		end
+	end
+
+	return count
+end
+
+function runPatternStageThree(k, pattern, isReady, cb) 
 	Citizen.CreateThread(function()
-		if (not IsEntityDead(k) and DoesEntityExist(k)) then
+		if (not IsEntityDead(k) and DoesEntityExist(k) and isReady) then
+			cb(false)
+			
+			local max = 0
 			local count = 1
-			while count <= 8 do
-                if count == 1 then
-                    setExtraState(k, 1, 0)
-                    setExtraState(k, 2, 1)
-                    setExtraState(k, 3, 1)
-                    setExtraState(k, 4, 0)
-                end
-                if count == 2 then
-                	setExtraState(k, 1, 1)
-                    setExtraState(k, 2, 0)
-                    setExtraState(k, 3, 0)
-                    setExtraState(k, 4, 1)
-                end
-                if count == 3 then
-                    setExtraState(k, 1, 0)
-                    setExtraState(k, 2, 1)
-                    setExtraState(k, 3, 1)
-                    setExtraState(k, 4, 0)
-                end
-                if count == 4 then
-                    setExtraState(k, 1, 1)
-                    setExtraState(k, 2, 0)
-                    setExtraState(k, 3, 0)
-                    setExtraState(k, 4, 1)
-                end
-                if count == 5 then
-                    setExtraState(k, 1, 0)
-                    setExtraState(k, 2, 1)
-                    setExtraState(k, 3, 1)
-                    setExtraState(k, 4, 0)
-                end
-                if count == 6 then
-                	setExtraState(k, 1, 1)
-                    setExtraState(k, 2, 0)
-                    setExtraState(k, 3, 0)
-                    setExtraState(k, 4, 1)
-                end
-                if count == 7 then
-                    setExtraState(k, 1, 0)
-                    setExtraState(k, 2, 1)
-                    setExtraState(k, 3, 1)
-                    setExtraState(k, 4, 0)
-                end
-                if count == 8 then
-                    setExtraState(k, 1, 1)
-                    setExtraState(k, 2, 0)
-                    setExtraState(k, 3, 0)
-                    setExtraState(k, 4, 1)
-                end
-                Wait(125)
-                count = count + 1
-            end
+
+			for k,v in pairs(els_patterns[pattern].primary.stages) do
+				max = max + 1
+			end
+
+			while count <= max do
+				setExtraState(k, 1, els_patterns[pattern].primary.stages[count][1])
+                setExtraState(k, 2, els_patterns[pattern].primary.stages[count][2])
+                setExtraState(k, 3, els_patterns[pattern].primary.stages[count][3])
+                setExtraState(k, 4, els_patterns[pattern].primary.stages[count][4])
+
+				if(count == max) then
+					cb(true)
+				end
+				Wait(els_patterns[pattern].primary.speed)
+				count = count + 1
+			end
 		end
 	end)
 end
 
-function prim_wigwag2(k) 
+function runPatternStageTwo(k, pattern, isReady, cb) 
 	Citizen.CreateThread(function()
-		if (not IsEntityDead(k) and DoesEntityExist(k)) then
+		if (not IsEntityDead(k) and DoesEntityExist(k) and isReady) then
+			cb(false)
+			
+			local max = 0
 			local count = 1
-			while count <= 8 do
-                if count == 1 then
-                    setExtraState(k, 1, 1)
-                    setExtraState(k, 2, 1)
-                    setExtraState(k, 3, 0)
-                    setExtraState(k, 4, 0)
-                end
-                if count == 2 then
-                	setExtraState(k, 1, 0)
-                    setExtraState(k, 2, 0)
-                    setExtraState(k, 3, 1)
-                    setExtraState(k, 4, 1)
-                end
-                if count == 3 then
-                    setExtraState(k, 1, 1)
-                    setExtraState(k, 2, 1)
-                    setExtraState(k, 3, 0)
-                    setExtraState(k, 4, 0)
-                end
-                if count == 4 then
-                    setExtraState(k, 1, 0)
-                    setExtraState(k, 2, 0)
-                    setExtraState(k, 3, 1)
-                    setExtraState(k, 4, 1)
-                end
-                if count == 5 then
-                    setExtraState(k, 1, 1)
-                    setExtraState(k, 2, 1)
-                    setExtraState(k, 3, 0)
-                    setExtraState(k, 4, 0)
-                end
-                if count == 6 then
-                	setExtraState(k, 1, 0)
-                    setExtraState(k, 2, 0)
-                    setExtraState(k, 3, 1)
-                    setExtraState(k, 4, 1)
-                end
-                if count == 7 then
-                    setExtraState(k, 1, 1)
-                    setExtraState(k, 2, 1)
-                    setExtraState(k, 3, 0)
-                    setExtraState(k, 4, 0)
-                end
-                if count == 8 then
-                    setExtraState(k, 1, 0)
-                    setExtraState(k, 2, 0)
-                    setExtraState(k, 3, 1)
-                    setExtraState(k, 4, 1)
-                end
-                Wait(125)
-                count = count + 1
-            end
-		end
-	end)
-end
 
-function prim_sidewise(k) 
-	Citizen.CreateThread(function()
-		if (not IsEntityDead(k) and DoesEntityExist(k)) then
-			local count = 1
-			while count <= 8 do
-                if count == 1 then
-                    setExtraState(k, 1, 0)
-                    setExtraState(k, 2, 1)
-                    setExtraState(k, 3, 1)
-                    setExtraState(k, 4, 1)
-                end
-                if count == 2 then
-                	setExtraState(k, 1, 0)
-                    setExtraState(k, 2, 0)
-                    setExtraState(k, 3, 1)
-                    setExtraState(k, 4, 1)
-                end
-                if count == 3 then
-                    setExtraState(k, 1, 1)
-                    setExtraState(k, 2, 0)
-                    setExtraState(k, 3, 0)
-                    setExtraState(k, 4, 1)
-                end
-                if count == 4 then
-                    setExtraState(k, 1, 1)
-                    setExtraState(k, 2, 1)
-                    setExtraState(k, 3, 0)
-                    setExtraState(k, 4, 0)
-                end
-                if count == 5 then
-                    setExtraState(k, 1, 1)
-                    setExtraState(k, 2, 1)
-                    setExtraState(k, 3, 1)
-                    setExtraState(k, 4, 1)
-                end
-                if count == 6 then
-                	setExtraState(k, 1, 0)
-                    setExtraState(k, 2, 0)
-                    setExtraState(k, 3, 0)
-                    setExtraState(k, 4, 0)
-                end
-                if count == 7 then
-                    setExtraState(k, 1, 1)
-                    setExtraState(k, 2, 1)
-                    setExtraState(k, 3, 1)
-                    setExtraState(k, 4, 1)
-                end
-                if count == 8 then
-                    setExtraState(k, 1, 0)
-                    setExtraState(k, 2, 0)
-                    setExtraState(k, 3, 0)
-                    setExtraState(k, 4, 0)
-                end
-                Wait(125)
-                count = count + 1
-            end
-		end
-	end)
-end
+			for k,v in pairs(els_patterns[pattern].secondary.stages) do
+				max = max + 1
+			end
 
-function prim_sidewise2(k) 
-	Citizen.CreateThread(function()
-		if (not IsEntityDead(k) and DoesEntityExist(k)) then
-			local count = 1
-			while count <= 8 do
-                if count == 1 then
-                    setExtraState(k, 1, 1)
-                    setExtraState(k, 2, 1)
-                    setExtraState(k, 3, 1)
-                    setExtraState(k, 4, 0)
+			while count <= max do
+				setExtraState(k, 5, els_patterns[pattern].secondary.stages[count][1])
+                setExtraState(k, 6, els_patterns[pattern].secondary.stages[count][2])
+                if (not doesVehicleHaveTrafficAdvisor(k)) then
+                    setExtraState(k, 7, els_patterns[pattern].secondary.stages[count][3])
+                    setExtraState(k, 9, els_patterns[pattern].secondary.stages[count][4])
                 end
-                if count == 2 then
-                	setExtraState(k, 1, 1)
-                    setExtraState(k, 2, 1)
-                    setExtraState(k, 3, 0)
-                    setExtraState(k, 4, 0)
-                end
-                if count == 3 then
-                    setExtraState(k, 1, 1)
-                    setExtraState(k, 2, 0)
-                    setExtraState(k, 3, 0)
-                    setExtraState(k, 4, 1)
-                end
-                if count == 4 then
-                    setExtraState(k, 1, 0)
-                    setExtraState(k, 2, 0)
-                    setExtraState(k, 3, 1)
-                    setExtraState(k, 4, 1)
-                end
-                if count == 5 then
-                    setExtraState(k, 1, 1)
-                    setExtraState(k, 2, 1)
-                    setExtraState(k, 3, 1)
-                    setExtraState(k, 4, 1)
-                end
-                if count == 6 then
-                	setExtraState(k, 1, 0)
-                    setExtraState(k, 2, 0)
-                    setExtraState(k, 3, 0)
-                    setExtraState(k, 4, 0)
-                end
-                if count == 7 then
-                    setExtraState(k, 1, 1)
-                    setExtraState(k, 2, 1)
-                    setExtraState(k, 3, 1)
-                    setExtraState(k, 4, 1)
-                end
-                if count == 8 then
-                    setExtraState(k, 1, 0)
-                    setExtraState(k, 2, 0)
-                    setExtraState(k, 3, 0)
-                    setExtraState(k, 4, 0)
-                end
-                Wait(125)
-                count = count + 1
-            end
-		end
-	end)
-end
 
-function sec_wigwag(k) 
-	Citizen.CreateThread(function()
-		if (not IsEntityDead(k) and DoesEntityExist(k)) then
-			if(doesVehicleHaveTrafficAdvisor(k)) then
-				local count = 1
-				while count <= 5 do
-	                if count == 1 then
-	                    setExtraState(k, 5, 0)
-	                    setExtraState(k, 6, 1)
-	                end
-	                if count == 2 then
-	                	setExtraState(k, 5, 1)
-	                    setExtraState(k, 6, 0)
-	                end
-	                if count == 3 then
-	                    setExtraState(k, 5, 0)
-	                    setExtraState(k, 6, 1)
-	                end
-	                if count == 4 then
-	                    setExtraState(k, 5, 1)
-	                    setExtraState(k, 6, 0)
-	                end
-	                if count == 5 then
-	                    setExtraState(k, 5, 0)
-	                    setExtraState(k, 6, 1)
-	                end
-	                Wait(200)
-	                count = count + 1
-	            end
-	        else
-	        	local count = 1
-				while count <= 5 do
-	                if count == 1 then
-	                    setExtraState(k, 5, 0)
-	                    setExtraState(k, 6, 1)
-	                    setExtraState(k, 7, 1)
-	                    setExtraState(k, 9, 0)
-	                end
-	                if count == 2 then
-	                	setExtraState(k, 5, 1)
-	                    setExtraState(k, 6, 0)
-	                    setExtraState(k, 7, 0)
-	                    setExtraState(k, 9, 1)
-	                end
-	                if count == 3 then
-	                    setExtraState(k, 5, 0)
-	                    setExtraState(k, 6, 1)
-	                    setExtraState(k, 7, 1)
-	                    setExtraState(k, 9, 0)
-	                end
-	                if count == 4 then
-	                    setExtraState(k, 5, 1)
-	                    setExtraState(k, 6, 0)
-	                    setExtraState(k, 7, 0)
-	                    setExtraState(k, 9, 1)
-	                end
-	                if count == 5 then
-	                    setExtraState(k, 5, 0)
-	                    setExtraState(k, 6, 1)
-	                    setExtraState(k, 7, 1)
-	                    setExtraState(k, 9, 0)
-	                end
-	                Wait(200)
-	                count = count + 1
-	            end
-	        end
+				if(count == max) then
+					cb(true)
+				end
+				Wait(els_patterns[pattern].secondary.speed)
+				count = count + 1
+			end
 		end
 	end)
 end

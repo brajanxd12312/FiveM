@@ -23,46 +23,12 @@ local d_soundID_veh = {}
 local h_horn_state = {}
 local h_soundID_veh = {}
 
-local soundCleanTime = 0
-local soundCleanTime_delay = 400
-
-local modelsWithFireSiren =
-{
-    "FIRETRUK",
-}
-
-
-local modelsWithAmbWarnSiren =
-{   
-    "AMBULANCE",
-    "FIRETRUK",
-    "LGUARD",
-}
-
-function useFiretruckSiren(veh)
-    local model = GetEntityModel(veh)
-    for i = 1, #modelsWithFireSiren, 1 do
-        if model == GetHashKey(modelsWithFireSiren[i]) then
-            return true
-        end
-    end
-    return false
-end
-
-function useAmbWarnSiren(veh)
-    local model = GetEntityModel(veh)
-    for i = 1, #modelsWithAmbWarnSiren, 1 do
-        if model == GetHashKey(modelsWithAmbWarnSiren[i]) then
-            return true
-        end
-    end
-    return false
-end
-
+local curCleanupTime = 0
 
 RegisterNetEvent("els:updateElsVehicles")
-AddEventHandler("els:updateElsVehicles", function(vehicles)
+AddEventHandler("els:updateElsVehicles", function(vehicles, patterns)
     els_Vehicles = vehicles
+    els_patterns = patterns
 end)
 
 RegisterNetEvent("els:changeLightStage_c")
@@ -215,10 +181,30 @@ AddEventHandler("els:setTakedownState_c", function(sender, newstate)
     end
 end)
 
+function useFiretruckSiren(veh)
+    local model = GetEntityModel(veh)
+    for i = 1, #modelsWithFireSiren, 1 do
+        if model == GetHashKey(modelsWithFireSiren[i]) then
+            return true
+        end
+    end
+    return false
+end
+
 function toggleSirenMute(veh, toggle)
     if DoesEntityExist(veh) and not IsEntityDead(veh) then
         DisableVehicleImpactExplosionActivation(veh, toggle)
     end
+end
+
+function useAmbWarnSiren(veh)
+    local model = GetEntityModel(veh)
+    for i = 1, #modelsWithAmbWarnSiren, 1 do
+        if model == GetHashKey(modelsWithAmbWarnSiren[i]) then
+            return true
+        end
+    end
+    return false
 end
 
 function setHornState(veh, newstate)
@@ -402,6 +388,7 @@ function setExtraState(veh, extra, state)
             if(els_Vehicles[checkCarHash(veh)].extras[extra].enabled) then
                 if DoesExtraExist(veh, extra) then
                     SetVehicleExtra(veh, extra, state)
+                    SetVehicleBodyHealth(veh, vehicleHealthBefore)
                 end
             end
         end
@@ -441,64 +428,72 @@ function Draw(text, r, g, b, alpha, x, y, width, height, ya, center, font)
     DrawText(x, y)
 end
 
+function hornCleanup()
+    for vehicle, state in pairs(h_horn_state) do
+        if state >= 0 then
+            if not DoesEntityExist(vehicle) or IsEntityDead(vehicle) then
+                if h_soundID_veh[vehicle] ~= nil then
+                    StopSound(h_soundID_veh[vehicle])
+                    ReleaseSoundId(h_soundID_veh[vehicle])
+                    h_soundID_veh[vehicle] = nil
+                    h_horn_state[vehicle] = nil
+                end
+            end
+        end
+    end
+end
+
+function sirenCleanup()
+    for vehicle, state in pairs(m_siren_state) do
+        if m_soundID_veh[vehicle] ~= nil then
+            if not DoesEntityExist(vehicle) or IsEntityDead(vehicle) then
+                StopSound(m_soundID_veh[vehicle])
+                ReleaseSoundId(m_soundID_veh[vehicle])
+                m_soundID_veh[vehicle] = nil
+                m_siren_state[vehicle] = nil
+            end
+        end
+    end
+
+    for vehicle, state in pairs(d_siren_state) do
+        if d_soundID_veh[vehicle] ~= nil then
+            if not DoesEntityExist(vehicle) or IsEntityDead(vehicle) then
+                StopSound(d_soundID_veh[vehicle])
+                ReleaseSoundId(d_soundID_veh[vehicle])
+                d_soundID_veh[vehicle] = nil
+                d_siren_state[vehicle] = nil
+            end
+        end
+    end
+end
+
 function _DrawRect(x, y, width, height, r, g, b, a, ya)
     Citizen.InvokeNative(0x61BB1D9B3A95D802, ya)
     DrawRect(x, y, width, height, r, g, b, a)
 end
 
-function CleanupSounds()
-    if soundCleanTime > soundCleanTime_delay then
-        soundCleanTime = 0
-        for k, v in pairs(m_siren_state) do
-            if v > 0 then
-                if not DoesEntityExist(k) or IsEntityDead(k) then
-                    if m_soundID_veh[k] ~= nil then
-                        StopSound(m_soundID_veh[k])
-                        ReleaseSoundId(m_soundID_veh[k])
-                        m_soundID_veh[k] = nil
-                        m_siren_state[k] = nil
-                    end
+function vehicleLightCleanup()
+    for vehicle,_ in pairs(elsVehs) do
+        if elsVehs[vehicle] then
+            if not DoesEntityExist(vehicle) or IsEntityDead(vehicle) then
+                if elsVehs[vehicle] ~= nil then
+                    elsVehs[vehicle] = nil
                 end
             end
         end
+    end
+end
 
-        for k, v in pairs(d_siren_state) do
-            if v > 0 then
-                if not DoesEntityExist(k) or IsEntityDead(k) then
-                    if d_soundID_veh[k] ~= nil then
-                        StopSound(d_soundID_veh[k])
-                        ReleaseSoundId(d_soundID_veh[k])
-                        d_soundID_veh[k] = nil
-                        d_siren_state[k] = nil
-                    end
-                end
-            end
-        end
+function LghtSoundCleaner()
+    if curCleanupTime > 350 then
+        curCleanupTime = 0
 
-        for k, v in pairs(h_horn_state) do
-            if v > 0 then
-                if not DoesEntityExist(k) or IsEntityDead(k) then
-                    if h_soundID_veh[k] ~= nil then
-                        StopSound(h_soundID_veh[k])
-                        ReleaseSoundId(h_soundID_veh[k])
-                        h_soundID_veh[k] = nil
-                        h_horn_state[k] = nil
-                    end
-                end
-            end
-        end
+        vehicleLightCleanup()
+        hornCleanup()
+        sirenCleanup()
 
-        for k,v in pairs(elsVehs) do
-            if elsVehs[k] then
-                if not DoesEntityExist(k) or IsEntityDead(k) then
-                    if elsVehs[k] ~= nil then
-                        elsVehs[k] = nil
-                    end
-                end
-            end
-        end
     else
-        soundCleanTime = soundCleanTime + 1
+        curCleanupTime = curCleanupTime + 1
     end
 end
 
@@ -545,7 +540,7 @@ Citizen.CreateThread(function()
                         if playButtonPressSounds then
                             PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
                         end
-                        local primMax = 4
+                        local primMax = getNumberOfPrimaryPatterns()
                         local primMin = 1
                         local temp = lightPatternPrim
 
@@ -562,7 +557,7 @@ Citizen.CreateThread(function()
                         if playButtonPressSounds then
                             PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
                         end
-                        local primMax = 4
+                        local primMax = getNumberOfPrimaryPatterns()
                         local primMin = 1
                         local temp = lightPatternPrim
 
@@ -580,7 +575,7 @@ Citizen.CreateThread(function()
                         if playButtonPressSounds then
                             PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
                         end
-                        local primMax = 1
+                        local primMax = getNumberOfSecondaryPatterns()
                         local primMin = 1
                         local temp = lightPatternSec
 
@@ -597,7 +592,7 @@ Citizen.CreateThread(function()
                         if playButtonPressSounds then
                             PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
                         end
-                        local primMax = 1
+                        local primMax = getNumberOfSecondaryPatterns()
                         local primMin = 1
                         local temp = lightPatternSec
 
@@ -1296,11 +1291,13 @@ Citizen.CreateThread(function()
     end
 
     while true do
-        if getVehicleLightStage(GetVehiclePedIsUsing(GetPlayerPed(-1))) ~= 0 then
-            SetVehicleEngineOn(GetVehiclePedIsUsing(GetPlayerPed(-1)), true, true, false)
+        if vehInTable(els_Vehicles, checkCarHash(GetVehiclePedIsIn(GetPlayerPed(-1, true)))) then
+            if getVehicleLightStage(GetVehiclePedIsIn(GetPlayerPed(-1, true))) ~= 0 then
+                SetVehicleEngineOn(GetVehiclePedIsIn(GetPlayerPed(-1, true)), true, true, false)
+            end
         end
 
-        CleanupSounds()
+        LghtSoundCleaner()
 
         for k,v in pairs(elsVehs) do
             if(v ~= nil or DoesEntityExist(k)) then
@@ -1363,7 +1360,46 @@ Citizen.CreateThread(function()
 end)
 
 Citizen.CreateThread(function()
-    local sec = true
+
+    while true do
+        for k,v in pairs(elsVehs) do
+            local elsVehicle = k
+            if (v ~= nil or DoesEntityExist(k)) then
+                if (v.stage == 0) then
+                    setExtraState(elsVehicle, 1, 1)
+                    setExtraState(elsVehicle, 2, 1)
+                    setExtraState(elsVehicle, 3, 1)
+                    setExtraState(elsVehicle, 4, 1)
+                    setExtraState(elsVehicle, 5, 1)
+                    setExtraState(elsVehicle, 6, 1)
+                    setExtraState(elsVehicle, 7, 1)
+                    setExtraState(elsVehicle, 8, 1)
+                    setExtraState(elsVehicle, 9, 1)
+                    -- setExtraState(elsVehicle, 10, 1)
+                    -- setExtraState(elsVehicle, 11, 1)
+                    -- setExtraState(elsVehicle, 12, 1)
+                elseif (v.stage == 1) then
+                    setExtraState(elsVehicle, 1, 1)
+                    setExtraState(elsVehicle, 2, 1)
+                    setExtraState(elsVehicle, 3, 1)
+                    setExtraState(elsVehicle, 4, 1)
+                    setExtraState(elsVehicle, 5, 1)
+                    setExtraState(elsVehicle, 6, 1)
+                elseif (v.stage == 2) then
+                    setExtraState(elsVehicle, 1, 1)
+                    setExtraState(elsVehicle, 2, 1)
+                    setExtraState(elsVehicle, 3, 1)
+                    setExtraState(elsVehicle, 4, 1)
+                end
+            end
+        end
+        Wait(0)
+    end
+end)
+
+
+Citizen.CreateThread(function()
+    local isReady = true
 
     while true do
         for k,v in pairs(elsVehs) do
@@ -1389,40 +1425,27 @@ Citizen.CreateThread(function()
                     setExtraState(elsVehicle, 3, 1)
                     setExtraState(elsVehicle, 4, 1)
 
-                    if v.secPattern == 1 then
-                        sec_wigwag(elsVehicle)
-                    end
+                    runPatternStageTwo(k, v.secPattern, isReady, function(cb) isReady = cb end)
                 elseif(v.stage == 3) then
-                    if v.secPattern == 1 then
-                        sec_wigwag(elsVehicle)
-                    end
+                    runPatternStageTwo(k, v.secPattern, isReady, function(cb) isReady = cb end)
                 end
             end
         end
-        Citizen.Wait(1010)
+        Citizen.Wait(0)
     end
 end)
 
 Citizen.CreateThread(function()
-    local prim = true
+    local isReady = true
 
     while true do
         for k,v in pairs(elsVehs) do
-            local elsVehicle = k
             if (v ~= nil or DoesEntityExist(k)) then
                 if (v.stage == 3) then
-                    if(v.primPattern == 1) then
-                        prim_wigwag(elsVehicle)
-                    elseif (v.primPattern == 2) then
-                        prim_wigwag2(elsVehicle) 
-                    elseif (v.primPattern == 3) then
-                        prim_sidewise(elsVehicle)
-                    elseif (v.primPattern == 4) then
-                        prim_sidewise2(elsVehicle) 
-                    end
+                    runPatternStageThree(k, v.primPattern, isReady, function(cb) isReady = cb end)
                 end
             end
         end
-        Citizen.Wait(1010)
+        Citizen.Wait(0)
     end
 end)

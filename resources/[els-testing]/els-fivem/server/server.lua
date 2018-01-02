@@ -1,8 +1,5 @@
-local vcf_files = {
-	"FBI3.xml",
-}
-
 vehicleInfoTable = {}
+patternInfoTable = {}
 
 local function processXml(el)
     local v = {}
@@ -52,9 +49,10 @@ function parseVehData(xml, fileName)
 	    			end
 
 	    			if not a.advisor then
-	    				if(elem.attr['TrafficAdvisor'] ~= nil) then
-	    					print("Vehicle has Traffic Advisor")
-	    					a.advisor = elem.attr['TrafficAdvisor']
+	    				if extra == 7 then
+	    					if string.upper(elem.attr['Color']) == "AMBER" then
+	    						a.advisor = true
+	    					end
 	    				end
 	    			end
 
@@ -95,31 +93,120 @@ function parseVehData(xml, fileName)
     print("Done with vehicle: " .. fileName)
 end
 
+function parsePatternData(xml, fileName)
+
+    local a = {}
+    fileName = string.sub(fileName, 1, -5)
+
+    for i=1,#xml.root.el do
+    	if(xml.root.el[i].name == "PRIMARY") then
+    		a.primary = {}
+    		a.primary.stages = {}
+    		a.primary.speed = tonumber(xml.root.el[i].attr["speed"])
+    		for ex=1,#xml.root.el[i].kids do
+    			if(string.upper(string.sub(xml.root.el[i].kids[ex].name, 1, -3)) == "STATE") then
+    				local spot = tonumber(string.sub(xml.root.el[i].kids[ex].name, 6))
+    				local elem = xml.root.el[i].kids[ex]
+    				a.primary.stages[spot] = {}
+	    			if elem.attr['Extra1'] == "true" then
+	    				a.primary.stages[spot][1] = 0
+	    			elseif elem.attr['Extra1'] == "false" then
+	    				a.primary.stages[spot][1] = 1
+	    			end
+	    			if elem.attr['Extra2'] == "true" then
+	    				a.primary.stages[spot][2] = 0
+	    			elseif elem.attr['Extra2'] == "false" then
+	    				a.primary.stages[spot][2] = 1
+	    			end
+	    			if elem.attr['Extra3'] == "true" then
+	    				a.primary.stages[spot][3] = 0
+	    			elseif elem.attr['Extra3'] == "false" then
+	    				a.primary.stages[spot][3] = 1
+	    			end
+	    			if elem.attr['Extra4'] == "true" then
+	    				a.primary.stages[spot][4] = 0
+	    			elseif elem.attr['Extra4'] == "false" then
+	    				a.primary.stages[spot][4] = 1
+	    			end
+    			end
+    		end
+    	end
+    	if(xml.root.el[i].name == "SECONDARY") then
+    		a.secondary = {}
+    		a.secondary.stages = {}
+    		a.secondary.speed = tonumber(xml.root.el[i].attr["speed"])
+    		for ex=1,#xml.root.el[i].kids do
+    			if(string.upper(string.sub(xml.root.el[i].kids[ex].name, 1, -3)) == "STATE") then
+    				local spot = tonumber(string.sub(xml.root.el[i].kids[ex].name, 6))
+    				local elem = xml.root.el[i].kids[ex]
+    				a.secondary.stages[spot] = {}
+	    			if elem.attr['Extra5'] == "true" then
+	    				a.secondary.stages[spot][1] = 0
+	    			elseif elem.attr['Extra5'] == "false" then
+	    				a.secondary.stages[spot][1] = 1
+	    			end
+	    			if elem.attr['Extra6'] == "true" then
+	    				a.secondary.stages[spot][2] = 0
+	    			elseif elem.attr['Extra6'] == "false" then
+	    				a.secondary.stages[spot][2] = 1
+	    			end
+	    			if elem.attr['Extra7'] == "true" then
+	    				a.secondary.stages[spot][3] = 0
+	    			elseif elem.attr['Extra7'] == "false" then
+	    				a.secondary.stages[spot][3] = 1
+	    			end
+	    			if elem.attr['Extra9'] == "true" then
+	    				a.secondary.stages[spot][4] = 0
+	    			elseif elem.attr['Extra9'] == "false" then
+	    				a.secondary.stages[spot][4] = 1
+	    			end
+    			end
+    		end
+    	end
+    end
+
+    patternInfoTable[#patternInfoTable + 1] = a
+
+    print("Done with pattern: " .. fileName)
+end
+
 function parseObjSet(data, fileName)
     local xml = SLAXML:dom(data)
 
     if xml and xml.root then
         if xml.root.name == "vcfroot" then
             parseVehData(xml, fileName)
+        elseif xml.root.name == "pattern" then
+        	parsePatternData(xml, fileName)
         end
 
     end
 end
 
 AddEventHandler('onResourceStart', function(name)
-    for i=1,#vcf_files do
-    	local data = LoadResourceFile(GetCurrentResourceName(), "vcf/" .. vcf_files[i])
+	if name == "els-fivem" then
+	    for i=1,#vcf_files do
+	    	local data = LoadResourceFile(GetCurrentResourceName(), "vcf/" .. vcf_files[i])
 
-	    if data then
-	        parseObjSet(data, vcf_files[i])
+		    if data then
+		        parseObjSet(data, vcf_files[i])
+		    end
 	    end
-    end
+
+	    for i=1,#pattern_files do
+	    	local data = LoadResourceFile(GetCurrentResourceName(), "patterns/" .. pattern_files[i])
+
+		    if data then
+		        parseObjSet(data, pattern_files[i])
+		    end
+	    end
+	end
 end)
 
 RegisterServerEvent("els:requestVehiclesUpdate")
 AddEventHandler('els:requestVehiclesUpdate', function()
-	print("Sending player (" .. source .. ") vehicle data")
-	TriggerClientEvent("els:updateElsVehicles", source, vehicleInfoTable)
+	print("Sending player (" .. source .. ") ELS data")
+	TriggerClientEvent("els:updateElsVehicles", source, vehicleInfoTable, patternInfoTable)
 end)
 
 RegisterServerEvent("els:changeLightStage_s")

@@ -1,8 +1,34 @@
+vcf_files = {
+	"FBI3.xml",
+	"POLICE3.xml",
+}
+
+pattern_files = {
+	"WIGWAG.xml",
+	"WIGWAG2.xml",
+	"WIGWAG3.xml",
+	"LEFTRIGHT.xml",
+	"LEFTSWEEP.xml",
+	"RIGHTSWEEP.xml",
+}
+
+modelsWithFireSiren =
+{
+    "FIRETRUK",
+}
+
+
+modelsWithAmbWarnSiren =
+{   
+    "AMBULANCE",
+    "FIRETRUK",
+    "LGUARD",
+}
+
 stagethreewithsiren = false
 playButtonPressSounds = true
 vehicleStageThreeAdvisor = {
-	"FBI3",
-	"POLICE3",
+    "FBI3",
 }
 
 
