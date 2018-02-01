@@ -3,9 +3,6 @@
   <residentTxd>vehshare</residentTxd>
   <residentAnims />
   <InitDatas>
-
-
-
      <Item>
       <modelName>POLCORVETTE</modelName>
       <txdName>POLCORVETTE</txdName>
@@ -139,25 +136,11 @@
         <Item>STD_POLICE2_REAR_RIGHT</Item>
       </firstPersonDrivebyData>
     </Item>
-
-
-
-
-
-
-
-
-
-
   </InitDatas>
   <txdRelationships>
     <Item>
       <parent>vehicles_dom_interior</parent>
-      <child>2015polstang</child>
+      <child>POLCORVETTE</child>
     </Item>
-
-
-
-	
   </txdRelationships>
 </CVehicleModelInfo__InitDataList>
