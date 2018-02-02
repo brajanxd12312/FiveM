@@ -1,5 +1,7 @@
 vcf_files = {
 	"FBI3.xml",
+	"police.xml",
+	"police2.xml",
 	"POLICE3.xml",
 }
 
