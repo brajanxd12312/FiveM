@@ -10,6 +10,7 @@ pattern_files = {
 	"WIGWAG2.xml",
 	"WIGWAG3.xml",
 	"LEFTRIGHT.xml",
+	"LEFTRIGHTDF.xml",
 	"LEFTSWEEP.xml",
 	"RIGHTSWEEP.xml",
 }
