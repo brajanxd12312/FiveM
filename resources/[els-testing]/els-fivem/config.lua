@@ -3,6 +3,7 @@ vcf_files = {
 	"police.xml",
 	"police2.xml",
 	"police3.xml",
+	"ambulance.xml",
 }
 
 pattern_files = {
