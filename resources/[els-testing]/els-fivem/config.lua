@@ -2,7 +2,7 @@ vcf_files = {
 	"FBI3.xml",
 	"police.xml",
 	"police2.xml",
-	"POLICE3.xml",
+	"police3.xml",
 }
 
 pattern_files = {
@@ -27,10 +27,13 @@ modelsWithAmbWarnSiren =
     "LGUARD",
 }
 
-stagethreewithsiren = false
+stagethreewithsiren = true
 playButtonPressSounds = true
 vehicleStageThreeAdvisor = {
-    "FBI3",
+	"FBI3.xml",
+	"police.xml",
+	"police2.xml",
+	"police3.xml",
 }
 
 
