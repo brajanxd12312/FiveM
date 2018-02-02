@@ -32,9 +32,6 @@ stagethreewithsiren = true
 playButtonPressSounds = true
 vehicleStageThreeAdvisor = {
 	"FBI3.xml",
-	"police.xml",
-	"police2.xml",
-	"police3.xml",
 }
 
 
