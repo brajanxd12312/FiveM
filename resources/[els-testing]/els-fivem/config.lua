@@ -29,7 +29,7 @@ modelsWithAmbWarnSiren =
     "LGUARD",
 }
 
-stagethreewithsiren = true
+stagethreewithsiren = false
 playButtonPressSounds = true
 vehicleStageThreeAdvisor = {
 	"FBI3.xml",

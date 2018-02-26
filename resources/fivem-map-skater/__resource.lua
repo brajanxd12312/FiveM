@@ -1,3 +1,3 @@
-resource_type 'map' { gameTypes = { fs_freemode = true } }
+resource_type 'map' { gameTypes = { fivem = true } }
 
 map 'map.lua'

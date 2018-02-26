@@ -14,6 +14,9 @@ const EXT_FUNCREF = 10;
 
 	const pack = data => msgpack.encode(data, { codec });
 	const unpack = data => msgpack.decode(data, { codec });
+	
+	// store for use by natives.js
+	global.msgpack_unpack = unpack;
 
 	/**
 	 * @param {Function} refFunction
@@ -30,7 +33,7 @@ const EXT_FUNCREF = 10;
 	function refFunctionPacker(refFunction) {
 		const ref = Citizen.makeRefFunction(refFunction);
 
-		return msgpack.encode(ref);
+		return ref;
 	}
 
 	function refFunctionUnpacker(refSerialized) {
@@ -66,7 +69,7 @@ const EXT_FUNCREF = 10;
 			return pack({});
 		}
 
-		return pack(refFunctionsMap.get(ref)(unpack(argsSerialized)));
+		return pack(refFunctionsMap.get(ref)(...unpack(argsSerialized)));
 	});
 
 	/**
@@ -132,7 +135,7 @@ const EXT_FUNCREF = 10;
 		global.source = source;
 
 		if (source.startsWith('net')) {
-			if (!netSafeEventNames.has(name)) {
+			if (emitter.listeners(name).length > 0 && !netSafeEventNames.has(name)) {
 				console.error(`Event ${name} was not safe for net`);
 
 				global.source = null;
