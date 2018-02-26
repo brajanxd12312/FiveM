@@ -1,24 +1,52 @@
 vcf_files = {
-	"FBI3.xml",
-	"police.xml",
-	"police2.xml",
-	"police3.xml",
-	"ambulance.xml",
+	'ambulance.xml',
+	'corvan.xml',
+	'fbi.xml',
+	'fbi2.xml',
+	'fbi3.xml',
+	'fbi4.xml',
+	'fbi5.xml',
+	'fbi6.xml',
+	'firetruk.xml',
+	'flatbed.xml',
+	'lspd1.xml',
+	'lspd2.xml',
+	'lspd3.xml',
+	'lspd4.xml',
+	'lspd5.xml',
+	'lspd6.xml',
+	'lspd7.xml',
+	'police.xml',
+	'police2.xml',
+	'police3.xml',
+	'police4.xml',
+	'police5.xml',
+	'policeb.xml',
+	'policet.xml',
+	'pranger.xml',
+	'riot.xml',
+	'sheriff.xml',
+	'sheriff2.xml',
+	'sheriff3.xml',
+	'towtruck.xml',
 }
 
 pattern_files = {
-	"WIGWAG.xml",
-	"WIGWAG2.xml",
-	"WIGWAG3.xml",
-	"LEFTRIGHT.xml",
+	"COMPLEX.xml",
 	"LEFTRIGHTDF.xml",
-	"LEFTSWEEP.xml",
-	"RIGHTSWEEP.xml",
+	"T_ADVIS_RIGHT_LEFT.xml",
+	"T_ADVIS_LEFT_RIGHT.xml",
+	"T_ADVIS_BACKFOURTH.xml"
+}
+
+modelsWithTrafficAdvisor = {
+	"FBI2",
+	'flatbed'
 }
 
 modelsWithFireSiren =
 {
-    "FIRETRUK",
+    "FIRETRUK"
 }
 
 
@@ -26,15 +54,21 @@ modelsWithAmbWarnSiren =
 {   
     "AMBULANCE",
     "FIRETRUK",
-    "LGUARD",
+    "LGUARD"
 }
 
 stagethreewithsiren = false
 playButtonPressSounds = true
 vehicleStageThreeAdvisor = {
-	"FBI3.xml",
+	"FBI3",
+	'flatbed'
 }
 
+
+vehicleSyncDistance = 150
+envirementLightBrightness = 0.025
+
+build = "master"
 
 shared = {
 	horn = 86,
