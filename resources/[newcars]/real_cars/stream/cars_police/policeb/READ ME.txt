@@ -1,0 +1,103 @@
+MODEL OVERVIEW
+=================================
+- NAME: 2013 CHP Harley Davidson Electraglide
+- VERSION: V1.0
+- EXTRA PARTS: N/A
+- OPTIMIZED FOR: Policeb
+
+!!!!!!!! IMPORTANT !!!!!!!!!!
+If you are feeling generious today, I always will welcome small donations.
+It is no way required, but any ammount if you do choose to donate will be 
+more then greatly appreciated!
+
+TO GET THE LIGHTS TO WORK PROPERLY ON THIS MODEL, YOU MUST MUST MUST
+INSTALL THE CARVARITAIONS LINE INCLUDED WITH THIS FILE. IT WILL MAKE THE
+POLICEB ACT LIKE POLICE WITH THE WAY THE LIGHTS FLASH.
+
+If you know anything about siren settings, just change the policeb to 1.
+
+DO NOT MESSAGE ME ABOUT YOUR LIGHTS BEING DIM, AS YOU CAN SEE BY THE SCREENS, 
+THEY ARE WELL ENOUGH BRIGHT. ENSURE YOU ARE USING RADIANCE V AND YOUR POST FX
+AND YOUR SHADER QUALITY ARE SET TO MAX.  
+
+I will not give support to a question that has already been answered, please 
+read through the comments section or this read me, as it is here for a reason.
+
+=============== Instillation ===============
+To install the Harley, all you have to do is navigate to the latest patch day
+you have in your MODS folder, and place it in the vehicles.rpf there.
+
+For me it would be:
+C:\Program Files (x86)\Steam\steamapps\common\Grand Theft Auto V\mods\update\x64\dlcpacks\patchday9ng\dlc.rpf\x64\levels\gta5\vehicles.rpf\
+
+To install the CARVAR file, navigate to:
+C:\Program Files (x86)\Steam\steamapps\common\Grand Theft Auto V\Mods\update\x64\dlcpacks\mpvalentines2\dlc.rpf\common\data
+and Install the line into the carvariation there!
+
+=============== NOTES =============== 
+A lot of work has gone into this bike, it has been a long time in the making 
+and I would just like to thank the guys over at Code Zero gaming, more specifically
+Polecat324 and BayAreaBugs, for giving me the oportunity to do these bikes.
+
+This bike is part of a CHP mega pack that I will be releasing at the earliest time it is done.
+The pack includes: - 2016 Utility
+                   - 2013 Marked and slicktop utility
+                   - 2013 Ford F2/350
+                   - 2011 CVPI, vector and Liberty
+                   - 2010 Dodge Charger
+                   and whatever else i can find pictures of!
+
+It took a long time to do because the base model that was crunched was about 
+1.4 MILLION triangles, so it was quite the project. 
+
+I always thought that pay walls were fucking stupid, so a huge thanks to the guys at code zero for
+rendering the current one on the harley in the community obsolite, and this bike is also of better 
+quality.
+
+The model itself is quite large in megabyte size, but it should not be an issue with anyone's
+game as the PoliceB does not spawn on a reoccuring basis.
+
+Once again as i've stated, YOU MUST INSTALL THE CARVAR LINE BEFORE USING THE BIKE!
+
+There should be no problems with the bike itself, it should act exactly like the default policeb. 
+If you have any issues, make sure to leave a comment or PM me!
+
+This model is after the California Highway Patrol, so it has a steadyburn and their lights they use
+on the bike itself.
+
+There is a template included with the file itself, so you are able to make your own skins for the bike.
+
+The DEV versions of this bike will be released later next month.
+
+I will be releasing a LAPD version with their gun mounts on it later next week.
+
+If you encounter any bugs, feel free to message me!
+
+=============== CREDITS =============== 
+MODEL
+- Harley Davidson Electraglide Purchased by beautiful bastards at Code Zero Gaming
+- Bike poly Crunched by Thehurk
+- Converted to GTA V by Thehurk
+- Templated by Windows446 and Thehurk
+
+Other Parts
+- Whelen Linz 3 Modeled and textured by Thehurk
+- General Electric Rangr Modeled and textured by Thehurk, Textures by T-swizzle
+- Whelen Speaker by Chippy
+- Motorcycle Baton and flashlight holder by Thehurk
+- Antennna mount by Thehurk
+- Wilson antenna by Gump, made moving by Thehurk
+
+- GORGEOUS CHP and SAHP skins by Windows446, he is also doing paid skins, if anyone wants
+extremely high quality skins.
+
+Disclaimer
+=================================
+-You are not to attempt to modify or rip this model in any way shape or form.
+-I (Thehurk) am not resposible for any damages done to your game. Please make a backup of any edited files!
+-Do not attempt to make a profit off this model in any way shape or form.
+-Do not upload this file to any other site, claiming it as your own. 
+-Do not re-upload this file, PLEASE MAKE A LINK TO IT.
+-If you want to use this file in a clan, PLEASE ask me before doing so. 
+ 
+Enjoy!!!
