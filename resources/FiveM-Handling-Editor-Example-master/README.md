@@ -1,1 +1,0 @@
-# FiveM-Handling-Editor-Example
