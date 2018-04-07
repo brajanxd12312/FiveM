@@ -1,7 +1,0 @@
-RegisterNetEvent("SaveCommand")
-AddEventHandler("SaveCommand", function(comment)
-		x, y, z = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
-	    local PlayerName = GetPlayerName()
-	    TriggerServerEvent("SaveCoords", PlayerName , x , y , z, comment)
-		TriggerEvent("chatMessage", "POS", {191, 1, 1}, 'Coords saved.' .. GetEntityHeading(GetPlayerPed(-1)) .. '')				
-end)
