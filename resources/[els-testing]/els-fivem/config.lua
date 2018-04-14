@@ -1,5 +1,11 @@
 vcf_files = {
 	'ambulance.xml',
+	'bcso1.xml',
+	'bcso2.xml',
+	'bcso3.xml',
+	'bcso4.xml',
+	'bcso5.xml',
+	'bcso6.xml',
 	'corvan.xml',
 	'esu.xml',
 	'fbi.xml',
@@ -10,6 +16,22 @@ vcf_files = {
 	'fbi6.xml',
 	'firetruk.xml',
 	'flatbed.xml',
+	'hwaycar1.xml',
+	'hwaycar2.xml',
+	'hwaycar3.xml',
+	'hwaycar4.xml',
+	'hwaycar5.xml',
+	'hwaycar6.xml',
+	'hwaycar7.xml',
+	'hwaycar8.xml',
+	'hwaycar9.xml',
+	'hwaycar10.xml',
+	'hwaycar11.xml',
+	'hwaycar12.xml',
+	'hwaycar13.xml',
+	'hwaycar14.xml',
+	'hwaycar15.xml',
+	'hwaycar16.xml',
 	'lspd1.xml',
 	'lspd2.xml',
 	'lspd3.xml',
@@ -35,13 +57,16 @@ vcf_files = {
 pattern_files = {
 	"COMPLEX.xml",
 	"LEFTRIGHTDF.xml",
+	"outsideburn.xml",
 	"T_ADVIS_RIGHT_LEFT.xml",
 	"T_ADVIS_LEFT_RIGHT.xml",
 	"T_ADVIS_BACKFOURTH.xml"
 }
 
 modelsWithTrafficAdvisor = {
-	'flatbed'
+	'flatbed',
+	'hwaycar1',
+	'hwaycar5'
 }
 
 modelsWithFireSiren =
@@ -60,7 +85,8 @@ modelsWithAmbWarnSiren =
 stagethreewithsiren = false
 playButtonPressSounds = true
 vehicleStageThreeAdvisor = {
-	'flatbed'
+	'flatbed',
+	'hwaycar1'
 }
 
 
