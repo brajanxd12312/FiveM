@@ -3,7 +3,7 @@
     <variationData>
     <!-- VEH_LSPD1 -->
         <Item>
-            <modelName>LSPD1</modelName>
+            <modelName>BCSO1</modelName>
             <colors>
                 <Item>
                     <indices content="char_array">
