@@ -2,12 +2,8 @@
 <pattern>
 	<PRIMARY speed="400">
         <State01 Extra1="true" Extra2="false" Extra3="false" Extra4="false" Extra5="true" Extra6="false"/>
-        <State02 Extra1="false" Extra2="false" Extra3="false" Extra4="false" Extra5="false" Extra6="false"/>
-        <State03 Extra1="false" Extra2="false" Extra3="false" Extra4="true" Extra5="false" Extra6="true"/>
-        <State04 Extra1="false" Extra2="false" Extra3="false" Extra4="false" Extra5="false" Extra6="false"/>
-        <State05 Extra1="true" Extra2="false" Extra3="false" Extra4="false" Extra5="true" Extra6="false"/>
-        <State06 Extra1="false" Extra2="false" Extra3="false" Extra4="false" Extra5="false" Extra6="false"/>
-        <State07 Extra1="false" Extra2="false" Extra3="false" Extra4="true" Extra5="false" Extra6="true"/>
-        <State08 Extra1="false" Extra2="false" Extra3="false" Extra4="false" Extra5="false" Extra6="false"/>
+        <State02 Extra1="false" Extra2="false" Extra3="false" Extra4="true" Extra5="false" Extra6="true"/>
+        <State03 Extra1="true" Extra2="false" Extra3="false" Extra4="false" Extra5="true" Extra6="false"/>
+        <State04 Extra1="false" Extra2="false" Extra3="false" Extra4="true" Extra5="false" Extra6="true"/>
     </PRIMARY>
 </pattern>
