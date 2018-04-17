@@ -10,14 +10,4 @@
         <State07 Extra1="false" Extra2="false" Extra3="false" Extra4="true" Extra5="false" Extra6="true"/>
         <State08 Extra1="false" Extra2="false" Extra3="false" Extra4="false" Extra5="false" Extra6="false"/>
     </PRIMARY>
-    <!-- <SECONDARY speed="65">
-        <State01 Extra5="true" Extra6="false" Extra7="false" Extra9="true"/>
-        <State02 Extra5="false" Extra6="false" Extra7="false" Extra9="false"/>
-        <State03 Extra5="true" Extra6="false" Extra7="false" Extra9="true"/>
-        <State04 Extra5="false" Extra6="false" Extra7="false" Extra9="false"/>
-        <State05 Extra5="false" Extra6="true" Extra7="true" Extra9="false"/>
-        <State06 Extra5="false" Extra6="false" Extra7="false" Extra9="false"/>
-        <State07 Extra5="false" Extra6="true" Extra7="true" Extra9="false"/>
-        <State08 Extra5="false" Extra6="false" Extra7="false" Extra9="false"/>
-    </SECONDARY> -->
 </pattern>
