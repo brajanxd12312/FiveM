@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <pattern>
-	<PRIMARY speed="400">
-        <State01 Extra1="true" Extra2="false" Extra3="false" Extra4="false" Extra5="true" Extra6="false"/>
-        <State02 Extra1="false" Extra2="false" Extra3="false" Extra4="true" Extra5="false" Extra6="true"/>
-        <State03 Extra1="true" Extra2="false" Extra3="false" Extra4="false" Extra5="true" Extra6="false"/>
-        <State04 Extra1="false" Extra2="false" Extra3="false" Extra4="true" Extra5="false" Extra6="true"/>
+	<PRIMARY speed="300">
+        <State01 Extra1="true" Extra2="false" Extra3="false" Extra4="true"/>
+        <State02 Extra1="false" Extra2="false" Extra3="true" Extra4="false"/>
+        <State03 Extra1="true" Extra2="false" Extra3="false" Extra4="true"/>
+        <State04 Extra1="false" Extra2="false" Extra3="true" Extra4="false"/>
+        <State05 Extra1="true" Extra2="false" Extra3="false" Extra4="true"/>
     </PRIMARY>
+	<SECONDARY speed="300">
+        <State01 Extra5="true" Extra6="false" Extra10="true"/>
+        <State02 Extra5="false" Extra6="true" Extra10="true"/>
+        <State03 Extra5="true" Extra6="false" Extra10="true"/>
+        <State04 Extra5="false" Extra6="true" Extra10="true"/>
+        <State05 Extra5="true" Extra6="false" Extra10="true"/>
+    </SECONDARY>
 </pattern>
