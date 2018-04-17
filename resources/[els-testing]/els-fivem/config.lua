@@ -55,18 +55,20 @@ vcf_files = {
 }
 
 pattern_files = {
-	"COMPLEX.xml",
 	"LEFTRIGHTDF.xml",
+	"COMPLEX.xml",
 	"outsideburn.xml",
 	"T_ADVIS_RIGHT_LEFT.xml",
 	"T_ADVIS_LEFT_RIGHT.xml",
-	"T_ADVIS_BACKFOURTH.xml"
+	"T_ADVIS_BACKFOURTH.xml",
+	"T_ADVIS_FLASH.xml"
 }
 
 modelsWithTrafficAdvisor = {
 	'flatbed',
 	'hwaycar1',
-	'hwaycar5'
+	'hwaycar5',
+	'police2'
 }
 
 modelsWithFireSiren =
@@ -86,7 +88,8 @@ stagethreewithsiren = false
 playButtonPressSounds = true
 vehicleStageThreeAdvisor = {
 	'flatbed',
-	'hwaycar1'
+	'hwaycar1',
+	'police2'
 }
 
 
