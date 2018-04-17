@@ -8,9 +8,9 @@
 		"textColour" : "0,0,0",
 		"useBoldText" : "true",
 		"serverTitle" : "Quantum Gaming",
-		"playAudioInBackground" : "true",
+		"playAudioInBackground" : "false",
 		"audioPath" : "audio/gtavthemesong.ogg",
-		"audioVolume" : "0.2"
+		"audioVolume" : "0"
 	},
 	{
 		"rule1" : "Do not RDM or VDM",
