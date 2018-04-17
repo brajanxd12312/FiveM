@@ -55,6 +55,7 @@ vcf_files = {
 }
 
 pattern_files = {
+	'chp.xml',
 	"LEFTRIGHTDF.xml",
 	"COMPLEX.xml",
 	"outsideburn.xml",
