@@ -9,8 +9,8 @@
 --	https://github.com/iEns/RealisticVehicleFailure
 --
 
-local damageFactor = 15.0					-- Sane values are 1 to 100. Higher values means more damage to vehicle. A good starting point is 15
-local cascadingFailureSpeedFactor = 10.0	-- Sane values are 1 to 100. When vehicle health drops below a certain point, cascading failure sets in, and the health drops rapidly until the vehicle dies. Higher values means faster failure. A good starting point is 10
+local damageFactor = 20.0					-- Sane values are 1 to 100. Higher values means more damage to vehicle. A good starting point is 15
+local cascadingFailureSpeedFactor = 15.0	-- Sane values are 1 to 100. When vehicle health drops below a certain point, cascading failure sets in, and the health drops rapidly until the vehicle dies. Higher values means faster failure. A good starting point is 10
 local displayBlips = true					-- Show blips for mechanics locations
 
 
