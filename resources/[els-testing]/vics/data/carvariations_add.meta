@@ -47,16 +47,9 @@
       		<Item>0_default_modkit</Item>
       	</kits>
       	<windowsWithExposedEdges/>
-      	<plateProbabilities>
-      		<Probabilities>
-				<Item>
-					<Name>Police guv plate</Name>
-					<Value value="100"/>
-				</Item>
-      		</Probabilities>
-      	</plateProbabilities>
-      	<lightSettings value="23"/>
-      	<sirenSettings value="0"/>
+      	<plateProbabilities/>
+      	<lightSettings value="1"/>
+      	<sirenSettings value="1"/>
     </Item>
 <Item>
       <modelName>corvan</modelName>
