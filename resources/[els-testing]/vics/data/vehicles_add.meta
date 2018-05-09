@@ -1645,9 +1645,13 @@
   </InitDatas>
   <txdRelationships>
 <Item>
-      <parent>vehicles_poltax_interior</parent>
-      <child>fbi3</child>
-    </Item>
+	<parent>vehicles_poltax_interior</parent>
+	<child>fbi3</child>
+</Item>
+<Item>
+	<parent>vehicles_poltax_interior</parent>
+	<child>LSFD1</child>
+</Item>
 <Item>
       <parent>vehicles_poltax_interior</parent>
       <child>fbi4</child>
