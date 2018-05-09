@@ -32,6 +32,7 @@ vcf_files = {
 	'hwaycar14.xml',
 	'hwaycar15.xml',
 	'hwaycar16.xml',
+	'lsfd1.xml',
 	'lspd1.xml',
 	'lspd2.xml',
 	'lspd3.xml',
