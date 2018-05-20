@@ -56,6 +56,7 @@ vcf_files = {
 }
 
 pattern_files = {
+	"dv_custom.xml",
 	"LEFTRIGHTDF.xml",
 	'chp.xml',
 	"COMPLEX.xml",
