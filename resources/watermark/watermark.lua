@@ -31,7 +31,7 @@ font = 1
 bringontherainbows = false
 
 -- CODE --
-SetCurrentPedWeapon(GetPlayerPed(-1), 'WEAPON_UNARMED', 1)
+
 
 Citizen.CreateThread(function()
 	while true do
