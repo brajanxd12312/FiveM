@@ -5,16 +5,13 @@
         <State02 Extra1="false" Extra2="false" Extra3="false" Extra4="true" Extra5="false" Extra6="false" />
         <State03 Extra1="true" Extra2="false" Extra3="false" Extra4="false" Extra5="false" Extra6="false" />
         <State04 Extra1="false" Extra2="false" Extra3="false" Extra4="true" Extra5="false" Extra6="false" />
-        <State03 Extra1="true" Extra2="false" Extra3="false" Extra4="false" Extra5="false" Extra6="false" />
+        <State05 Extra1="true" Extra2="false" Extra3="false" Extra4="false" Extra5="false" Extra6="false" />
     </PRIMARY>
     <SECONDARY speed="150">
         <State01 Extra1="false" Extra2="true" Extra3="false" Extra4="false" Extra5="true" Extra6="false" />
         <State02 Extra1="false" Extra2="false" Extra3="true" Extra4="false" Extra5="false" Extra6="true" />
         <State03 Extra1="false" Extra2="true" Extra3="false" Extra4="false" Extra5="true" Extra6="false" />
         <State04 Extra1="false" Extra2="false" Extra3="true" Extra4="false" Extra5="false" Extra6="true" />
-        <State03 Extra1="false" Extra2="true" Extra3="false" Extra4="false" Extra5="true" Extra6="false" />
+        <State05 Extra1="false" Extra2="true" Extra3="false" Extra4="false" Extra5="true" Extra6="false" />
     </SECONDARY>
-    <ADVISOR speed="200">
-        <State01 Extra1="false" Extra2="false" Extra3="false" Extra4="false" Extra5="false" Extra6="false" />
-    </ADVISOR>
 </pattern>
