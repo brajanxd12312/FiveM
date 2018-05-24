@@ -1,33 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <pattern>
-	<PRIMARY speed="100">
+	<PRIMARY speed="65">
         <State01 Extra1="true" Extra2="false" Extra3="true" Extra4="false"/>
-        <State02 Extra1="false" Extra2="true" Extra3="false" Extra4="true"/>
+        <State02 Extra1="false" Extra2="false" Extra3="false" Extra4="false"/>
         <State03 Extra1="true" Extra2="false" Extra3="true" Extra4="false"/>
-        <State04 Extra1="false" Extra2="true" Extra3="false" Extra4="true"/>
-        <State05 Extra1="true" Extra2="false" Extra3="true" Extra4="false"/>
-        <State06 Extra1="false" Extra2="true" Extra3="false" Extra4="true"/>
-        <State07 Extra1="true" Extra2="false" Extra3="true" Extra4="false" Speed="70"/>
+        <State04 Extra1="false" Extra2="false" Extra3="false" Extra4="false"/>
+        
+        <State05 Extra1="false" Extra2="true" Extra3="false" Extra4="true"/>
+        <State06 Extra1="false" Extra2="false" Extra3="false" Extra4="false"/>
+        <State07 Extra1="false" Extra2="true" Extra3="false" Extra4="true"/>
+        <State08 Extra1="false" Extra2="false" Extra3="false" Extra4="false"/>
+        
+        <State09 Extra1="true" Extra2="false" Extra3="true" Extra4="false"/>
+        <State10 Extra1="false" Extra2="false" Extra3="false" Extra4="false"/>
+        <State11 Extra1="true" Extra2="false" Extra3="true" Extra4="false"/>
+        <State12 Extra1="false" Extra2="false" Extra3="false" Extra4="false"/>
+        
+        <State13 Extra1="false" Extra2="true" Extra3="false" Extra4="true"/>
+        <State14 Extra1="false" Extra2="false" Extra3="false" Extra4="false"/>
+        <State15 Extra1="false" Extra2="true" Extra3="false" Extra4="true"/>
+        <State16 Extra1="false" Extra2="false" Extra3="false" Extra4="false"/>
+
+        <State17 Extra1="true" Extra2="false" Extra3="true" Extra4="false"/>
+        <State18 Extra1="false" Extra2="false" Extra3="false" Extra4="false"/>
+        <State19 Extra1="true" Extra2="false" Extra3="true" Extra4="false"/>
+        <State20 Extra1="false" Extra2="false" Extra3="false" Extra4="false"/>
+        
+        <State21 Extra1="false" Extra2="true" Extra3="false" Extra4="true"/>
+        <State22 Extra1="false" Extra2="false" Extra3="false" Extra4="false"/>
+        <State23 Extra1="false" Extra2="true" Extra3="false" Extra4="true"/>
+        <State24 Extra1="false" Extra2="false" Extra3="false" Extra4="false"/>
     </PRIMARY>
     <SECONDARY speed="75">
         <State01 Extra5="false" Extra6="true" />
+        
         <State02 Extra5="false" Extra6="false" />
+        
         <State03 Extra5="false" Extra6="true" />
-        <State04 Extra5="true" Extra6="false" />
-        <State05 Extra5="false" Extra6="false" />
-        <State06 Extra5="true" Extra6="false" />
-        <State07 Extra5="false" Extra6="true" />
+        
+        <State04 Extra5="false" Extra6="false" />
+        
+        <State05 Extra5="true" Extra6="false" />
+        
+        <State06 Extra5="false" Extra6="false" />
+        
+        <State07 Extra5="true" Extra6="false" />
+        
         <State08 Extra5="false" Extra6="false" />
+        
         <State09 Extra5="false" Extra6="true" />
-        <State10 Extra5="true" Extra6="false" />
-        <State11 Extra5="false" Extra6="false" />
-        <State12 Extra5="true" Extra6="false" />
-        <State13 Extra5="false" Extra6="true" />
+        
+        <State10 Extra5="false" Extra6="false" />
+        
+        <State11 Extra5="false" Extra6="true" />
+        
+        <State12 Extra5="false" Extra6="false" />
+        
+        <State13 Extra5="true" Extra6="false" />
+        
         <State14 Extra5="false" Extra6="false" />
-        <State15 Extra5="false" Extra6="true" />
-        <State16 Extra5="true" Extra6="false" />
-        <State17 Extra5="false" Extra6="false" />
-        <State18 Extra5="true" Extra6="false" />
-        <State19 Extra5="false" Extra6="true" Speed="70"/>
+        
+        <State15 Extra5="true" Extra6="false" />
+        
+        <State16 Extra5="false" Extra6="false" />
+        
+        <State17 Extra5="false" Extra6="true" />
+        
+        <State18 Extra5="false" Extra6="false" />
+        
+        <State19 Extra5="false" Extra6="true" />
+        
+        <State20 Extra5="false" Extra6="false" />
+        
+        <State21 Extra5="true" Extra6="false" />
+        
+        <State22 Extra5="false" Extra6="false" />
+        
+        <State23 Extra5="true" Extra6="false" />
+        
+        <State24 Extra5="false" Extra6="false" />
     </SECONDARY>
 </pattern>

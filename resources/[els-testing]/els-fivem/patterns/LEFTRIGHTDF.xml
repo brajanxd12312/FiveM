@@ -10,7 +10,7 @@
         <State07 Extra1="false" Extra2="false" Extra3="true" Extra4="true"/>
         <State08 Extra1="false" Extra2="false" Extra3="false" Extra4="false"/>
     </PRIMARY>
-    <SECONDARY speed="65">
+    <SECONDARY speed="75">
         <State01 Extra5="true" Extra6="false" Extra7="false" Extra9="true"/>
         <State02 Extra5="false" Extra6="false" Extra7="false" Extra9="false"/>
         <State03 Extra5="true" Extra6="false" Extra7="false" Extra9="true"/>
