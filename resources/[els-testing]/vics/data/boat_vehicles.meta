@@ -137,7 +137,7 @@
 	<txdRelationships>
 		<Item>
 			<parent>vehicles_jet_interior</parent>
-			<child>DEFENDER</child>
+			<child>kj2000</child>
 		</Item>
 	</txdRelationships>
 
