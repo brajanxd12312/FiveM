@@ -5,10 +5,10 @@
 
   <InitDatas>
     <Item>
-      <modelName>defender</modelName>
-      <txdName>defender</txdName>
+      <modelName>DEFENDER</modelName>
+      <txdName>DEFENDER</txdName>
       <handlingId>DEFENDER</handlingId>
-      <gameName>PREDATOR</gameName>
+      <gameName>USCGBOAT</gameName>
       <vehicleMakeName />
       <expressionDictName>null</expressionDictName>
       <expressionName>null</expressionName>
@@ -102,7 +102,7 @@
       <additionalTrailers />
       <drivers>
         <Item>
-          <driverName>S_M_Y_USCG_01</driverName>
+          <driverName>S_M_Y_COP_01</driverName>
           <npcName />
         </Item>
       </drivers>
@@ -137,7 +137,7 @@
   <txdRelationships>
     <Item>
       <parent>vehicles_jet_interior</parent>
-      <child>kj2000</child>
+      <child>DEFENDER</child>
     </Item>
   </txdRelationships>
 
