@@ -1,10 +1,10 @@
-print("Write /pos2 ingame to save the coords in a .txt in server's main folder")
+print("Write /pos [comment] ingame to save the coords in a .txt in server's main folder")
 
 RegisterServerEvent("SaveCoords")
 AddEventHandler("SaveCoords", function( PlayerName , x , y , z , comment )
  file = io.open( PlayerName .. "-Coords.txt", "a")
     if file then
-        file:write("{" .. x .. "," .. y .. "," .. z .. ",".. comment .."},")
+        file:write("{x: " .. x .. ", y: " .. y .. ", z: " .. z .. ", desc: " .. comment .."},")
         file:write("\n")
     end
     file:close()
@@ -20,7 +20,7 @@ AddEventHandler("chatMessage", function(p, color, msg)
               comment = comment .. " " .. fullcmd[i]
           end
         end
-        if cmd == "/pos2" then
+        if cmd == "/pos" then
         	TriggerClientEvent("SaveCommand", p, comment)
         	CancelEvent()
         end
