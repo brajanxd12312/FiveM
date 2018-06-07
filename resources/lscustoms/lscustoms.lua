@@ -92,7 +92,7 @@ local function AddMod(mod,parent,header,name,info,stock)
 			local price = LSC_Config.prices.mods[mod].startprice
 			for i = 0,   tonumber(GetNumVehicleMods(veh,mod)) -1 do
 				local lbl = GetModTextLabel(veh,mod,i)
-				if lbl ~= nil then
+				--if lbl ~= nil then
 					local mname = tostring(GetLabelText(lbl))
 					if mname ~= "NULL" then
 						local btn = m:addPurchase(mname,price)
@@ -100,7 +100,7 @@ local function AddMod(mod,parent,header,name,info,stock)
 						btn.mod = i
 						price = price + LSC_Config.prices.mods[mod].increaseby
 					end
-				end
+				--end
 			end		
 		else
 			for n, v in pairs(LSC_Config.prices.mods[mod]) do
