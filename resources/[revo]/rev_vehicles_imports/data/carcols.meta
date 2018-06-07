@@ -3,7 +3,7 @@
   <Kits>
     <Item>
       <kitName>3850_charger_modkit</kitName>
-      <id value="385" />	 	  
+      <id value="3850" />	 	  
       <kitType>MKT_SPORT</kitType>
       <visibleMods>
 	    <Item>
