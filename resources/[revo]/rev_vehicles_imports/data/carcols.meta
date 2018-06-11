@@ -2,8 +2,8 @@
 <CVehicleModelInfoVarGlobal>    
   <Kits>
     <Item>
-      <kitName>111_charger_modkit</kitName>
-      <id value="111" />	 	  
+      <kitName>203_charger_modkit</kitName>
+      <id value="203" />	 	  
       <kitType>MKT_SPORT</kitType>
       <visibleMods>
 	    <Item>
