@@ -4,6 +4,6 @@
         <State01 Extra1="true" Extra2="false" Extra3="false" Extra4="true"/>
     </PRIMARY>
     <SECONDARY>
-        <State01 Extra5="false" Extra6="false"/>
+        <State02 Extra5="false" Extra6="false"/>
     </SECONDARY>
 </pattern>
