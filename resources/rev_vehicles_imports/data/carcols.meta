@@ -857,12 +857,15 @@
       <slotNames>
       </slotNames>
       <liveryNames>
-        <Item>16CHARGER_LV1</Item>
-        <Item>16CHARGER_LV2</Item>
-		<Item>16CHARGER_LV3</Item>
-		<Item>16CHARGER_LV4</Item>
-		<Item>16CHARGER_LV5</Item>
-		<Item>16CHARGER_LV6</Item>
+        <Item>NO_SKIN</Item>
+        <Item>DOUBLE_RACE_STRIPE_BL</Item>
+		    <Item>DOUBLE_RACE_STRIPE_WH</Item>
+		    <Item>SINGLE_RACE_STRIPE_BL</Item>
+		    <Item>SINLGE_RACE_STRIPE_WH</Item>
+		    <Item>SIDE_MOPAR_STRIPE_BLK</Item>
+		    <Item>SIDE_MOPAR_STRIPE_WHT</Item>
+		    <Item>SINGLE_RACE_STRIPE_FULLTORRED</Item>
+		    <Item>SINGLE_RACE_STRIPE_FULLINDIGOBLUE</Item>
       </liveryNames>
     </Item>
  </Kits>
