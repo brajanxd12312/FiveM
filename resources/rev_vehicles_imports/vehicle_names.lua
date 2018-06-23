@@ -7,7 +7,7 @@ Citizen.CreateThread(function()
     AddTextEntry('0x03279B2E', 'Lightweight_Forged_Aluminum_Wheel')
 
     
-    AddTextEntry('0x0378E930', 'Hellcat_Front_Bumper')
+    AddTextEntry('0xF6023556', 'Hellcat_Front_Bumper')
     
    --[[  AddTextEntry('', '')
     
