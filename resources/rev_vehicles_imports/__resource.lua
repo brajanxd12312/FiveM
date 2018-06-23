@@ -13,5 +13,5 @@ data_file 'CARCOLS_FILE' 'data/carcols.meta'
 data_file 'VEHICLE_VARIATION_FILE' 'data/carvariations.meta'
 
 client_script {
-    'data/vehicle_names.lua'    -- Not Required
+    'data/vehicle_names.lua'    -- Not Required... or is it...
 }
