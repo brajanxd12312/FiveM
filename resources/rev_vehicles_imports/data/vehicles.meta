@@ -251,7 +251,7 @@
     <Item>
       <modelName>m2</modelName>
       <txdName>m2</txdName>
-      <handlingId>buffalo</handlingId>
+      <handlingId>SENTINEL</handlingId>
       <gameName>m2</gameName>
       <vehicleMakeName>bmw</vehicleMakeName>
       <expressionDictName>null</expressionDictName>
