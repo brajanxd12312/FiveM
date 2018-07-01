@@ -495,6 +495,10 @@
       <parent>vehicles_dom_interior</parent>
       <child>m2</child>
     </Item>
+    <Item>
+      <parent>vehicles_poltax_interior</parent>
+      <child>750li</child>
+    </Item>
   </txdRelationships>
 
 </CVehicleModelInfo__InitDataList>
