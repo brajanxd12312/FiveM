@@ -542,18 +542,17 @@
       <sirenSettings value="0" />
     </Item>
     <Item>
-      <modelName>focusrs</modelName>
+      <modelName>taurus</modelName>
       <colors>
         <Item>
           <indices content="char_array">
             70
             70
-            74 
-            34
-						27
-						112
+            74
+            0
           </indices>
           <liveries>
+            <Item value="true" />
             <Item value="false" />
             <Item value="false" />
             <Item value="false" />
@@ -561,19 +560,20 @@
             <Item value="false" />
             <Item value="false" />
             <Item value="false" />
-            <Item value="false" />
-          </liveries>																			
+          </liveries>
         </Item>
       </colors>
       <kits>
-        <Item>189_focusrs_modkit</Item>
+        <Item>0_default_modkit</Item>
       </kits>
       <windowsWithExposedEdges />
       <plateProbabilities>
         <Probabilities />
       </plateProbabilities>
-      <lightSettings value="999" />
+      <lightSettings value="934" />
       <sirenSettings value="0" />
     </Item>
+    <Item>
+    
   </variationData>
 </CVehicleModelInfoVariation>
