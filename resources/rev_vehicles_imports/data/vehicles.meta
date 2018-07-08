@@ -481,8 +481,8 @@
     </Item>
     <!-- -->
     <Item>
-      <modelName>taurus</modelName>
-      <txdName>taurus</txdName>
+      <modelName>TAURUS</modelName>
+      <txdName>TAURUS</txdName>
       <handlingId>oracle</handlingId>
       <gameName>TAURUS</gameName>
       <vehicleMakeName>FORD</vehicleMakeName>
@@ -612,7 +612,7 @@
     </Item>
     <Item>
       <parent>vehicles_dom_interior</parent>
-      <child>taurus</child>
+      <child>TAURUS</child>
     </Item>
   </txdRelationships>
 
