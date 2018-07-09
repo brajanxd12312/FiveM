@@ -113,7 +113,7 @@
       <AIHandling>AVERAGE</AIHandling>
       <SubHandlingData>
         <Item type="CFlyingHandlingData">
-          <fThrust value="0.500000" />
+          <fThrust value="0.650000" />
           <fThrustFallOff value="0.033000" />
           <fThrustVectoring value="0.350000" />
           <fYawMult value="-1.050000" />
