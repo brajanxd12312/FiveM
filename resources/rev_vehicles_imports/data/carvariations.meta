@@ -542,7 +542,7 @@
       <sirenSettings value="0" />
     </Item>
     <Item>
-      <modelName>TAURUS</modelName>
+      <modelName>taurus</modelName>
       <colors>
         <Item>
           <indices content="char_array">
