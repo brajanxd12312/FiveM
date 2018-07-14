@@ -99,7 +99,8 @@ vehicleStageThreeAdvisor = {
 vehicleSyncDistance = 150
 envirementLightBrightness = 0.025
 
-build = "master"
+panelOffsetX = 0.0
+panelOffsetY = 0.0
 
 shared = {
 	horn = 86,
@@ -108,22 +109,25 @@ shared = {
 keyboard = {
 	modifyKey = 132,
 	stageChange = 85,
-	guiKey = 243,
-	takedown = 245,
+	guiKey = 199,
+	takedown = 83,
 	siren = {
 		tone_one = 157,
 		tone_two = 158,
 		tone_three = 160,
-		dual_toggle = 164,
-		dual_one = 165,
-		dual_two = 159,
-		dual_three = 161,
+		dual_toggle = 79,
+		dual_one = 164,
+		dual_two = 165,
+		dual_three = 159,
 	},
 	pattern = {
-		primary = 246,
-		secondary = 303,
-		advisor = 182,
+		primary = 163,
+		secondary = 162,
+		warning = 161,
 	},
+	warning = 246,
+	secondary = 303,
+	primary = 7,
 }
 
 controller = {
