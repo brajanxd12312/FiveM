@@ -566,6 +566,31 @@
       <lightSettings value="1" />
       <sirenSettings value="0" />
     </Item>
+    <Item>
+      <modelName>frdexplorer</modelName>
+      <colors>
+        <Item>
+          <indices content="char_array">
+            58
+            15
+            15
+            0
+          </indices>
+          <liveries>
+            <Item value="false" />
+          </liveries>
+        </Item>
+      </colors>
+      <kits>
+        <Item>0_default_modkit</Item>
+      </kits>
+      <windowsWithExposedEdges />
+      <plateProbabilities>
+        <Probabilities />
+      </plateProbabilities>
+      <lightSettings value="1" />
+      <sirenSettings value="0" />
+    </Item>
     
   </variationData>
 </CVehicleModelInfoVariation>
