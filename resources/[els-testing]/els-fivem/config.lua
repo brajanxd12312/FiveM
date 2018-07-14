@@ -1,3 +1,5 @@
+outputLoading = false
+
 vcf_files = {
 	'ambulance.xml',
 	'bcso1.xml',
@@ -53,6 +55,7 @@ vcf_files = {
 	'sheriff2.xml',
 	'sheriff3.xml',
 	'towtruck.xml',
+	
 }
 
 pattern_files = {
@@ -67,16 +70,8 @@ pattern_files = {
 	"T_ADVIS_FLASH.xml"
 }
 
-modelsWithTrafficAdvisor = {
-	'flatbed',
-	'hwaycar1',
-	'hwaycar5',
-	'police2'
-}
-
-modelsWithFireSiren =
-{
-    "FIRETRUK"
+modelsWithFireSiren = {
+    "FIRETRUK",
 }
 
 
@@ -84,20 +79,20 @@ modelsWithAmbWarnSiren =
 {   
     "AMBULANCE",
     "FIRETRUK",
-    "LGUARD"
+    "LGUARD",
 }
 
 stagethreewithsiren = false
 playButtonPressSounds = true
 vehicleStageThreeAdvisor = {
-	'flatbed',
+    'flatbed',
 	'hwaycar1',
 	'police2'
 }
 
 
 vehicleSyncDistance = 150
-envirementLightBrightness = 0.025
+envirementLightBrightness = 0.01
 
 panelOffsetX = 0.0
 panelOffsetY = 0.0
