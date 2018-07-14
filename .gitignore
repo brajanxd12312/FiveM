@@ -1,6 +1,4 @@
-*.sfl
-*.rpf
 *.log
 CitizenFX.log
-*.zip
 mtsaves/
+cache/
