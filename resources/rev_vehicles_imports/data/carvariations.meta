@@ -571,10 +571,10 @@
       <colors>
         <Item>
           <indices content="char_array">
+            15
             58
             15
-            15
-            156
+            0
           </indices>
           <liveries>
             <Item value="false" />
