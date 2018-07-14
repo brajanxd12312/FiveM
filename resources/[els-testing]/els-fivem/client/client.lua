@@ -8,8 +8,6 @@ prevframes = 0
 curframes = 0
 prevtime = 0
 curtime = 0
-
-advisorPattern = {"Right to left", "Left to Right", "Center out"}
 advisorPatternSelectedIndex = 1
 advisorPatternIndex = 1
 
@@ -20,7 +18,7 @@ lightPatternSec = 1
 local guiEnabled = true
 local lastVeh = nil
 local lastVehDmgReset = false
-local elsVehs = {}
+elsVehs = {}
 
 local m_siren_state = {}
 local m_soundID_veh = {}
@@ -31,6 +29,10 @@ local h_horn_state = {}
 local h_soundID_veh = {}
 
 local curCleanupTime = 0
+
+local curPresetOne = {prim = 1, sec = 1, adv = 1}
+local curPresetTwo = {prim = 1, sec = 1, adv = 1}
+local curPresetThree = {prim = 1, sec = 1, adv = 1}
 
 RegisterNetEvent("els:updateElsVehicles")
 AddEventHandler("els:updateElsVehicles", function(vehicles, patterns)
@@ -44,30 +46,82 @@ end)
 
 RegisterNetEvent("els:changeLightStage_c")
 AddEventHandler("els:changeLightStage_c", function(sender, stage, advisor, prim, sec)
+    Citizen.CreateThread(function()
+
+        local player_s = GetPlayerFromServerId(sender)
+        local ped_s = GetPlayerPed(player_s)
+        if DoesEntityExist(ped_s) and not IsEntityDead(ped_s) then
+            if IsPedInAnyVehicle(ped_s, false) then
+
+                local vehNetID = GetVehiclePedIsUsing(ped_s)
+
+                if elsVehs[vehNetID] ~= nil then
+                    elsVehs[vehNetID].stage = stage
+                    if (stage == 1) then
+                        elsVehs[vehNetID].warning = true
+                        elsVehs[vehNetID].secondary = false
+                    elseif (stage == 2) then
+                        elsVehs[vehNetID].warning = true
+                        elsVehs[vehNetID].secondary = true
+                        elsVehs[vehNetID].primary = false
+                    elseif (stage == 3) then
+                        elsVehs[vehNetID].warning = true
+                        elsVehs[vehNetID].secondary = true
+                        elsVehs[vehNetID].primary = true
+                    else
+                        elsVehs[vehNetID].warning = false
+                        elsVehs[vehNetID].secondary = false
+                        elsVehs[vehNetID].primary = false
+                    end
+                    elsVehs[vehNetID].primPattern = prim
+                    elsVehs[vehNetID].secPattern = sec
+                    elsVehs[vehNetID].advisorPattern = advisor
+                else
+                    elsVehs[vehNetID] = {}
+                    elsVehs[vehNetID].stage = stage
+                    if (stage == 1) then
+                        elsVehs[vehNetID].warning = true
+                        elsVehs[vehNetID].secondary = false
+                    elseif (stage == 2) then
+                        elsVehs[vehNetID].warning = true
+                        elsVehs[vehNetID].secondary = true
+                        elsVehs[vehNetID].primary = false
+                    elseif (stage == 3) then
+                        elsVehs[vehNetID].warning = true
+                        elsVehs[vehNetID].secondary = true
+                        elsVehs[vehNetID].primary = true
+                    else
+                        elsVehs[vehNetID].warning = false
+                        elsVehs[vehNetID].secondary = false
+                        elsVehs[vehNetID].primary = false
+                    end
+                    elsVehs[vehNetID].primPattern = prim
+                    elsVehs[vehNetID].secPattern = sec
+                    elsVehs[vehNetID].advisorPattern = advisor
+                end
+            end
+        end
+        return
+    end)
+end)
+
+RegisterNetEvent("els:changePartState_c")
+AddEventHandler("els:changePartState_c", function(sender, part, newstate)
     local player_s = GetPlayerFromServerId(sender)
     local ped_s = GetPlayerPed(player_s)
     if DoesEntityExist(ped_s) and not IsEntityDead(ped_s) then
         if IsPedInAnyVehicle(ped_s, false) then
-
             local vehNetID = GetVehiclePedIsUsing(ped_s)
-            if canaryClient then
-                SetVehicleAutoRepairDisabled(vehNetID, true)
-            end
 
-            if elsVehs[vehNetID] ~= nil then
-                elsVehs[vehNetID].stage = stage
-                elsVehs[vehNetID].primPattern = prim
-                elsVehs[vehNetID].secPattern = sec
-                elsVehs[vehNetID].advisorPattern = advisor
-            else
+            if elsVehs[vehNetID] == nil then
                 elsVehs[vehNetID] = {}
-                elsVehs[vehNetID].stage = stage
-                elsVehs[vehNetID].primPattern = prim
-                elsVehs[vehNetID].secPattern = sec
-                elsVehs[vehNetID].advisorPattern = advisor
+                elsVehs[vehNetID].stage = 0
+                elsVehs[vehNetID].primPattern = 1
+                elsVehs[vehNetID].secPattern = 1
+                elsVehs[vehNetID].advisorPattern = 1
             end
 
-            
+            elsVehs[vehNetID][part] = newstate
         end
     end
 end)
@@ -80,9 +134,6 @@ AddEventHandler("els:changeAdvisorPattern_c", function(sender, pat)
         if IsPedInAnyVehicle(ped_s, false) then
 
             local vehNetID = GetVehiclePedIsUsing(ped_s)
-            if canaryClient then
-                SetVehicleAutoRepairDisabled(vehNetID, true)
-            end
 
             if elsVehs[vehNetID] ~= nil then
                 elsVehs[vehNetID].advisorPattern = pat
@@ -102,9 +153,6 @@ AddEventHandler("els:changeSecondaryPattern_c", function(sender, pat)
         if IsPedInAnyVehicle(ped_s, false) then
 
             local vehNetID = GetVehiclePedIsUsing(ped_s)
-            if canaryClient then
-                SetVehicleAutoRepairDisabled(vehNetID, true)
-            end
 
             if elsVehs[vehNetID] ~= nil then
                 elsVehs[vehNetID].secPattern = pat
@@ -124,9 +172,6 @@ AddEventHandler("els:changePrimaryPattern_c", function(sender, pat)
         if IsPedInAnyVehicle(ped_s, false) then
 
             local vehNetID = GetVehiclePedIsUsing(ped_s)
-            if canaryClient then
-                SetVehicleAutoRepairDisabled(vehNetID, true)
-            end
 
             if elsVehs[vehNetID] ~= nil then
                 elsVehs[vehNetID].primPattern = pat
@@ -187,8 +232,48 @@ AddEventHandler("els:setHornState_c", function(sender, newstate)
     end
 end)
 
+RegisterNetEvent("els:setSceneLightState_c")
+AddEventHandler("els:setSceneLightState_c", function(sender)
+    local player_s = GetPlayerFromServerId(sender)
+    local ped_s = GetPlayerPed(player_s)
+    if DoesEntityExist(ped_s) and not IsEntityDead(ped_s) then
+        if IsPedInAnyVehicle(ped_s, false) then
+            local veh = GetVehiclePedIsUsing(ped_s)
+            if(elsVehs[veh] == nil) then
+                changeLightStage(0, 1, 1, 1)
+            end
+            if IsVehicleExtraTurnedOn(veh, 12) then
+                setExtraState(veh, 12, 1)
+            else
+                setExtraState(veh, 12, 0)
+            end
+        end
+    end
+end)
+
+RegisterNetEvent("els:setCruiseLights_c")
+AddEventHandler("els:setCruiseLights_c", function(sender)
+    local player_s = GetPlayerFromServerId(sender)
+    local ped_s = GetPlayerPed(player_s)
+    if DoesEntityExist(ped_s) and not IsEntityDead(ped_s) then
+        if IsPedInAnyVehicle(ped_s, false) then
+            local veh = GetVehiclePedIsUsing(ped_s)
+            if elsVehs[veh] ~= nil then
+                if elsVehs[veh].cruise then
+                    elsVehs[veh].cruise = false
+                else
+                    elsVehs[veh].cruise = true
+                end
+            else
+                elsVehs[veh] = {}
+                elsVehs[veh].cruise = true
+            end
+        end
+    end
+end)
+
 RegisterNetEvent("els:setTakedownState_c")
-AddEventHandler("els:setTakedownState_c", function(sender, newstate)
+AddEventHandler("els:setTakedownState_c", function(sender)
     local player_s = GetPlayerFromServerId(sender)
     local ped_s = GetPlayerPed(player_s)
     if DoesEntityExist(ped_s) and not IsEntityDead(ped_s) then
@@ -386,17 +471,6 @@ function checkCarHash(car)
     end
 end
 
-
-function canUseAdvisorStageThree(car)
-    if car then
-        for k,v in pairs(vehicleStageThreeAdvisor) do
-            if GetEntityModel(car) == GetHashKey(v) then
-                return true
-            end
-        end
-    end
-end
-
 function vehInTable (tab, val)
     for index in pairs(tab) do
         if index == val then
@@ -421,12 +495,14 @@ end
 
 function doesVehicleHaveTrafficAdvisor(veh)
     if (not IsEntityDead(veh) and DoesEntityExist(veh)) then 
-        for k,v in pairs(modelsWithTrafficAdvisor) do
-            if GetEntityModel(veh) == GetHashKey(v) then
+        if(els_Vehicles[checkCarHash(veh)].extras[8].enabled) then
+            if DoesExtraExist(veh, 8) then
                 return true
             end
         end
     end
+
+    return false
 end
 
 function isVehicleELS(veh)
@@ -523,6 +599,174 @@ function LghtSoundCleaner()
     end
 end
 
+function changePrimaryPatternMath(way)
+    if playButtonPressSounds then
+        PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
+    end
+    local primMax = getNumberOfPrimaryPatterns(els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))])
+    local primMin = 1
+    local temp = lightPatternPrim
+
+    temp = temp + way
+
+    if(temp < primMin) then
+        temp = primMax
+    end
+
+    if(temp > primMax) then
+        temp = primMin
+    end
+
+    lightPatternPrim = temp
+
+    if temp ~= 0 then lightPatternsPrim = temp end
+    changePrimaryPattern(lightPatternsPrim)
+end
+
+function changeSecondaryPatternMath(way)
+    if playButtonPressSounds then
+        PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
+    end
+    local primMax = getNumberOfSecondaryPatterns(GetVehiclePedIsUsing(GetPlayerPed(-1)))
+    local primMin = 1
+    local temp = lightPatternSec
+
+    temp = temp + way
+
+    if(temp > primMax) then
+        temp = primMin
+    end
+
+    if(temp < primMin) then
+        temp = primMax
+    end
+
+    lightPatternSec = temp
+    changeSecondaryPattern(lightPatternSec)
+end
+
+function changeAdvisorPatternMath(way)
+    if playButtonPressSounds then
+        PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
+    end
+    
+    local primMax = getNumberOfAdvisorPatterns(GetVehiclePedIsUsing(GetPlayerPed(-1)))
+
+    local primMin = 1
+    local temp = advisorPatternSelectedIndex
+
+    temp = temp + way
+
+    if(temp < primMin) then
+        temp = primMax
+    end
+
+    if(temp > primMax) then
+        temp = primMin
+    end
+
+    advisorPatternSelectedIndex = temp
+    changeAdvisorPattern(advisorPatternSelectedIndex)
+end
+
+function setSirenStateButton(state)
+    if playButtonPressSounds then
+        PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
+    end
+    if m_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] ~= state then
+        TriggerServerEvent("els:setSirenState_s", state)
+    elseif m_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == state then
+        TriggerServerEvent("els:setSirenState_s", 0)
+    end
+end
+
+function upOneStage()
+    if playButtonPressSounds then
+        PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
+    end
+    local vehNetID = GetVehiclePedIsUsing(GetPlayerPed(-1))
+
+    local newStage = 1
+
+    if (elsVehs[vehNetID] ~= nil and elsVehs[vehNetID].stage ~= nil) then
+        newStage = elsVehs[vehNetID].stage + 1
+    end
+
+    if newStage == 4 then
+        newStage = 0
+    end
+
+    changeLightStage(newStage, advisorPatternSelectedIndex, lightPatternPrim, lightPatternSec)
+
+    if GetVehicleClass(GetVehiclePedIsUsing(GetPlayerPed(-1))) == 18 then
+        if(newStage == 3) then
+            SetVehicleSiren(GetVehiclePedIsUsing(GetPlayerPed(-1)), true)
+            if stagethreewithsiren then
+                TriggerServerEvent("els:setSirenState_s", 1)
+            end
+        else
+            SetVehicleSiren(GetVehiclePedIsUsing(GetPlayerPed(-1)), false)
+            TriggerServerEvent("els:setSirenState_s", 0)
+            TriggerServerEvent("els:setDualSirenState_s", 0)
+            TriggerServerEvent("els:setDualSiren_s", false)
+        end
+    end
+end
+
+function downOneStage()
+    if playButtonPressSounds then
+        PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
+    end
+    local vehNetID = GetVehiclePedIsUsing(GetPlayerPed(-1))
+
+    local newStage = 3
+
+    if(elsVehs[vehNetID] ~= nil and elsVehs[vehNetID].stage ~= nil) then
+        newStage = elsVehs[vehNetID].stage - 1
+    end
+
+    if newStage == -1 then
+        newStage = 3
+    end
+
+    changeLightStage(newStage, advisorPatternSelectedIndex, lightPatternPrim, lightPatternSec)
+
+    if GetVehicleClass(GetVehiclePedIsUsing(GetPlayerPed(-1))) == 18 then
+        if(newStage == 3) then
+            SetVehicleSiren(GetVehiclePedIsUsing(GetPlayerPed(-1)), true)
+            if stagethreewithsiren then
+                TriggerServerEvent("els:setSirenState_s", 1)
+            end
+        else
+            SetVehicleSiren(GetVehiclePedIsUsing(GetPlayerPed(-1)), false)
+            TriggerServerEvent("els:setSirenState_s", 0)
+            TriggerServerEvent("els:setDualSirenState_s", 0)
+            TriggerServerEvent("els:setDualSiren_s", false)
+        end
+    end
+end
+
+function displayScreenKeyboard(text)
+    HideHudAndRadarThisFrame()
+    DisplayOnscreenKeyboard(1, text, "", "", "", "", "", 60)
+    while UpdateOnscreenKeyboard() == 0 do
+        DisableAllControlActions(0)
+        Wait(0)
+    end
+    if (not GetOnscreenKeyboardResult()) then return nil end
+    return GetOnscreenKeyboardResult()
+end
+
+function formatPatternNumber(num)
+    if num < 10 then
+        return "00" .. tostring(num)
+    elseif num < 100 and num >= 10 then
+        return "0" .. tostring(num)
+    else
+        return tostring(num)
+    end 
+end
+
 Citizen.CreateThread(function() --Count FPS (Thanks To siggyfawn [forum.FiveM.net])
     while not NetworkIsPlayerActive(PlayerId()) or not NetworkIsSessionStarted() do
         Citizen.Wait(0)
@@ -583,163 +827,124 @@ Citizen.CreateThread(function()
                     DisableControlAction(0, keyboard.siren.dual_three, true)
 
                     if IsDisabledControlPressed(0, keyboard.modifyKey) then
-                        if IsDisabledControlPressed(0, keyboard.modifyKey) and IsDisabledControlJustReleased(0, keyboard.pattern.primary) then
-                            if playButtonPressSounds then
-                                PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
-                            end
-                            local primMax = getNumberOfPrimaryPatterns()
-                            local primMin = 1
-                            local temp = lightPatternPrim
 
-                            temp = temp - 1
+                        if IsDisabledControlPressed(0, keyboard.siren.tone_one) then
+                            changePrimaryPattern(curPresetOne.prim)
+                            changeSecondaryPattern(curPresetOne.sec)
+                            changeAdvisorPattern(curPresetOne.adv)
 
-                            if(temp < primMin) then
-                                temp = primMax
-                            end
-
-                            lightPatternPrim = temp
-
-                            if temp ~= 0 then lightPatternsPrim = temp end
-                            changePrimaryPattern(lightPatternsPrim)
+                            lightPatternPrim = curPresetOne.prim
+                            lightPatternSec = curPresetOne.sec
+                            advisorPatternSelectedIndex = curPresetOne.adv
                         end
 
-                        if IsDisabledControlPressed(0, keyboard.modifyKey) and IsDisabledControlJustReleased(0, keyboard.pattern.secondary) then
+                        if IsDisabledControlPressed(0, keyboard.siren.dual_one) then
+                            curPresetOne.prim = tonumber(displayScreenKeyboard(""))
+                            curPresetOne.sec = tonumber(displayScreenKeyboard(""))
+                            curPresetOne.adv = tonumber(displayScreenKeyboard(""))
+                        end
+
+
+                        if IsDisabledControlJustReleased(0, keyboard.guiKey) then
                             if playButtonPressSounds then
                                 PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
                             end
-                            local primMax = getNumberOfSecondaryPatterns()
-                            local primMin = 1
-                            local temp = lightPatternSec
-
-                            temp = temp - 1
-
-                            if(temp < primMin) then
-                                temp = primMax
+                            if guiEnabled then
+                                guiEnabled = false
+                            else
+                                guiEnabled = true
                             end
+                        end
 
-                            lightPatternSec = temp
-                            changeSecondaryPattern(lightPatternSec)
+                        if IsDisabledControlJustReleased(0, keyboard.stageChange) then
+                            if els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].activateUp then
+                                downOneStage()
+                            else
+                                upOneStage()
+                            end
+                        end
+                        if IsDisabledControlJustReleased(0, keyboard.takedown) then
+                            if playButtonPressSounds then
+                                PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
+                            end
+                            TriggerServerEvent("els:setSceneLightState_s")
                         end
                     else
-                        if IsDisabledControlJustReleased(0, keyboard.pattern.primary) then
+                        if IsDisabledControlJustReleased(0, keyboard.stageChange) then
+                            if els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].activateUp then
+                                upOneStage()
+                            else
+                                downOneStage()
+                            end
+                        end
+                        if IsDisabledControlJustReleased(0, keyboard.takedown) then
                             if playButtonPressSounds then
                                 PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
                             end
-                            local primMax = getNumberOfPrimaryPatterns()
-                            local primMin = 1
-                            local temp = lightPatternPrim
-
-                            temp = temp + 1
-
-                            if(temp > primMax) then
-                                temp = primMin
-                            end
-
-                            lightPatternPrim = temp
-                            if temp ~= 0 then lightPatternsPrim = temp end
-                            changePrimaryPattern(lightPatternsPrim)
+                            TriggerServerEvent("els:setTakedownState_s")
                         end
-
-                        if IsDisabledControlJustReleased(0, keyboard.pattern.secondary) then
+                        if IsDisabledControlJustReleased(0, 84) then
                             if playButtonPressSounds then
                                 PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
                             end
-                            local primMax = getNumberOfSecondaryPatterns()
-                            local primMin = 1
-                            local temp = lightPatternSec
-
-                            temp = temp + 1
-
-                            if(temp > primMax) then
-                                temp = primMin
+                            TriggerServerEvent("els:setCruiseLights_s")
+                        end
+                        if IsDisabledControlJustReleased(0, keyboard.warning) then
+                            if playButtonPressSounds then
+                                PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
                             end
-
-                            lightPatternSec = temp
-                            changeSecondaryPattern(lightPatternSec)
+                            if elsVehs[GetVehiclePedIsUsing(GetPlayerPed(-1))] ~= nil then
+                                if elsVehs[GetVehiclePedIsUsing(GetPlayerPed(-1))].warning then
+                                    TriggerServerEvent("els:changePartState_s", "warning", false)
+                                else
+                                    TriggerServerEvent("els:changePartState_s", "warning", true)
+                                end
+                            else
+                                TriggerServerEvent("els:changePartState_s", "warning", true)
+                            end
+                        end
+                        if IsDisabledControlJustReleased(0, keyboard.secondary) then
+                            if playButtonPressSounds then
+                                PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
+                            end
+                            if elsVehs[GetVehiclePedIsUsing(GetPlayerPed(-1))] ~= nil then
+                                if elsVehs[GetVehiclePedIsUsing(GetPlayerPed(-1))].secondary then
+                                    TriggerServerEvent("els:changePartState_s", "secondary", false)
+                                else
+                                    TriggerServerEvent("els:changePartState_s", "secondary", true)
+                                end
+                            else
+                                TriggerServerEvent("els:changePartState_s", "secondary", true)
+                            end
+                        end
+                        if IsDisabledControlJustPressed(0, keyboard.primary) then
+                            if playButtonPressSounds then
+                                PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
+                            end
+                            if elsVehs[GetVehiclePedIsUsing(GetPlayerPed(-1))] ~= nil then
+                                if elsVehs[GetVehiclePedIsUsing(GetPlayerPed(-1))].primary then
+                                    TriggerServerEvent("els:changePartState_s", "primary", false)
+                                else
+                                    TriggerServerEvent("els:changePartState_s", "primary", true)
+                                end
+                            else
+                                TriggerServerEvent("els:changePartState_s", "primary", true)
+                            end
                         end
                     end
 
-                    if (doesVehicleHaveTrafficAdvisor(GetVehiclePedIsUsing(GetPlayerPed(-1)))) then
-                        if IsDisabledControlPressed(0, keyboard.modifyKey) then
-                            if IsDisabledControlPressed(0, keyboard.modifyKey) and IsDisabledControlJustReleased(0, keyboard.pattern.advisor) then
-                                if playButtonPressSounds then
-                                    PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
-                                end
-                                
-                                local primMax = getNumberOfAdvisorPatterns()
-
-                                local primMin = 1
-                                local temp = advisorPatternSelectedIndex
-
-                                temp = temp - 1
-
-                                if(temp < primMin) then
-                                    temp = primMax
-                                end
-
-                                advisorPatternSelectedIndex = temp
-                                changeAdvisorPattern(advisorPatternSelectedIndex)
-                            end
-                        else
-                            if IsDisabledControlJustReleased(0, keyboard.pattern.advisor) then
-                                if playButtonPressSounds then
-                                    PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
-                                end
-                                local primMax = getNumberOfAdvisorPatterns()
-
-                                local primMin = 1
-                                local temp = advisorPatternSelectedIndex
-
-                                temp = temp + 1
-
-                                if(temp > primMax) then
-                                    temp = primMin
-                                end
-
-                                advisorPatternSelectedIndex = temp
-                                changeAdvisorPattern(advisorPatternSelectedIndex)
-                            end
-                        end
-                    end
 
                     if GetVehicleClass(GetVehiclePedIsUsing(GetPlayerPed(-1))) == 18 then
                         if (elsVehs[GetVehiclePedIsUsing(GetPlayerPed(-1))] ~= nil) then
                             if elsVehs[GetVehiclePedIsUsing(GetPlayerPed(-1))].stage == 3 then
                                 if IsDisabledControlJustReleased(0, keyboard.siren.tone_one) then
-                                    if playButtonPressSounds then
-                                        PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
-                                    end
-                                    if m_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 2 or
-                                       m_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 3 or
-                                       m_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 0 then
-                                        TriggerServerEvent("els:setSirenState_s", 1)
-                                    elseif m_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 1 then
-                                        TriggerServerEvent("els:setSirenState_s", 0)
-                                    end
+                                    setSirenStateButton(1)
                                 end
                                 if IsDisabledControlJustReleased(0, keyboard.siren.tone_two) then
-                                    if playButtonPressSounds then
-                                        PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
-                                    end
-                                    if m_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 1 or
-                                       m_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 3 or
-                                       m_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 0 then
-                                        TriggerServerEvent("els:setSirenState_s", 2)
-                                    elseif m_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 2 then
-                                        TriggerServerEvent("els:setSirenState_s", 0)
-                                    end
+                                    setSirenStateButton(2)
                                 end
                                 if IsDisabledControlJustReleased(0, keyboard.siren.tone_three) then
-                                    if playButtonPressSounds then
-                                        PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
-                                    end
-                                    if m_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 1 or
-                                       m_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 2 or
-                                       m_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 0 then
-                                        TriggerServerEvent("els:setSirenState_s", 3)
-                                    elseif m_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 3 then
-                                        TriggerServerEvent("els:setSirenState_s", 0)
-                                    end
+                                    setSirenStateButton(3)
                                 end
 
 
@@ -821,183 +1026,6 @@ Citizen.CreateThread(function()
                         end
                     end
 
-                    if IsDisabledControlPressed(0, keyboard.modifyKey) then
-                        DisableControlAction(0, keyboard.takedown, true)
-                        DisableControlAction(0, keyboard.guiKey, true)
-
-                        if IsDisabledControlPressed(0, keyboard.modifyKey) and IsDisabledControlJustReleased(0, keyboard.guiKey) then
-                            if playButtonPressSounds then
-                                PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
-                            end
-                            if guiEnabled then
-                                guiEnabled = false
-                            else
-                                guiEnabled = true
-                            end
-                        end
-
-                        if IsDisabledControlPressed(0, keyboard.modifyKey) and IsDisabledControlJustReleased(0, keyboard.takedown) then
-                            if playButtonPressSounds then
-                                PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
-                            end
-                            TriggerServerEvent("els:setTakedownState_s")
-                        end
-                    end
-
-                    if els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].activateUp then
-
-                        if IsDisabledControlPressed(0, keyboard.modifyKey) and IsDisabledControlJustReleased(0, keyboard.stageChange) then
-                            if playButtonPressSounds then
-                                PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
-                            end
-                            local vehNetID = GetVehiclePedIsUsing(GetPlayerPed(-1))
-
-                            local newStage = 3
-
-                            if(elsVehs[vehNetID] ~= nil and elsVehs[vehNetID].stage ~= nil) then
-                                newStage = elsVehs[vehNetID].stage - 1
-                            end
-
-                            if newStage == 1 then
-                                if not doesVehicleHaveTrafficAdvisor(GetVehiclePedIsUsing(GetPlayerPed(-1))) then
-                                    newStage = 0
-                                end
-                            end
-
-                            if newStage == -1 then
-                                newStage = 3
-                            end
-
-                            changeLightStage(newStage, advisorPatternSelectedIndex, lightPatternPrim, lightPatternSec)
-
-                            if GetVehicleClass(GetVehiclePedIsUsing(GetPlayerPed(-1))) == 18 then
-                                if(newStage == 3) then
-                                    SetVehicleSiren(GetVehiclePedIsUsing(GetPlayerPed(-1)), true)
-                                    if stagethreewithsiren then
-                                        TriggerServerEvent("els:setSirenState_s", 1)
-                                    end
-                                else
-                                    SetVehicleSiren(GetVehiclePedIsUsing(GetPlayerPed(-1)), false)
-                                    TriggerServerEvent("els:setSirenState_s", 0)
-                                    TriggerServerEvent("els:setDualSirenState_s", 0)
-                                    TriggerServerEvent("els:setDualSiren_s", false)
-                                end
-                            end
-                        elseif IsDisabledControlJustReleased(0, keyboard.stageChange) then
-                            if playButtonPressSounds then
-                                PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
-                            end
-                            local vehNetID = GetVehiclePedIsUsing(GetPlayerPed(-1))
-
-                            local newStage = 1
-
-                            if (elsVehs[vehNetID] ~= nil and elsVehs[vehNetID].stage ~= nil) then
-                                newStage = elsVehs[vehNetID].stage + 1
-                            end
-
-                            if newStage == 1 then
-                                if not doesVehicleHaveTrafficAdvisor(GetVehiclePedIsUsing(GetPlayerPed(-1))) then
-                                    newStage = 2
-                                end
-                            end
-
-                            if newStage == 4 then
-                                newStage = 0
-                            end
-
-                            changeLightStage(newStage, advisorPatternSelectedIndex, lightPatternPrim, lightPatternSec)
-
-                            if GetVehicleClass(GetVehiclePedIsUsing(GetPlayerPed(-1))) == 18 then
-                                if(newStage == 3) then
-                                    SetVehicleSiren(GetVehiclePedIsUsing(GetPlayerPed(-1)), true)
-                                    if stagethreewithsiren then
-                                        TriggerServerEvent("els:setSirenState_s", 1)
-                                    end
-                                else
-                                    SetVehicleSiren(GetVehiclePedIsUsing(GetPlayerPed(-1)), false)
-                                    TriggerServerEvent("els:setSirenState_s", 0)
-                                    TriggerServerEvent("els:setDualSirenState_s", 0)
-                                    TriggerServerEvent("els:setDualSiren_s", false)
-                                end
-                            end
-                        end
-                    else
-                        if IsDisabledControlJustReleased(0, keyboard.stageChange) then
-                            if playButtonPressSounds then
-                                PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
-                            end
-                            local vehNetID = GetVehiclePedIsUsing(GetPlayerPed(-1))
-
-                            local newStage = 3
-
-                            if(elsVehs[vehNetID] ~= nil and elsVehs[vehNetID].stage ~= nil) then
-                                newStage = elsVehs[vehNetID].stage - 1
-                            end
-
-                            if newStage == 1 then
-                                if not doesVehicleHaveTrafficAdvisor(GetVehiclePedIsUsing(GetPlayerPed(-1))) then
-                                    newStage = 0
-                                end
-                            end
-
-                            if newStage == -1 then
-                                newStage = 3
-                            end
-
-                            changeLightStage(newStage, advisorPatternSelectedIndex, lightPatternPrim, lightPatternSec)
-
-                            if GetVehicleClass(GetVehiclePedIsUsing(GetPlayerPed(-1))) == 18 then
-                                if(newStage == 3) then
-                                    SetVehicleSiren(GetVehiclePedIsUsing(GetPlayerPed(-1)), true)
-                                    if stagethreewithsiren then
-                                        TriggerServerEvent("els:setSirenState_s", 1)
-                                    end
-                                else
-                                    SetVehicleSiren(GetVehiclePedIsUsing(GetPlayerPed(-1)), false)
-                                    TriggerServerEvent("els:setSirenState_s", 0)
-                                    TriggerServerEvent("els:setDualSirenState_s", 0)
-                                    TriggerServerEvent("els:setDualSiren_s", false)
-                                end
-                            end
-                        elseif IsDisabledControlPressed(0, keyboard.modifyKey) and IsDisabledControlJustReleased(0, keyboard.stageChange) then
-                            if playButtonPressSounds then
-                                PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
-                            end
-                            local vehNetID = GetVehiclePedIsUsing(GetPlayerPed(-1))
-
-                            local newStage = 1
-
-                            if (elsVehs[vehNetID] ~= nil and elsVehs[vehNetID].stage ~= nil) then
-                                newStage = elsVehs[vehNetID].stage + 1
-                            end
-
-                            if newStage == 1 then
-                                if not doesVehicleHaveTrafficAdvisor(GetVehiclePedIsUsing(GetPlayerPed(-1))) then
-                                    newStage = 2
-                                end
-                            end
-
-                            if newStage == 4 then
-                                newStage = 0
-                            end
-
-                            changeLightStage(newStage, advisorPatternSelectedIndex, lightPatternPrim, lightPatternSec)
-
-                            if GetVehicleClass(GetVehiclePedIsUsing(GetPlayerPed(-1))) == 18 then
-                                if(newStage == 3) then
-                                    SetVehicleSiren(GetVehiclePedIsUsing(GetPlayerPed(-1)), true)
-                                    if stagethreewithsiren then
-                                        TriggerServerEvent("els:setSirenState_s", 1)
-                                    end
-                                else
-                                    SetVehicleSiren(GetVehiclePedIsUsing(GetPlayerPed(-1)), false)
-                                    TriggerServerEvent("els:setSirenState_s", 0)
-                                    TriggerServerEvent("els:setDualSirenState_s", 0)
-                                    TriggerServerEvent("els:setDualSiren_s", false)
-                                end
-                            end
-                        end
-                    end
                 else
                     DisableControlAction(0, controller.modifyKey, true)
                     DisableControlAction(0, controller.stageChange, true)
@@ -1007,155 +1035,15 @@ Citizen.CreateThread(function()
 
                     if els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].activateUp then
                         if IsDisabledControlPressed(0, controller.modifyKey) and IsDisabledControlJustReleased(0, controller.stageChange) then
-                            if playButtonPressSounds then
-                                PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
-                            end
-                            local vehNetID = GetVehiclePedIsUsing(GetPlayerPed(-1))
-
-                            local newStage = 3
-
-                            if(elsVehs[vehNetID] ~= nil and elsVehs[vehNetID].stage ~= nil) then
-                                newStage = elsVehs[vehNetID].stage - 1
-                            end
-
-                            if newStage == 1 then
-                                if not doesVehicleHaveTrafficAdvisor(GetVehiclePedIsUsing(GetPlayerPed(-1))) then
-                                    newStage = 0
-                                end
-                            end
-
-                            if newStage == -1 then
-                                newStage = 3
-                            end
-
-                            changeLightStage(newStage, advisorPatternSelectedIndex, lightPatternPrim, lightPatternSec)
-
-                            if GetVehicleClass(GetVehiclePedIsUsing(GetPlayerPed(-1))) == 18 then
-                                if(newStage == 3) then
-                                    SetVehicleSiren(GetVehiclePedIsUsing(GetPlayerPed(-1)), true)
-                                    if stagethreewithsiren then
-                                        TriggerServerEvent("els:setSirenState_s", 1)
-                                    end
-                                else
-                                    SetVehicleSiren(GetVehiclePedIsUsing(GetPlayerPed(-1)), false)
-                                    TriggerServerEvent("els:setSirenState_s", 0)
-                                    TriggerServerEvent("els:setDualSirenState_s", 0)
-                                    TriggerServerEvent("els:setDualSiren_s", false)
-                                end
-                            end
+                            downOneStage()
                         elseif IsDisabledControlJustReleased(0, controller.stageChange) then
-                            if playButtonPressSounds then
-                                PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
-                            end
-                            local vehNetID = GetVehiclePedIsUsing(GetPlayerPed(-1))
-
-                            local newStage = 1
-
-                            if (elsVehs[vehNetID] ~= nil and elsVehs[vehNetID].stage ~= nil) then
-                                newStage = elsVehs[vehNetID].stage + 1
-                            end
-
-                            if newStage == 1 then
-                                if not doesVehicleHaveTrafficAdvisor(GetVehiclePedIsUsing(GetPlayerPed(-1))) then
-                                    newStage = 2
-                                end
-                            end
-
-                            if newStage == 4 then
-                                newStage = 0
-                            end
-
-                            changeLightStage(newStage, advisorPatternSelectedIndex, lightPatternPrim, lightPatternSec)
-
-                            if GetVehicleClass(GetVehiclePedIsUsing(GetPlayerPed(-1))) == 18 then
-                                if(newStage == 3) then
-                                    SetVehicleSiren(GetVehiclePedIsUsing(GetPlayerPed(-1)), true)
-                                    if stagethreewithsiren then
-                                        TriggerServerEvent("els:setSirenState_s", 1)
-                                    end
-                                else
-                                    SetVehicleSiren(GetVehiclePedIsUsing(GetPlayerPed(-1)), false)
-                                    TriggerServerEvent("els:setSirenState_s", 0)
-                                    TriggerServerEvent("els:setDualSirenState_s", 0)
-                                    TriggerServerEvent("els:setDualSiren_s", false)
-                                end
-                            end
+                            upOneStage()
                         end
                     else
                         if IsDisabledControlJustReleased(0, controller.stageChange) then
-                            if playButtonPressSounds then
-                                PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
-                            end
-                            local vehNetID = GetVehiclePedIsUsing(GetPlayerPed(-1))
-
-                            local newStage = 3
-
-                            if(elsVehs[vehNetID] ~= nil and elsVehs[vehNetID].stage ~= nil) then
-                                newStage = elsVehs[vehNetID].stage - 1
-                            end
-
-                            if newStage == 1 then
-                                if not doesVehicleHaveTrafficAdvisor(GetVehiclePedIsUsing(GetPlayerPed(-1))) then
-                                    newStage = 0
-                                end
-                            end
-
-                            if newStage == -1 then
-                                newStage = 3
-                            end
-
-                            changeLightStage(newStage, advisorPatternSelectedIndex, lightPatternPrim, lightPatternSec)
-
-                            if GetVehicleClass(GetVehiclePedIsUsing(GetPlayerPed(-1))) == 18 then
-                                if(newStage == 3) then
-                                    SetVehicleSiren(GetVehiclePedIsUsing(GetPlayerPed(-1)), true)
-                                    if stagethreewithsiren then
-                                        TriggerServerEvent("els:setSirenState_s", 1)
-                                    end
-                                else
-                                    SetVehicleSiren(GetVehiclePedIsUsing(GetPlayerPed(-1)), false)
-                                    TriggerServerEvent("els:setSirenState_s", 0)
-                                    TriggerServerEvent("els:setDualSirenState_s", 0)
-                                    TriggerServerEvent("els:setDualSiren_s", false)
-                                end
-                            end
+                            downOneStage()
                         elseif IsDisabledControlPressed(0, controller.modifyKey) and IsDisabledControlJustReleased(0, controller.stageChange) then
-                            if playButtonPressSounds then
-                                PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
-                            end
-                            local vehNetID = GetVehiclePedIsUsing(GetPlayerPed(-1))
-
-                            local newStage = 1
-
-                            if (elsVehs[vehNetID] ~= nil and elsVehs[vehNetID].stage ~= nil) then
-                                newStage = elsVehs[vehNetID].stage + 1
-                            end
-
-                            if newStage == 1 then
-                                if not doesVehicleHaveTrafficAdvisor(GetVehiclePedIsUsing(GetPlayerPed(-1))) then
-                                    newStage = 2
-                                end
-                            end
-
-                            if newStage == 4 then
-                                newStage = 0
-                            end
-
-                            changeLightStage(newStage, advisorPatternSelectedIndex, lightPatternPrim, lightPatternSec)
-
-                            if GetVehicleClass(GetVehiclePedIsUsing(GetPlayerPed(-1))) == 18 then
-                                if(newStage == 3) then
-                                    SetVehicleSiren(GetVehiclePedIsUsing(GetPlayerPed(-1)), true)
-                                    if stagethreewithsiren then
-                                        TriggerServerEvent("els:setSirenState_s", 1)
-                                    end
-                                else
-                                    SetVehicleSiren(GetVehiclePedIsUsing(GetPlayerPed(-1)), false)
-                                    TriggerServerEvent("els:setSirenState_s", 0)
-                                    TriggerServerEvent("els:setDualSirenState_s", 0)
-                                    TriggerServerEvent("els:setDualSiren_s", false)
-                                end
-                            end
+                            upOneStage()
                         end
                     end
 
@@ -1174,40 +1062,13 @@ Citizen.CreateThread(function()
                             if elsVehs[GetVehiclePedIsUsing(GetPlayerPed(-1))].stage == 3 then
                                 if not IsDisabledControlPressed(0, controller.modifyKey) then
                                     if IsDisabledControlJustReleased(0, controller.siren.tone_one) then
-                                        if playButtonPressSounds then
-                                            PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
-                                        end
-                                        if m_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 2 or
-                                           m_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 3 or
-                                           m_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 0 then
-                                            TriggerServerEvent("els:setSirenState_s", 1)
-                                        elseif m_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 1 then
-                                            TriggerServerEvent("els:setSirenState_s", 0)
-                                        end
+                                        setSirenStateButton(1)
                                     end
                                     if IsDisabledControlJustReleased(0, controller.siren.tone_two) then
-                                        if playButtonPressSounds then
-                                            PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
-                                        end
-                                        if m_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 1 or
-                                           m_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 3 or
-                                           m_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 0 then
-                                            TriggerServerEvent("els:setSirenState_s", 2)
-                                        elseif m_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 2 then
-                                            TriggerServerEvent("els:setSirenState_s", 0)
-                                        end
+                                        setSirenStateButton(2)
                                     end
                                     if IsDisabledControlJustReleased(0, controller.siren.tone_three) then
-                                        if playButtonPressSounds then
-                                            PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
-                                        end
-                                        if m_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 1 or
-                                           m_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 2 or
-                                           m_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 0 then
-                                            TriggerServerEvent("els:setSirenState_s", 3)
-                                        elseif m_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 3 then
-                                            TriggerServerEvent("els:setSirenState_s", 0)
-                                        end
+                                        setSirenStateButton(3)
                                     end
                                 end
 
@@ -1315,189 +1176,318 @@ end)
 
 Citizen.CreateThread(function()
     while true do
-
-        if guiEnabled and vehInTable(els_Vehicles, checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))) then
-            if (GetPedInVehicleSeat(GetVehiclePedIsUsing(GetPlayerPed(-1)), -1) == GetPlayerPed(-1)) or
-                (GetPedInVehicleSeat(GetVehiclePedIsUsing(GetPlayerPed(-1)), 0) == GetPlayerPed(-1)) then
-                local vehN = checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))
-
-                _DrawRect(0.85, 0.91, 0.24, 0.11, 0, 0, 0, 200, 0)
-
-                if (getVehicleLightStage(GetVehiclePedIsUsing(GetPlayerPed(-1))) == 1) then
-                    _DrawRect(0.75, 0.88, 0.03, 0.02, 173, 0, 0, 225, 0)
-                    Draw("1", 0, 0, 0, 255, 0.75, 0.87, 0.25, 0.25, 1, true, 0)
-                else
-                    _DrawRect(0.75, 0.88, 0.03, 0.02, 186, 186, 186, 225, 0)
-                    Draw("1", 0, 0, 0, 255, 0.75, 0.87, 0.25, 0.25, 1, true, 0)
+        if IsDisabledControlPressed(0, keyboard.modifyKey) then
+            if IsDisabledControlPressed(0, keyboard.pattern.primary) then
+                if playButtonPressSounds then
+                    PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
                 end
-
-                if (getVehicleLightStage(GetVehiclePedIsUsing(GetPlayerPed(-1))) == 2) then
-                    _DrawRect(0.784, 0.88, 0.03, 0.02, 173, 0, 0, 225, 0)
-                    Draw("2", 0, 0, 0, 255, 0.784, 0.87, 0.25, 0.25, 1, true, 0)
-                else
-                    _DrawRect(0.784, 0.88, 0.03, 0.02, 186, 186, 186, 225, 0)
-                    Draw("2", 0, 0, 0, 255, 0.784, 0.87, 0.25, 0.25, 1, true, 0)
+                changePrimaryPatternMath(-1)
+            end
+            if IsDisabledControlPressed(0, keyboard.pattern.secondary) then
+                if playButtonPressSounds then
+                    PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
                 end
-
-                if (getVehicleLightStage(GetVehiclePedIsUsing(GetPlayerPed(-1))) == 3) then
-                    _DrawRect(0.817, 0.88, 0.03, 0.02, 173, 0, 0, 225, 0)
-                    Draw("3", 0, 0, 0, 255, 0.817, 0.87, 0.25, 0.25, 1, true, 0)
-                else
-                    _DrawRect(0.817, 0.88, 0.03, 0.02, 186, 186, 186, 225, 0)
-                    Draw("3", 0, 0, 0, 255, 0.817, 0.87, 0.25, 0.25, 1, true, 0)
+                changeSecondaryPatternMath(-1)
+            end
+            if IsDisabledControlPressed(0, keyboard.pattern.warning) then
+                if playButtonPressSounds then
+                    PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
                 end
-
-                _DrawRect(0.854, 0.88, 0.035, 0.02, 186, 186, 186, 225, 0)
-                Draw("PRIM " .. tostring(lightPatternPrim), 0, 0, 0, 255, 0.854, 0.87, 0.25, 0.25, 1, true, 0)
-
-                _DrawRect(0.854, 0.91, 0.035, 0.02, 186, 186, 186, 225, 0)
-                Draw("SEC " .. tostring(lightPatternSec), 0, 0, 0, 255, 0.854, 0.9, 0.25, 0.25, 1, true, 0)
-
-                if (doesVehicleHaveTrafficAdvisor(GetVehiclePedIsUsing(GetPlayerPed(-1)))) then
-                    _DrawRect(0.854, 0.94, 0.035, 0.02, 186, 186, 186, 225, 0)
-                    Draw("ADV " .. tostring(advisorPatternSelectedIndex), 0, 0, 0, 255, 0.854, 0.93, 0.25, 0.25, 1, true, 0)
+                changeAdvisorPatternMath(-1)
+            end
+        else
+            if IsDisabledControlPressed(0, keyboard.pattern.primary) then
+                if playButtonPressSounds then
+                    PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
                 end
-
-                if (h_horn_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 1) then
-                    _DrawRect(0.75, 0.91, 0.03, 0.02, 0, 173, 0, 225, 0)
-                    Draw("HORN", 0, 0, 0, 255, 0.75, 0.9, 0.25, 0.25, 1, true, 0)
-                else
-                    _DrawRect(0.75, 0.91, 0.03, 0.02, 186, 186, 186, 225, 0)
-                    Draw("HORN", 0, 0, 0, 255, 0.75, 0.9, 0.25, 0.25, 1, true, 0)
+                changePrimaryPatternMath(1)
+            end
+            if IsDisabledControlPressed(0, keyboard.pattern.secondary) then
+                if playButtonPressSounds then
+                    PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
                 end
-
-                if (dualEnable[GetVehiclePedIsUsing(GetPlayerPed(-1))]) then
-                    _DrawRect(0.784, 0.91, 0.03, 0.02, 0, 213, 255, 225, 0)
-                    Draw("DUAL", 0, 0, 0, 255, 0.784, 0.9, 0.25, 0.25, 1, true, 0)
-                else
-                    _DrawRect(0.784, 0.91, 0.03, 0.02, 186, 186, 186, 225, 0)
-                    Draw("DUAL", 0, 0, 0, 255, 0.784, 0.9, 0.25, 0.25, 1, true, 0)
+                changeSecondaryPatternMath(1)
+            end
+            if IsDisabledControlPressed(0, keyboard.pattern.warning) then
+                if playButtonPressSounds then
+                    PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
                 end
+                changeAdvisorPatternMath(1)
+            end
+        end
+        Wait(200)
+    end
+end)
 
-                if (IsVehicleExtraTurnedOn(GetVehiclePedIsUsing(GetPlayerPed(-1)), 11)) then
-                    _DrawRect(0.817, 0.91, 0.03, 0.02, 255, 0, 0, 255, 0)
-                    Draw("TKD", 0, 0, 0, 255, 0.817, 0.9, 0.25, 0.25, 1, true, 0)
-                else
-                    _DrawRect(0.817, 0.91, 0.03, 0.02, 186, 186, 186, 225, 0)
-                    Draw("TKD", 0, 0, 0, 255, 0.817, 0.9, 0.25, 0.25, 1, true, 0)
-                end
+Citizen.CreateThread(function()
+    while true do
+        if panelOffsetX ~= nil and panelOffsetY ~= nil then
+            if guiEnabled and vehInTable(els_Vehicles, checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))) then
+                if (GetPedInVehicleSeat(GetVehiclePedIsUsing(GetPlayerPed(-1)), -1) == GetPlayerPed(-1)) or
+                    (GetPedInVehicleSeat(GetVehiclePedIsUsing(GetPlayerPed(-1)), 0) == GetPlayerPed(-1)) then
+                    local vehN = checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))
 
-                if (m_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 1) then
-                    if (d_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 1) then
-                        _DrawRect(0.743, 0.94, 0.015, 0.02, 0, 173, 0, 225, 0)
+                    _DrawRect(0.85 + panelOffsetX, 0.89 + panelOffsetY, 0.26, 0.16, 16, 16, 16, 225, 0)
+
+
+                   
+                    _DrawRect(0.85 + panelOffsetX, 0.835 + panelOffsetY, 0.245, 0.035, 0, 0, 0, 225, 0)
+                    _DrawRect(0.85 + panelOffsetX, 0.835 + panelOffsetY, 0.24, 0.03, els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].headerColor.r, els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].headerColor.g, els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].headerColor.b, 225, 0)
+                    Draw("MAIN", 0, 0, 0, 255, 0.745 + panelOffsetX, 0.825 + panelOffsetY, 0.25, 0.25, 1, true, 0)
+                    Draw("MRDAGREE SYSTEMS", 0, 0, 0, 255, 0.92 + panelOffsetX, 0.825 + panelOffsetY, 0.25, 0.25, 1, true, 0)
+
+
+                    _DrawRect(0.78 + panelOffsetX, 0.835 + panelOffsetY, 0.033, 0.025, 0, 0, 0, 225, 0)
+                    if (getVehicleLightStage(GetVehiclePedIsUsing(GetPlayerPed(-1))) == 1) then
+                        _DrawRect(0.78 + panelOffsetX, 0.835 + panelOffsetY, 0.03, 0.02, els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].buttonColor.r, els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].buttonColor.g, els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].buttonColor.b, 225, 0)
+                        Draw("S-1", 0, 0, 0, 255, 0.78 + panelOffsetX, 0.825 + panelOffsetY, 0.25, 0.25, 1, true, 0)
                     else
-                        _DrawRect(0.75, 0.94, 0.03, 0.02, 0, 173, 0, 225, 0)
+                        _DrawRect(0.78 + panelOffsetX, 0.835 + panelOffsetY, 0.03, 0.02, 186, 186, 186, 225, 0)
+                        Draw("S-1", 0, 0, 0, 255, 0.78 + panelOffsetX, 0.825 + panelOffsetY, 0.25, 0.25, 1, true, 0)
                     end
-                else
-                    _DrawRect(0.75, 0.94, 0.03, 0.02, 186, 186, 186, 225, 0)
-                end
 
-                if (d_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 1) then
-                    if (m_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 1) then
-                        _DrawRect(0.758, 0.94, 0.015, 0.02, 0, 213, 255, 225, 2)
+                    _DrawRect(0.815 + panelOffsetX, 0.835 + panelOffsetY, 0.033, 0.025, 0, 0, 0, 225, 0)
+                    if (getVehicleLightStage(GetVehiclePedIsUsing(GetPlayerPed(-1))) == 2) then
+                        _DrawRect(0.815 + panelOffsetX, 0.835 + panelOffsetY, 0.03, 0.02, els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].buttonColor.r, els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].buttonColor.g, els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].buttonColor.b, 225, 0)
+                        Draw("S-2", 0, 0, 0, 255, 0.815 + panelOffsetX, 0.825 + panelOffsetY, 0.25, 0.25, 1, true, 0)
                     else
-                        _DrawRect(0.75, 0.94, 0.03, 0.02, 0, 213, 255, 225, 0)
+                        _DrawRect(0.815 + panelOffsetX, 0.835 + panelOffsetY, 0.03, 0.02, 186, 186, 186, 225, 0)
+                        Draw("S-2", 0, 0, 0, 255, 0.815 + panelOffsetX, 0.825 + panelOffsetY, 0.25, 0.25, 1, true, 0)
                     end
-                end
-                
-                Draw("MAIN", 0, 0, 0, 255, 0.75, 0.93, 0.25, 0.25, 3, true, 0)
 
-                if (m_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 2) then
-                    if (d_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 2) then
-                        _DrawRect(0.777, 0.94, 0.015, 0.02, 0, 173, 0, 225, 0)
+                    _DrawRect(0.850 + panelOffsetX, 0.835 + panelOffsetY, 0.033, 0.025, 0, 0, 0, 225, 0)
+                    if (getVehicleLightStage(GetVehiclePedIsUsing(GetPlayerPed(-1))) == 3) then
+                        _DrawRect(0.850 + panelOffsetX, 0.835 + panelOffsetY, 0.03, 0.02, els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].buttonColor.r, els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].buttonColor.g, els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].buttonColor.b, 225, 0)
+                        Draw("S-3", 0, 0, 0, 255, 0.850 + panelOffsetX, 0.825 + panelOffsetY, 0.25, 0.25, 1, true, 0)
                     else
-                        _DrawRect(0.784, 0.94, 0.03, 0.02, 0, 173, 0, 225, 0)
+                        _DrawRect(0.850 + panelOffsetX, 0.835 + panelOffsetY, 0.03, 0.02, 186, 186, 186, 225, 0)
+                        Draw("S-3", 0, 0, 0, 255, 0.850 + panelOffsetX, 0.825 + panelOffsetY, 0.25, 0.25, 1, true, 0)
                     end
-                else
-                    _DrawRect(0.784, 0.94, 0.03, 0.02, 186, 186, 186, 225, 0)
-                end
 
-                if (d_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 2) then
-                    if (m_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 2) then
-                        _DrawRect(0.792, 0.94, 0.015, 0.02, 0, 213, 255, 225, 2)
+                    _DrawRect(0.742 + panelOffsetX, 0.88 + panelOffsetY, 0.028, 0.045, 0, 0, 0, 225, 0)
+                    if elsVehs[GetVehiclePedIsUsing(GetPlayerPed(-1))] ~= nil then
+                        if elsVehs[GetVehiclePedIsUsing(GetPlayerPed(-1))].warning then
+                            _DrawRect(0.7421 + panelOffsetX, 0.871 + panelOffsetY, 0.026, 0.02, els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].buttonColor.r, els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].buttonColor.g, els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].buttonColor.b, 225, 0)
+                            Draw("E-" .. formatPatternNumber(advisorPatternSelectedIndex), els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].buttonColor.r, els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].buttonColor.g, els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].buttonColor.b, 255, 0.7423 + panelOffsetX, 0.88 + panelOffsetY, 0.25, 0.25, 1, true, 0)
+                        else
+                            _DrawRect(0.7421 + panelOffsetX, 0.871 + panelOffsetY, 0.026, 0.02, 186, 186, 186, 225, 0)
+                            Draw("E-" .. formatPatternNumber(advisorPatternSelectedIndex), 255, 255, 255, 255, 0.7423 + panelOffsetX, 0.88 + panelOffsetY, 0.25, 0.25, 1, true, 0)
+                        end
                     else
-                        _DrawRect(0.784, 0.94, 0.03, 0.02, 0, 213, 255, 255, 0)
+                        _DrawRect(0.7421 + panelOffsetX, 0.871 + panelOffsetY, 0.026, 0.02, 186, 186, 186, 225, 0)
+                        Draw("E-" .. formatPatternNumber(advisorPatternSelectedIndex), 255, 255, 255, 255, 0.7423 + panelOffsetX, 0.88 + panelOffsetY, 0.25, 0.25, 1, true, 0)
                     end
-                end
+                    Draw("WRN", 0, 0, 0, 255, 0.7423 + panelOffsetX, 0.86 + panelOffsetY, 0.25, 0.25, 1, true, 0)
 
-                Draw("SEC", 0, 0, 0, 255, 0.784, 0.93, 0.25, 0.25, 3, true, 0)
-
-                if (m_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 3) then
-                    if (d_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 3) then
-                        _DrawRect(0.81, 0.94, 0.015, 0.02, 0, 173, 0, 225, 0)
+                    _DrawRect(0.774 + panelOffsetX, 0.88 + panelOffsetY, 0.028, 0.045, 0, 0, 0, 225, 0)
+                    if elsVehs[GetVehiclePedIsUsing(GetPlayerPed(-1))] ~= nil then
+                        if elsVehs[GetVehiclePedIsUsing(GetPlayerPed(-1))].secondary then
+                            _DrawRect(0.774 + panelOffsetX, 0.871 + panelOffsetY, 0.025, 0.02, els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].buttonColor.r, els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].buttonColor.g, els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].buttonColor.b, 225, 0)
+                            Draw("E-" .. formatPatternNumber(lightPatternSec), els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].buttonColor.r, els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].buttonColor.g, els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].buttonColor.b, 255, 0.774 + panelOffsetX, 0.88 + panelOffsetY, 0.25, 0.25, 1, true, 0)
+                        else
+                            _DrawRect(0.774 + panelOffsetX, 0.871 + panelOffsetY, 0.025, 0.02, 186, 186, 186, 225, 0)
+                            Draw("E-" .. formatPatternNumber(lightPatternSec), 255, 255, 255, 255, 0.774 + panelOffsetX, 0.88 + panelOffsetY, 0.25, 0.25, 1, true, 0)
+                        end
                     else
-                        _DrawRect(0.817, 0.94, 0.03, 0.02, 0, 173, 0, 225, 0)
+                        _DrawRect(0.774 + panelOffsetX, 0.871 + panelOffsetY, 0.025, 0.02, 186, 186, 186, 225, 0)
+                        Draw("E-" .. formatPatternNumber(lightPatternSec), 255, 255, 255, 255, 0.774 + panelOffsetX, 0.88 + panelOffsetY, 0.25, 0.25, 1, true, 0)
                     end
-                else
-                    _DrawRect(0.817, 0.94, 0.03, 0.02, 186, 186, 186, 225, 0)
-                end
+                    Draw("SEC", 0, 0, 0, 255, 0.774 + panelOffsetX, 0.86 + panelOffsetY, 0.25, 0.25, 1, true, 0)
 
-                if (d_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 3) then
-                    if (m_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 3) then
-                        _DrawRect(0.823, 0.94, 0.015, 0.02, 0, 213, 255, 225, 2)
+                    _DrawRect(0.806 + panelOffsetX, 0.88 + panelOffsetY, 0.028, 0.045, 0, 0, 0, 225, 0)
+                    if elsVehs[GetVehiclePedIsUsing(GetPlayerPed(-1))] ~= nil then
+                        if elsVehs[GetVehiclePedIsUsing(GetPlayerPed(-1))].primary then
+                            _DrawRect(0.806 + panelOffsetX, 0.871 + panelOffsetY, 0.025, 0.02, els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].buttonColor.r, els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].buttonColor.g, els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].buttonColor.b, 225, 0)
+                            Draw("E-" .. formatPatternNumber(lightPatternPrim), els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].buttonColor.r, els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].buttonColor.g, els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].buttonColor.b, 255, 0.806 + panelOffsetX, 0.88 + panelOffsetY, 0.25, 0.25, 1, true, 0)
+                        else
+                            _DrawRect(0.806 + panelOffsetX, 0.871 + panelOffsetY, 0.025, 0.02, 186, 186, 186, 225, 0)
+                            Draw("E-" .. formatPatternNumber(lightPatternPrim), 255, 255, 255, 255, 0.806 + panelOffsetX, 0.88 + panelOffsetY, 0.25, 0.25, 1, true, 0)
+                        end
                     else
-                        _DrawRect(0.817, 0.94, 0.03, 0.02, 0, 213, 255, 255, 0)
+                        _DrawRect(0.806 + panelOffsetX, 0.871 + panelOffsetY, 0.025, 0.02, 186, 186, 186, 225, 0)
+                        Draw("E-" .. formatPatternNumber(lightPatternPrim), 255, 255, 255, 255, 0.806 + panelOffsetX, 0.88 + panelOffsetY, 0.25, 0.25, 1, true, 0)
                     end
-                end
+                    Draw("PRIM", 0, 0, 0, 255, 0.806 + panelOffsetX, 0.86 + panelOffsetY, 0.25, 0.25, 1, true, 0)
 
-                Draw("AUX", 0, 0, 0, 255, 0.817, 0.93, 0.25, 0.25, 3, true, 0)
+                    -- if (h_horn_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 1) then
+                    --     _DrawRect(0.75 + panelOffsetX, 0.92 + panelOffsetY, 0.03, 0.02, 0, 173, 0, 225, 0)
+                    --     Draw("HORN", 0, 0, 0, 255, 0.75 + panelOffsetX, 0.91 + panelOffsetY, 0.25, 0.25, 1, true, 0)
+                    -- else
+                    --     _DrawRect(0.75 + panelOffsetX, 0.92 + panelOffsetY, 0.03, 0.02, 186, 186, 186, 225, 0)
+                    --     Draw("HORN", 0, 0, 0, 255, 0.75 + panelOffsetX, 0.91 + panelOffsetY, 0.25, 0.25, 1, true, 0)
+                    -- end
 
-                if(IsVehicleExtraTurnedOn(GetVehiclePedIsUsing(GetPlayerPed(-1)), 7)) then
-                    _DrawRect(0.9, 0.94, 0.015, 0.015, els_Vehicles[vehN].extras[7].env_color.r, els_Vehicles[vehN].extras[7].env_color.g, els_Vehicles[vehN].extras[7].env_color.b, 225, 0)
-                else
-                    _DrawRect(0.9, 0.94, 0.015, 0.015, 186, 186, 186, 225, 0)
-                end
+                    -- if (dualEnable[GetVehiclePedIsUsing(GetPlayerPed(-1))]) then
+                    --     _DrawRect(0.784 + panelOffsetX, 0.92 + panelOffsetY, 0.03, 0.02, 0, 213, 255, 225, 0)
+                    --     Draw("DUAL", 0, 0, 0, 255, 0.784 + panelOffsetX, 0.91 + panelOffsetY, 0.25, 0.25, 1, true, 0)
+                    -- else
+                    --     _DrawRect(0.784 + panelOffsetX, 0.92 + panelOffsetY, 0.03, 0.02, 186, 186, 186, 225, 0)
+                    --     Draw("DUAL", 0, 0, 0, 255, 0.784 + panelOffsetX, 0.91 + panelOffsetY, 0.25, 0.25, 1, true, 0)
+                    -- end
 
-                if(IsVehicleExtraTurnedOn(GetVehiclePedIsUsing(GetPlayerPed(-1)), 8)) then
-                    _DrawRect(0.92, 0.94, 0.015, 0.015, els_Vehicles[vehN].extras[8].env_color.r, els_Vehicles[vehN].extras[8].env_color.g, els_Vehicles[vehN].extras[8].env_color.b, 225, 0)
-                else
-                    _DrawRect(0.92, 0.94, 0.015, 0.015, 186, 186, 186, 225, 0)
-                end
+                    -- if (m_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 1) then
+                    --     if (d_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 1) then
+                    --         _DrawRect(0.743 + panelOffsetX, 0.95 + panelOffsetY, 0.015, 0.02, 0, 173, 0, 225, 0)
+                    --     else
+                    --         _DrawRect(0.75 + panelOffsetX, 0.95 + panelOffsetY, 0.03, 0.02, 0, 173, 0, 225, 0)
+                    --     end
+                    -- else
+                    --     _DrawRect(0.75 + panelOffsetX, 0.95 + panelOffsetY, 0.03, 0.02, 186, 186, 186, 225, 0)
+                    -- end
 
-                if(IsVehicleExtraTurnedOn(GetVehiclePedIsUsing(GetPlayerPed(-1)), 9)) then
-                    _DrawRect(0.94, 0.94, 0.015, 0.015, els_Vehicles[vehN].extras[9].env_color.r, els_Vehicles[vehN].extras[9].env_color.g, els_Vehicles[vehN].extras[9].env_color.b, 225, 0)
-                else
-                    _DrawRect(0.94, 0.94, 0.015, 0.015, 186, 186, 186, 225, 0)
-                end
+                    -- if (d_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 1) then
+                    --     if (m_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 1) then
+                    --         _DrawRect(0.758 + panelOffsetX, 0.95 + panelOffsetY, 0.015, 0.02, 0, 213, 255, 225, 2)
+                    --     else
+                    --         _DrawRect(0.75 + panelOffsetX, 0.95 + panelOffsetY, 0.03, 0.02, 0, 213, 255, 225, 0)
+                    --     end
+                    -- end
+                    
+                    -- Draw("MAIN", 0, 0, 0, 255, 0.75 + panelOffsetX, 0.94 + panelOffsetY, 0.25, 0.25, 3, true, 0)
 
-                if(IsVehicleExtraTurnedOn(GetVehiclePedIsUsing(GetPlayerPed(-1)), 1)) then
-                    _DrawRect(0.89, 0.92, 0.015, 0.015, els_Vehicles[vehN].extras[1].env_color.r, els_Vehicles[vehN].extras[1].env_color.g, els_Vehicles[vehN].extras[1].env_color.b, 225, 0)
-                else
-                    _DrawRect(0.89, 0.92, 0.015, 0.015, 186, 186, 186, 225, 0)
-                end
+                    -- if (m_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 2) then
+                    --     if (d_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 2) then
+                    --         _DrawRect(0.777 + panelOffsetX, 0.95 + panelOffsetY, 0.015, 0.02, 0, 173, 0, 225, 0)
+                    --     else
+                    --         _DrawRect(0.784 + panelOffsetX, 0.95 + panelOffsetY, 0.03, 0.02, 0, 173, 0, 225, 0)
+                    --     end
+                    -- else
+                    --     _DrawRect(0.784 + panelOffsetX, 0.95 + panelOffsetY, 0.03, 0.02, 186, 186, 186, 225, 0)
+                    -- end
 
-                if(IsVehicleExtraTurnedOn(GetVehiclePedIsUsing(GetPlayerPed(-1)), 2)) then
-                    _DrawRect(0.91, 0.92, 0.015, 0.015, els_Vehicles[vehN].extras[2].env_color.r, els_Vehicles[vehN].extras[2].env_color.g, els_Vehicles[vehN].extras[2].env_color.b, 225, 0)
-                else
-                    _DrawRect(0.91, 0.92, 0.015, 0.015, 186, 186, 186, 225, 0)
-                end
+                    -- if (d_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 2) then
+                    --     if (m_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 2) then
+                    --         _DrawRect(0.792 + panelOffsetX, 0.95 + panelOffsetY, 0.015, 0.02, 0, 213, 255, 225, 2)
+                    --     else
+                    --         _DrawRect(0.784 + panelOffsetX, 0.95 + panelOffsetY, 0.03, 0.02, 0, 213, 255, 255, 0)
+                    --     end
+                    -- end
 
-                if(IsVehicleExtraTurnedOn(GetVehiclePedIsUsing(GetPlayerPed(-1)), 3)) then
-                    _DrawRect(0.93, 0.92, 0.015, 0.015, els_Vehicles[vehN].extras[3].env_color.r, els_Vehicles[vehN].extras[3].env_color.g, els_Vehicles[vehN].extras[3].env_color.b, 225, 0)
-                else
-                    _DrawRect(0.93, 0.92, 0.015, 0.015, 186, 186, 186, 225, 0)
-                end
+                    -- Draw("SEC", 0, 0, 0, 255, 0.784 + panelOffsetX, 0.94 + panelOffsetY, 0.25, 0.25, 3, true, 0)
 
-                if(IsVehicleExtraTurnedOn(GetVehiclePedIsUsing(GetPlayerPed(-1)), 4)) then
-                    _DrawRect(0.95, 0.92, 0.015, 0.015, els_Vehicles[vehN].extras[4].env_color.r, els_Vehicles[vehN].extras[4].env_color.g, els_Vehicles[vehN].extras[4].env_color.b, 225, 0)
-                else
-                    _DrawRect(0.95, 0.92, 0.015, 0.015, 186, 186, 186, 225, 0)
-                end
+                    -- if (m_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 3) then
+                    --     if (d_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 3) then
+                    --         _DrawRect(0.81 + panelOffsetX, 0.95 + panelOffsetY, 0.015, 0.02, 0, 173, 0, 225, 0)
+                    --     else
+                    --         _DrawRect(0.817 + panelOffsetX, 0.95 + panelOffsetY, 0.03, 0.02, 0, 173, 0, 225, 0)
+                    --     end
+                    -- else
+                    --     _DrawRect(0.817 + panelOffsetX, 0.95 + panelOffsetY, 0.03, 0.02, 186, 186, 186, 225, 0)
+                    -- end
 
-                if(IsVehicleExtraTurnedOn(GetVehiclePedIsUsing(GetPlayerPed(-1)), 5)) then
-                    _DrawRect(0.91, 0.885, 0.015, 0.015, els_Vehicles[vehN].extras[5].env_color.r, els_Vehicles[vehN].extras[5].env_color.g, els_Vehicles[vehN].extras[5].env_color.b, 225, 0)
-                else
-                    _DrawRect(0.91, 0.885, 0.015, 0.015, 186, 186, 186, 225, 0)
-                end
+                    -- if (d_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 3) then
+                    --     if (m_siren_state[GetVehiclePedIsUsing(GetPlayerPed(-1))] == 3) then
+                    --         _DrawRect(0.823 + panelOffsetX, 0.95 + panelOffsetY, 0.015, 0.02, 0, 213, 255, 225, 2)
+                    --     else
+                    --         _DrawRect(0.817 + panelOffsetX, 0.95 + panelOffsetY, 0.03, 0.02, 0, 213, 255, 255, 0)
+                    --     end
+                    -- end
 
-                if(IsVehicleExtraTurnedOn(GetVehiclePedIsUsing(GetPlayerPed(-1)), 6)) then
-                    _DrawRect(0.93, 0.885, 0.015, 0.015, els_Vehicles[vehN].extras[6].env_color.r, els_Vehicles[vehN].extras[6].env_color.g, els_Vehicles[vehN].extras[6].env_color.b, 225, 0)
-                else
-                    _DrawRect(0.93, 0.885, 0.015, 0.015, 186, 186, 186, 225, 0)
+                    -- Draw("AUX", 0, 0, 0, 255, 0.817 + panelOffsetX, 0.94 + panelOffsetY, 0.25, 0.25, 3, true, 0)
+
+                    _DrawRect(0.86 + panelOffsetX, 0.911 + panelOffsetY, 0.06, 0.09, 0, 0, 0, 225, 0)
+
+                    if (IsVehicleExtraTurnedOn(GetVehiclePedIsUsing(GetPlayerPed(-1)), 11)) then
+                        _DrawRect(0.853 + panelOffsetX, 0.895 + panelOffsetY, 0.01, 0.005, 255, 255, 255, 225, 0)
+                        _DrawRect(0.866 + panelOffsetX, 0.895 + panelOffsetY, 0.01, 0.005, 255, 255, 255, 225, 0)
+                    else
+                        _DrawRect(0.853 + panelOffsetX, 0.895 + panelOffsetY, 0.01, 0.005, 54, 54, 54, 225, 0)
+                        _DrawRect(0.866 + panelOffsetX, 0.895 + panelOffsetY, 0.01, 0.005, 54, 54, 54, 225, 0)
+                    end
+
+                    _DrawRect(0.8365 + panelOffsetX, 0.9 + panelOffsetY, 0.0029, 0.015, 54, 54, 54, 225, 0)
+
+                    _DrawRect(0.882 + panelOffsetX, 0.9 + panelOffsetY, 0.0029, 0.015, 54, 54, 54, 225, 0)
+
+                    if(IsVehicleExtraTurnedOn(GetVehiclePedIsUsing(GetPlayerPed(-1)), 7)) then
+                        _DrawRect(0.848 + panelOffsetX, 0.94 + panelOffsetY, 0.01, 0.015, els_Vehicles[vehN].extras[7].env_color.r, els_Vehicles[vehN].extras[7].env_color.g, els_Vehicles[vehN].extras[7].env_color.b, 225, 0)
+                    else
+                        _DrawRect(0.848 + panelOffsetX, 0.94 + panelOffsetY, 0.01, 0.015, 54, 54, 54, 225, 0)
+                    end
+
+                    if doesVehicleHaveTrafficAdvisor(GetVehiclePedIsUsing(GetPlayerPed(-1))) then
+                        if(IsVehicleExtraTurnedOn(GetVehiclePedIsUsing(GetPlayerPed(-1)), 8)) then
+                            _DrawRect(0.8598 + panelOffsetX, 0.94 + panelOffsetY, 0.01, 0.015, els_Vehicles[vehN].extras[8].env_color.r, els_Vehicles[vehN].extras[8].env_color.g, els_Vehicles[vehN].extras[8].env_color.b, 225, 0)
+                        else
+                            _DrawRect(0.8598 + panelOffsetX, 0.94 + panelOffsetY, 0.01, 0.015, 54, 54, 54, 225, 0)
+                        end
+                    end
+
+                    if(IsVehicleExtraTurnedOn(GetVehiclePedIsUsing(GetPlayerPed(-1)), 9)) then
+                        _DrawRect(0.872 + panelOffsetX, 0.94 + panelOffsetY, 0.01, 0.015, els_Vehicles[vehN].extras[9].env_color.r, els_Vehicles[vehN].extras[9].env_color.g, els_Vehicles[vehN].extras[9].env_color.b, 225, 0)
+                    else
+                        _DrawRect(0.872 + panelOffsetX, 0.94 + panelOffsetY, 0.01, 0.015, 54, 54, 54, 225, 0)
+                    end
+
+                    if(IsVehicleExtraTurnedOn(GetVehiclePedIsUsing(GetPlayerPed(-1)), 1)) then
+                        _DrawRect(0.84 + panelOffsetX, 0.92 + panelOffsetY, 0.01, 0.015, els_Vehicles[vehN].extras[1].env_color.r, els_Vehicles[vehN].extras[1].env_color.g, els_Vehicles[vehN].extras[1].env_color.b, 225, 0)
+                    else
+                        _DrawRect(0.84 + panelOffsetX, 0.92 + panelOffsetY, 0.01, 0.015, 54, 54, 54, 225, 0)
+                    end
+
+                    if(IsVehicleExtraTurnedOn(GetVehiclePedIsUsing(GetPlayerPed(-1)), 2)) then
+                        _DrawRect(0.853 + panelOffsetX, 0.92 + panelOffsetY, 0.01, 0.015, els_Vehicles[vehN].extras[2].env_color.r, els_Vehicles[vehN].extras[2].env_color.g, els_Vehicles[vehN].extras[2].env_color.b, 225, 0)
+                    else
+                        _DrawRect(0.853 + panelOffsetX, 0.92 + panelOffsetY, 0.01, 0.015, 54, 54, 54, 225, 0)
+                    end
+
+                    if(IsVehicleExtraTurnedOn(GetVehiclePedIsUsing(GetPlayerPed(-1)), 3)) then
+                        _DrawRect(0.866 + panelOffsetX, 0.92 + panelOffsetY, 0.01, 0.015, els_Vehicles[vehN].extras[3].env_color.r, els_Vehicles[vehN].extras[3].env_color.g, els_Vehicles[vehN].extras[3].env_color.b, 225, 0)
+                    else
+                        _DrawRect(0.866 + panelOffsetX, 0.92 + panelOffsetY, 0.01, 0.015, 54, 54, 54, 225, 0)
+                    end
+
+                    if(IsVehicleExtraTurnedOn(GetVehiclePedIsUsing(GetPlayerPed(-1)), 4)) then
+                        _DrawRect(0.879 + panelOffsetX, 0.92 + panelOffsetY, 0.01, 0.015, els_Vehicles[vehN].extras[4].env_color.r, els_Vehicles[vehN].extras[4].env_color.g, els_Vehicles[vehN].extras[4].env_color.b, 225, 0)
+                    else
+                        _DrawRect(0.879 + panelOffsetX, 0.92 + panelOffsetY, 0.01, 0.015, 54, 54, 54, 225, 0)
+                    end
+
+                    if(IsVehicleExtraTurnedOn(GetVehiclePedIsUsing(GetPlayerPed(-1)), 5)) then
+                        _DrawRect(0.853 + panelOffsetX, 0.88 + panelOffsetY, 0.01, 0.015, els_Vehicles[vehN].extras[5].env_color.r, els_Vehicles[vehN].extras[5].env_color.g, els_Vehicles[vehN].extras[5].env_color.b, 225, 0)
+                    else
+                        _DrawRect(0.853 + panelOffsetX, 0.88 + panelOffsetY, 0.01, 0.015, 54, 54, 54, 225, 0)
+                    end
+
+                    if(IsVehicleExtraTurnedOn(GetVehiclePedIsUsing(GetPlayerPed(-1)), 6)) then
+                        _DrawRect(0.866 + panelOffsetX, 0.88 + panelOffsetY, 0.01, 0.015, els_Vehicles[vehN].extras[6].env_color.r, els_Vehicles[vehN].extras[6].env_color.g, els_Vehicles[vehN].extras[6].env_color.b, 225, 0)
+                    else
+                        _DrawRect(0.866 + panelOffsetX, 0.88 + panelOffsetY, 0.01, 0.015, 54, 54, 54, 225, 0)
+                    end
+
+
+                    _DrawRect(0.91 + panelOffsetX, 0.94 + panelOffsetY, 0.024, 0.023, 0, 0, 0, 225, 0)
+                    if elsVehs[GetVehiclePedIsUsing(GetPlayerPed(-1))] ~= nil then
+                        if elsVehs[GetVehiclePedIsUsing(GetPlayerPed(-1))].cruise then
+                            _DrawRect(0.91 + panelOffsetX, 0.94 + panelOffsetY, 0.022, 0.02, els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].buttonColor.r, els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].buttonColor.g, els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].buttonColor.b, 225, 0)
+                        else
+                            _DrawRect(0.91 + panelOffsetX, 0.94 + panelOffsetY, 0.022, 0.02, 186, 186, 186, 225, 0)
+                        end
+                    else
+                        _DrawRect(0.91 + panelOffsetX, 0.94 + panelOffsetY, 0.0215, 0.02, 186, 186, 186, 225, 0)
+                    end
+                    Draw("CRS", 0, 0, 0, 255, 0.91 + panelOffsetX, 0.93 + panelOffsetY, 0.25, 0.25, 1, true, 0)
+
+                    _DrawRect(0.935 + panelOffsetX, 0.94 + panelOffsetY, 0.024, 0.023, 0, 0, 0, 225, 0)
+                    if IsVehicleExtraTurnedOn(GetVehiclePedIsUsing(GetPlayerPed(-1)), 11) then
+                        _DrawRect(0.935 + panelOffsetX, 0.94 + panelOffsetY, 0.022, 0.02, els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].buttonColor.r, els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].buttonColor.g, els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].buttonColor.b, 225, 0)
+                    else
+                        _DrawRect(0.935 + panelOffsetX, 0.94 + panelOffsetY, 0.0215, 0.02, 186, 186, 186, 225, 0)
+                    end
+                    Draw("TKD", 0, 0, 0, 255, 0.935 + panelOffsetX, 0.93 + panelOffsetY, 0.25, 0.25, 1, true, 0)
+
+                    _DrawRect(0.96 + panelOffsetX, 0.94 + panelOffsetY, 0.024, 0.023, 0, 0, 0, 225, 0)
+                    if IsVehicleExtraTurnedOn(GetVehiclePedIsUsing(GetPlayerPed(-1)), 12) then
+                        _DrawRect(0.96 + panelOffsetX, 0.94 + panelOffsetY, 0.022, 0.02, els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].buttonColor.r, els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].buttonColor.g, els_Vehicles[checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))].buttonColor.b, 225, 0)
+                    else
+                        _DrawRect(0.96 + panelOffsetX, 0.94 + panelOffsetY, 0.0215, 0.02, 186, 186, 186, 225, 0)
+                    end
+                    Draw("SCL", 0, 0, 0, 255, 0.96 + panelOffsetX, 0.93 + panelOffsetY, 0.25, 0.25, 1, true, 0)
+
                 end
             end
         end
-        Wait(0)
+        Wait(1)
     end
 end)
 
@@ -1510,7 +1500,7 @@ Citizen.CreateThread(function()
 
     while true do
         if vehInTable(els_Vehicles, checkCarHash(GetVehiclePedIsIn(GetPlayerPed(-1, true)))) then
-            if getVehicleLightStage(GetVehiclePedIsIn(GetPlayerPed(-1, true))) ~= 0 then
+            if getVehicleLightStage(GetVehiclePedIsIn(GetPlayerPed(-1, true))) ~= 0 or not elsVehs[GetVehiclePedIsIn(GetPlayerPed(-1, true))].warning or not elsVehs[GetVehiclePedIsIn(GetPlayerPed(-1, true))].secondary or not elsVehs[GetVehiclePedIsIn(GetPlayerPed(-1, true))].primary then
                 SetVehicleEngineOn(GetVehiclePedIsIn(GetPlayerPed(-1, true)), true, true, false)
             end
         end
@@ -1530,7 +1520,7 @@ Citizen.CreateThread(function()
 
                     for i=1,12 do
                         if (not IsEntityDead(k) and DoesEntityExist(k)) then
-                            if(els_Vehicles[vehN].extras[i] ~= nil) then
+                            if(els_Vehicles[vehN].extras[i] ~= nil and els_Vehicles[vehN].extras[i].enabled) then
                                 if(IsVehicleExtraTurnedOn(k, i)) then
                                     local boneIndex = GetEntityBoneIndexByName(k, "extra_" .. i)
                                     local coords = GetWorldPositionOfEntityBone(k, boneIndex)
@@ -1540,17 +1530,27 @@ Citizen.CreateThread(function()
                                         if i == 11 then
                                             DrawSpotLightWithShadow(coords.x + els_Vehicles[vehN].extras[11].env_pos.x, coords.y + els_Vehicles[vehN].extras[11].env_pos.y, coords.z + els_Vehicles[vehN].extras[11].env_pos.z, rotX, rotY, rotZ, 255, 255, 255, 75.0, 2.0, 10.0, 20.0, 0.0, true)
                                         end
+                                        if i == 12 then
+                                            DrawLightWithRange(coords.x + els_Vehicles[vehN].extras[12].env_pos.x, coords.y + els_Vehicles[vehN].extras[12].env_pos.y, coords.z + els_Vehicles[vehN].extras[12].env_pos.z, 255, 255, 255, 50.0, envirementLightBrightness + 0.2)
+                                        end
                                     else
                                         if i == 11 then
                                             DrawSpotLightWithShadow(coords.x, coords.y, coords.z + 0.2, rotX, rotY, rotZ, 255, 255, 255, 75.0, 2.0, 10.0, 20.0, 0.0, true)
                                         end
-                                    end
-
-                                    if doesVehicleHaveTrafficAdvisor(k) then
-                                        if (i ~= 7 and i ~= 8 and i ~= 9) then
-                                            runEnvirementLightWithBrightness(k, i, 0.01)
+                                        if i == 12 then
+                                            DrawLightWithRange(coords.x, coords.y, coords.z, 255, 255, 255, 50.0, envirementLightBrightness + 0.2)
                                         end
                                     end
+
+                                    if v.cruise then
+                                        runEnvirementLightWithBrightness(k, i, 0.01)
+                                    end
+
+                                    -- if doesVehicleHaveTrafficAdvisor(k) then
+                                    --     if (i == 7 or i == 8 or i == 9) then
+                                    --         runEnvirementLightWithBrightness(k, i, 0.01)
+                                    --     end
+                                    -- end
                                 end
                             end
                         end
@@ -1562,138 +1562,35 @@ Citizen.CreateThread(function()
     end
 end)
 
--- Citizen.CreateThread(function()
---     while true do
---         if vehInTable(els_Vehicles, checkCarHash(GetVehiclePedIsUsing(GetPlayerPed(-1)))) then
---             if (GetPedInVehicleSeat(GetVehiclePedIsUsing(GetPlayerPed(-1)), -1) == GetPlayerPed(-1)) or
---                 (GetPedInVehicleSeat(GetVehiclePedIsUsing(GetPlayerPed(-1)), 0) == GetPlayerPed(-1)) then
---                 if lightPatternPrim == 0 then
---                     if lightPatternsPrim ~= nil then
---                         lightPatternsPrim = math.random (1, getNumberOfPrimaryPatterns())
---                         changePrimaryPattern(lightPatternsPrim)
---                     else
---                         changePrimaryPattern(1)
---                     end
---                 end
---             end
---         end
-
---         Wait(10000)
---     end
--- end)
-
 Citizen.CreateThread(function()
     local vehIsReady = {}
 
     while true do
         for k,v in pairs(elsVehs) do
-            if (v ~= nil or DoesEntityExist(k)) then
-                if doesVehicleHaveTrafficAdvisor(k) then
-                    if (GetDistanceBetweenCoords(GetEntityCoords(k, true), GetEntityCoords(GetPlayerPed(-1), true), true) <= vehicleSyncDistance) then
-                        if canaryClient then
-                            SetVehicleAutoRepairDisabled(k, true)
-                        end
-
-                        if(vehIsReady[k] == nil) then
-                            vehIsReady[k] = true
-                        end
-                        if vehIsReady[k] then
-                            runPatternAdvisor(k, v.stage, v.advisorPattern, function(cb) vehIsReady[k] = cb end)
-                        end
-                    end
-                end
+            if not DoesEntityExist(k) then
+                vehIsReady[k] = true
             end
-        end
-        Wait(0)
-    end
-end)
-
-Citizen.CreateThread(function()
-
-    while true do
-        for k,v in pairs(elsVehs) do
-            local elsVehicle = k
             if (v ~= nil or DoesEntityExist(k)) then
-                if (v.stage == 0) then
-                    setExtraState(elsVehicle, 1, 1)
-                    setExtraState(elsVehicle, 2, 1)
-                    setExtraState(elsVehicle, 3, 1)
-                    setExtraState(elsVehicle, 4, 1)
-                    setExtraState(elsVehicle, 5, 1)
-                    setExtraState(elsVehicle, 6, 1)
-                    setExtraState(elsVehicle, 7, 1)
-                    setExtraState(elsVehicle, 8, 1)
-                    setExtraState(elsVehicle, 9, 1)
-                    -- setExtraState(elsVehicle, 10, 1)
-                    -- setExtraState(elsVehicle, 11, 1)
-                    -- setExtraState(elsVehicle, 12, 1)
-                elseif (v.stage == 1) then
-                    setExtraState(elsVehicle, 1, 1)
-                    setExtraState(elsVehicle, 2, 1)
-                    setExtraState(elsVehicle, 3, 1)
-                    setExtraState(elsVehicle, 4, 1)
-                    setExtraState(elsVehicle, 5, 1)
-                    setExtraState(elsVehicle, 6, 1)
-                elseif (v.stage == 2) then
-                    setExtraState(elsVehicle, 1, 1)
-                    setExtraState(elsVehicle, 2, 1)
-                    setExtraState(elsVehicle, 3, 1)
-                    setExtraState(elsVehicle, 4, 1)
+                if vehIsReady == nil then
+                    vehIsReady = true
                 end
-            end
-        end
-        Wait(0)
-    end
-end)
-
-
-Citizen.CreateThread(function()
-    local vehIsReady = {}
-
-    while true do
-        for k,v in pairs(elsVehs) do
-            local elsVehicle = k
-            
-            if (v ~= nil or DoesEntityExist(k)) then
-                if (v.stage == 0) then
-                    setExtraState(elsVehicle, 1, 1)
-                    setExtraState(elsVehicle, 2, 1)
-                    setExtraState(elsVehicle, 3, 1)
-                    setExtraState(elsVehicle, 4, 1)
-                    setExtraState(elsVehicle, 5, 1)
-                    setExtraState(elsVehicle, 6, 1)
-                    setExtraState(elsVehicle, 7, 1)
-                    setExtraState(elsVehicle, 8, 1)
-                    setExtraState(elsVehicle, 9, 1)
-                    -- setExtraState(elsVehicle, 10, 1)
-                    -- setExtraState(elsVehicle, 11, 1)
-                    -- setExtraState(elsVehicle, 12, 1)
-                elseif(v.stage == 2) then
+                if (v.warning) then
                     if (GetDistanceBetweenCoords(GetEntityCoords(k, true), GetEntityCoords(GetPlayerPed(-1), true), true) <= vehicleSyncDistance) then
-                        if canaryClient then
-                            SetVehicleAutoRepairDisabled(k, true)
-                        end
+                        SetVehicleAutoRepairDisabled(k, true)
 
-                        if(vehIsReady[k] == nil) then
+                        if vehIsReady[k] == nil then
                             vehIsReady[k] = true
                         end
-                        if vehIsReady[k] then
-                            runPatternStageTwo(k, v.secPattern, function(cb) vehIsReady[k] = cb end)
-                        end
-                    end
-                elseif(v.stage == 3) then
-                    if (GetDistanceBetweenCoords(GetEntityCoords(k, true), GetEntityCoords(GetPlayerPed(-1), true), true) <= vehicleSyncDistance) then
-                        if canaryClient then
-                            SetVehicleAutoRepairDisabled(k, true)
-                        end
 
-                        if(vehIsReady[k] == nil) then
-                            vehIsReady[k] = true
-                        end
-                        if vehIsReady[k] then
-                            runPatternStageTwo(k, v.secPattern, function(cb) vehIsReady[k] = cb end)
+                        if els_Vehicles[checkCarHash(k)].warnType == string.lower("leds") and v.advisorPattern <= 53 then
+                            if vehIsReady[k] then
+                                runLedPatternWarning(k, v.advisorPattern, function(cb) vehIsReady[k] = cb end)
+                            end
                         end
                     end
+                else
+                    setExtraState(k, 5, 1)
+                    setExtraState(k, 6, 1)
                 end
             end
         end
@@ -1706,20 +1603,86 @@ Citizen.CreateThread(function()
 
     while true do
         for k,v in pairs(elsVehs) do
+            if not DoesEntityExist(k) then
+                vehIsReady[k] = true
+            end
             if (v ~= nil or DoesEntityExist(k)) then
-                if (v.stage == 3) then
-                    if (GetDistanceBetweenCoords(GetEntityCoords(k, true), GetEntityCoords(GetPlayerPed(-1), true), true) <= vehicleSyncDistance) then
-                        if canaryClient then
-                            SetVehicleAutoRepairDisabled(k, true)
-                        end
+                if vehIsReady == nil then
+                    vehIsReady = true
+                end
 
-                        if(vehIsReady[k] == nil) then
+                SetVehicleAutoRepairDisabled(k, true)
+
+                if (v.secondary) then
+                    if (GetDistanceBetweenCoords(GetEntityCoords(k, true), GetEntityCoords(GetPlayerPed(-1), true), true) <= vehicleSyncDistance) then
+                        SetVehicleAutoRepairDisabled(k, true)
+
+                        if vehIsReady[k] == nil then
                             vehIsReady[k] = true
                         end
-                        if vehIsReady[k] then
-                            runPatternStageThree(k, v.primPattern, function(cb) vehIsReady[k] = cb end)
+
+                        if els_Vehicles[checkCarHash(k)].secType == string.lower("leds") and v.secPattern <= 140 then
+                            if vehIsReady[k] then
+                                runLedPatternSecondary(k, v.secPattern, function(cb) vehIsReady[k] = cb end)
+                            end
+                        elseif els_Vehicles[checkCarHash(k)].secType == string.lower("traf") and v.secPattern <= 36 then
+                            if vehIsReady[k] then
+                                runTrafPattern(k, v.secPattern, function(cb) vehIsReady[k] = cb end)
+                            end
                         end
                     end
+                else
+                    setExtraState(k, 7, 1)
+                    setExtraState(k, 8, 1)
+                    setExtraState(k, 9, 1)
+                end
+            end
+        end
+        Citizen.Wait(0)
+    end
+end)
+
+Citizen.CreateThread(function()
+    local vehIsReady = {}
+
+    while true do
+        for k,v in pairs(elsVehs) do
+            if not DoesEntityExist(k) then
+                vehIsReady[k] = true
+            end
+            if (v ~= nil or DoesEntityExist(k)) then
+                if vehIsReady == nil then
+                    vehIsReady = true
+                end
+                if (v.primary) then
+                    if (GetDistanceBetweenCoords(GetEntityCoords(k, true), GetEntityCoords(GetPlayerPed(-1), true), true) <= vehicleSyncDistance) then
+                        SetVehicleAutoRepairDisabled(k, true)
+
+                        if vehIsReady[k] == nil then
+                            vehIsReady[k] = true
+                        end
+
+                        if els_Vehicles[checkCarHash(k)].primType == string.lower("leds") and v.primPattern <= 140 then
+                            if vehIsReady[k] then
+                                runLedPatternPrimary(k, v.primPattern, function(cb) vehIsReady[k] = cb end)
+                            end
+                        end
+                    end
+                elseif (v.cruise or (v.stage == 3 and els_Vehicles[checkCarHash(k)].cruise.DisableLstgThree == false)) then
+                    if (GetDistanceBetweenCoords(GetEntityCoords(k, true), GetEntityCoords(GetPlayerPed(-1), true), true) <= vehicleSyncDistance) then
+                        SetVehicleAutoRepairDisabled(k, true)
+
+                        setExtraState(k, 1, els_Vehicles[checkCarHash(k)].cruise[1])
+                        setExtraState(k, 2, els_Vehicles[checkCarHash(k)].cruise[2])
+                        setExtraState(k, 3, els_Vehicles[checkCarHash(k)].cruise[3])
+                        setExtraState(k, 4, els_Vehicles[checkCarHash(k)].cruise[4])
+
+                    end
+                else
+                    setExtraState(k, 1, 1)
+                    setExtraState(k, 2, 1)
+                    setExtraState(k, 3, 1)
+                    setExtraState(k, 4, 1)
                 end
             end
         end
