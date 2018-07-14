@@ -591,18 +591,18 @@
     </Item>
     
     <Item>
-      <modelName>frdexplorer</modelName>
-      <txdName>frdexplorer</txdName>
-      <handlingId>POLICE3</handlingId>
-      <gameName>EXPLORER</gameName>
-      <vehicleMakeName>FORD</vehicleMakeName>
+      <modelName>suburban</modelName>
+      <txdName>suburban</txdName>
+      <handlingId>GRANGER</handlingId>
+      <gameName>SUBURBAN</gameName>
+      <vehicleMakeName>CHEVY</vehicleMakeName>
       <expressionDictName>null</expressionDictName>
       <expressionName>null</expressionName>
       <animConvRoofDictName>null</animConvRoofDictName>
       <animConvRoofName>null</animConvRoofName>
       <animConvRoofWindowsAffected />
       <ptfxAssetName>null</ptfxAssetName>
-      <audioNameHash>BALLER2</audioNameHash>
+      <audioNameHash>GRANGER</audioNameHash>
       <layout>LAYOUT_STANDARD</layout>
       <coverBoundOffsets>DOMINATOR_COVER_OFFSET_INFO</coverBoundOffsets>
       <explosionInfo>EXPLOSION_INFO_DEFAULT</explosionInfo>

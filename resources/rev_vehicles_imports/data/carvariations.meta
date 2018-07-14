@@ -567,7 +567,7 @@
       <sirenSettings value="0" />
     </Item>
     <Item>
-      <modelName>frdexplorer</modelName>
+      <modelName>suburban</modelName>
       <colors>
         <Item>
           <indices content="char_array">
