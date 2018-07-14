@@ -546,10 +546,10 @@
       <colors>
         <Item>
           <indices content="char_array">
-            70
-            70
-            74
-            0
+            110
+            110
+            106
+            156
           </indices>
           <liveries>
             <Item value="false" />
