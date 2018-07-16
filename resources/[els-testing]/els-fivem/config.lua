@@ -53,6 +53,7 @@ vcf_files = {
 	'sheriff2.xml',
 	'sheriff3.xml',
 	'towtruck.xml',
+	'dinghy.xml'
 }
 
 pattern_files = {
