@@ -7,9 +7,9 @@
     <Item>
       <modelName>uscg</modelName>
       <txdName>uscg</txdName>
-      <handlingId>PREDATOR</handlingId>
-      <gameName>PREDATOR</gameName>
-      <vehicleMakeName />
+      <handlingId>DINGHY</handlingId>
+      <gameName>POLBOAT</gameName>
+      <vehicleMakeName>POLICE</vehicleMakeName>
       <expressionDictName>null</expressionDictName>
       <expressionName>null</expressionName>
       <animConvRoofDictName>null</animConvRoofDictName>
