@@ -9,7 +9,7 @@
       <txdName>uscg</txdName>
       <handlingId>DINGHY</handlingId>
       <gameName>POLBOAT</gameName>
-      <vehicleMakeName>POLICE</vehicleMakeName>
+      <vehicleMakeName>POLDING</vehicleMakeName>
       <expressionDictName>null</expressionDictName>
       <expressionName>null</expressionName>
       <animConvRoofDictName>null</animConvRoofDictName>
@@ -27,26 +27,26 @@
       <povCameraName>DEFAULT_POV_CAMERA</povCameraName>
       <FirstPersonDriveByIKOffset x="0.000000" y="-0.040000" z="-0.033000" />
       <FirstPersonDriveByUnarmedIKOffset x="0.000000" y="0.000000" z="0.000000" />
-	  <FirstPersonProjectileDriveByIKOffset x="0.000000" y="0.000000" z="-0.050000" />
-	  <FirstPersonProjectileDriveByPassengerIKOffset x="0.000000" y="0.000000" z="-0.050000" />
-	  <FirstPersonProjectileDriveByRearLeftIKOffset x="0.000000" y="0.000000" z="-0.063000" />
-	  <FirstPersonProjectileDriveByRearRightIKOffset x="0.000000" y="0.000000" z="-0.063000" />
-	  <FirstPersonDriveByLeftPassengerIKOffset x="-0.030000" y="0.015000" z="-0.046000" />
-	  <FirstPersonDriveByRightPassengerIKOffset x="0.000000" y="-0.020000" z="-0.041000" />
-	  <FirstPersonDriveByRightRearPassengerIKOffset x="0.033000" y="0.020000" z="-0.070000" />
-	  <FirstPersonDriveByLeftPassengerUnarmedIKOffset x="0.000000" y="0.000000" z="0.000000" />
-	  <FirstPersonDriveByRightPassengerUnarmedIKOffset x="0.000000" y="0.000000" z="0.000000" />
-	  <FirstPersonMobilePhoneOffset x="0.155000" y="0.315000" z="0.643000" />
+      <FirstPersonProjectileDriveByIKOffset x="0.000000" y="0.000000" z="-0.050000" />
+      <FirstPersonProjectileDriveByPassengerIKOffset x="0.000000" y="0.000000" z="-0.050000" />
+      <FirstPersonProjectileDriveByRearLeftIKOffset x="0.000000" y="0.000000" z="-0.063000" />
+      <FirstPersonProjectileDriveByRearRightIKOffset x="0.000000" y="0.000000" z="-0.063000" />
+      <FirstPersonDriveByLeftPassengerIKOffset x="-0.030000" y="0.015000" z="-0.046000" />
+      <FirstPersonDriveByRightPassengerIKOffset x="0.000000" y="-0.020000" z="-0.041000" />
+      <FirstPersonDriveByRightRearPassengerIKOffset x="0.033000" y="0.020000" z="-0.070000" />
+      <FirstPersonDriveByLeftPassengerUnarmedIKOffset x="0.000000" y="0.000000" z="0.000000" />
+      <FirstPersonDriveByRightPassengerUnarmedIKOffset x="0.000000" y="0.000000" z="0.000000" />
+      <FirstPersonMobilePhoneOffset x="0.155000" y="0.315000" z="0.643000" />
       <FirstPersonPassengerMobilePhoneOffset x="0.113000" y="0.450000" z="0.503000" />
       <FirstPersonMobilePhoneSeatIKOffset>
-		<Item>
-			<Offset x="0.113000" y="0.450000" z="0.596000" />
-			<SeatIndex value="2" />
-		</Item>
-		<Item>
-			<Offset x="0.113000" y="0.450000" z="0.596000" />
-			<SeatIndex value="3" />
-		</Item>
+        <Item>
+          <Offset x="0.113000" y="0.450000" z="0.596000" />
+          <SeatIndex value="2" />
+        </Item>
+        <Item>
+          <Offset x="0.113000" y="0.450000" z="0.596000" />
+          <SeatIndex value="3" />
+        </Item>
       </FirstPersonMobilePhoneSeatIKOffset>
       <PovCameraOffset x="0.000000" y="-0.050000" z="0.755000" />
       <PovCameraVerticalAdjustmentForRollCage value="-0.045000" />
