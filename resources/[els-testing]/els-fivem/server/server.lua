@@ -1,15 +1,92 @@
 vehicleInfoTable = {}
 patternInfoTable = {}
 
-_VERSION = "1.1.5b"
-_BUILD = "development"
+_VERSION = "1.1.3a"
+local updateAvailable = false
 
-print("\n---------- ELS (" .. _BUILD .. " Build) by MrDaGree ----------")
-print('           Current Version: ' .. _VERSION)
-print('\n  Whats the point of putting something funny')
-print('             if its not even funny?')
-print('-------------------------------------------------')
 
+if build == nil then
+	PerformHttpRequest('https://raw.githubusercontent.com/MrDaGree/ELS-FiveM/master/VERSION.md', function(Error, NewestVersion, Header)
+		PerformHttpRequest('https://raw.githubusercontent.com/MrDaGree/ELS-FiveM/master/CHANGES.md', function(Error, Changes, Header)
+			print("\n---------- ELS (master Build) by MrDaGree ----------")
+			print('           Current Version: ' .. _VERSION)
+			print('           Newest Version: ' .. NewestVersion)
+			print('')
+			if _VERSION ~= NewestVersion then
+				print('---------- Outdated ----------\n')
+				PerformHttpRequest('https://raw.githubusercontent.com/MrDaGree/ELS-FiveM/master/PERVIOUSVERSION.md', function(Error, PreviousVersion, Header)
+					if _VERSION == PreviousVersion then
+						UpdateAvailable = true
+					end
+					if UpdateAvailable then
+						print('\nPlease download the newest version or use "els update"')
+						build = "master"
+					end
+				end)
+				
+				print('  CHANGES: \n' .. Changes)
+			else
+				UpdateAvailable = false
+				print('\n       All good! You are all up to date.')
+			end
+
+			print('\n  Whats the point of putting something funny')
+			print('             if its not even funny?')
+			print('-------------------------------------------------')
+		end)
+	end)
+else
+	PerformHttpRequest('https://raw.githubusercontent.com/MrDaGree/ELS-FiveM/' .. build .. '/VERSION.md', function(Error, NewestVersion, Header)
+		PerformHttpRequest('https://raw.githubusercontent.com/MrDaGree/ELS-FiveM/' .. build .. '/CHANGES.md', function(Error, Changes, Header)
+			print("\n---------- ELS (" .. build .. " Build) by MrDaGree ----------")
+			print('           Current Version: ' .. _VERSION)
+			print('           Newest Version: ' .. NewestVersion)
+			print('')
+			if _VERSION ~= NewestVersion then
+				print('---------- Outdated ----------\n')
+				PerformHttpRequest('https://git.mrdagree.com/mrdagree/ELS-FiveM-Info/raw/' .. build .. '/PERVIOUSVERSION.md', function(Error, PreviousVersion, Header)
+					if _VERSION == PreviousVersion then
+						UpdateAvailable = true
+					end
+					if UpdateAvailable then
+						print('\nPlease download the newest version or use "els update"')
+					end
+				end)
+				
+				print('  CHANGES: \n' .. Changes)
+			else
+				UpdateAvailable = false
+				print('\n       All good! You are all up to date.')
+			end
+
+			print('\n  Whats the point of putting something funny')
+			print('             if its not even funny?')
+			print('-------------------------------------------------')
+		end)
+	end)
+end
+
+RegisterServerEvent('els:update')
+AddEventHandler('els:update', function()
+	if UpdateAvailable then
+		PerformHttpRequest('https://raw.githubusercontent.com/MrDaGree/ELS-FiveM/' .. build .. '/CHANGEDFILES.md', function(Error, Content, Header)
+			ContentSplitted = stringsplit(Content, '\n')
+			for k, Line in ipairs(ContentSplitted) do
+				local PreviousContent = ''
+				if Line:find('-add') then
+					Line = Line:gsub('-add')
+					PreviousContent = LoadResourceFile(GetCurrentResourceName(), Line) .. '\n'
+				end
+				PerformHttpRequest('https://raw.githubusercontent.com/MrDaGree/ELS-FiveM/' .. build .. '/' .. Line, function(Error, NewContent, Header)
+					SaveResourceFile(GetCurrentResourceName(), Line, PreviousContent .. NewContent, -1)
+				end)
+			end
+		end)
+		print('Update finished! Enter "restart ' .. GetCurrentResourceName() .. '" now!')
+	else
+		print('This is already the newest version! [' .. _VERSION .. ']')
+	end
+end)
 
 RegisterCommand("els", function(source, args, rawCommand)
 
@@ -71,39 +148,8 @@ function parseVehData(xml, fileName)
 
     a = {}
     a.extras = {}
-    a.cruise = {}
 
     for i=1,#xml.root.el do
-    	if(xml.root.el[i].name == "PRML") then
-    		a.primType = string.lower(xml.root.el[i].attr['LightingFormat'])
-    	end
-    	if(xml.root.el[i].name == "SECL") then
-    		a.secType = string.lower(xml.root.el[i].attr['LightingFormat'])
-    	end
-    	if(xml.root.el[i].name == "WRNL") then
-    		a.warnType = string.lower(xml.root.el[i].attr['LightingFormat'])
-    	end
-		if(xml.root.el[i].name == "CRUISE") then
-    		for ex=1,#xml.root.el[i].kids do
-    			local elem = xml.root.el[i].kids[ex]
-    			if(xml.root.el[i].kids[ex].name== "UseExtras") then
-    				if elem.attr['Extra1'] == "true" then a.cruise[1] = 0 else a.cruise[1] = 1 end
-    				if elem.attr['Extra2'] == "true" then a.cruise[2] = 0 else a.cruise[2] = 1 end
-    				if elem.attr['Extra3'] == "true" then a.cruise[3] = 0 else a.cruise[3] = 1 end
-    				if elem.attr['Extra4'] == "true" then a.cruise[4] = 0 else a.cruise[4] = 1 end
-    			end
-
-    			if(xml.root.el[i].kids[ex].name== "DisableAtLstg3") then
-    				local elem = xml.root.el[i].kids[ex]
-    				if elem.kids[1].value == "true" then
-    					a.cruise.DisableLstgThree = true
-    				else
-    					a.cruise.DisableLstgThree = false
-    				end
-    			end
-    		end
-    	end
-
     	if(xml.root.el[i].name == "INTERFACE") then
     		for ex=1,#xml.root.el[i].kids do
     			if(xml.root.el[i].kids[ex].name== "LstgActivationType") then
@@ -112,49 +158,6 @@ function parseVehData(xml, fileName)
     					a.activateUp = true
     				else
     					a.activateUp = false
-    				end
-    			end
-    			if(xml.root.el[i].kids[ex].name== "InfoPanelHeaderColor") then
-    				local elem = xml.root.el[i].kids[ex]
-    				a.headerColor = {}
-    				if elem.kids[1].value == string.lower("grey") then
-    					a.headerColor['r'] = 40
-    					a.headerColor['g'] = 40
-    					a.headerColor['b'] = 40
-    				end
-    				if elem.kids[1].value == string.lower("white") then
-    					a.headerColor['r'] = 255
-    					a.headerColor['g'] = 255
-    					a.headerColor['b'] = 255
-    				end
-    			end
-    			if(xml.root.el[i].kids[ex].name== "InfoPanelButtonLightColor") then
-    				local elem = xml.root.el[i].kids[ex]
-    				a.buttonColor = {}
-    				if elem.kids[1].value == string.lower("green") then
-    					a.buttonColor['r'] = 0
-    					a.buttonColor['g'] = 255
-    					a.buttonColor['b'] = 0
-    				end
-    				if elem.kids[1].value == string.lower("red") then
-    					a.buttonColor['r'] = 255
-    					a.buttonColor['g'] = 0
-    					a.buttonColor['b'] = 0
-    				end
-    				if elem.kids[1].value == string.lower("blue") then
-    					a.buttonColor['r'] = 0
-    					a.buttonColor['g'] = 0
-    					a.buttonColor['b'] = 255
-    				end
-    				if elem.kids[1].value == string.lower("purple") then
-    					a.buttonColor['r'] = 170
-    					a.buttonColor['g'] = 0
-    					a.buttonColor['b'] = 255
-    				end
-    				if elem.kids[1].value == string.lower("orange") then
-    					a.buttonColor['r'] = 255
-    					a.buttonColor['g'] = 157
-    					a.buttonColor['b'] = 0
     				end
     			end
     		end
@@ -218,9 +221,7 @@ function parseVehData(xml, fileName)
 
     vehicleInfoTable[fileName] = a
 
-    if outputLoading and outputLoading ~= nil then
-    	print("Done with vehicle: " .. fileName)
-    end
+    print("Done with vehicle: " .. fileName)
 end
 
 function parsePatternData(xml, fileName)
@@ -228,7 +229,6 @@ function parsePatternData(xml, fileName)
     local primary = {}
     local secondary = {}
     local advisor = {}
-    local patternError = false
 
     fileName = string.sub(fileName, 1, -5)
 
@@ -473,29 +473,20 @@ function parsePatternData(xml, fileName)
     end
     patternInfoTable[#patternInfoTable + 1] = a
 
-    if outputLoading and outputLoading ~= nil then
-    	print("Done with pattern: " .. fileName)
-    end
+    print("Done with pattern: " .. fileName)
 end
 
 function parseObjSet(data, fileName)
-    local xml = SLAXML:dom(data, fileName)
+    local xml = SLAXML:dom(data)
+
     if xml and xml.root then
         if xml.root.name == "vcfroot" then
             parseVehData(xml, fileName)
         elseif xml.root.name == "pattern" then
         	parsePatternData(xml, fileName)
         end
-    end
-end
 
-function configCheck()
-	if (panelOffsetX == nil) then
-		print("\n\n[ERROR] Please add 'panelOffsetX = 0.0' to your config or you will not get a panel.\n\n")
-	end
-	if (panelOffsetY == nil) then
-		print("\n\n[ERROR] Please add 'panelOffsetY = 0.0' to your config or you will not get a panel.\n\n")
-	end
+    end
 end
 
 AddEventHandler('onResourceStart', function(name)
@@ -518,7 +509,6 @@ AddEventHandler('onResourceStart', function(name)
 		        parseObjSet(data, pattern_files[i])
 		    end
 	    end
-	    configCheck()
 	end
 end)
 
@@ -531,11 +521,6 @@ end)
 RegisterServerEvent("els:changeLightStage_s")
 AddEventHandler("els:changeLightStage_s", function(state, advisor, prim, sec)
 	TriggerClientEvent("els:changeLightStage_c", -1, source, state, advisor, prim, sec)
-end)
-
-RegisterServerEvent("els:changePartState_s")
-AddEventHandler("els:changePartState_s", function(part, state)
-	TriggerClientEvent("els:changePartState_c", -1, source, part, state)
 end)
 
 RegisterServerEvent("els:changeAdvisorPattern_s")
@@ -580,15 +565,5 @@ end)
 
 RegisterServerEvent("els:setTakedownState_s")
 AddEventHandler("els:setTakedownState_s", function(state)
-	TriggerClientEvent("els:setTakedownState_c", -1, source)
-end)
-
-RegisterServerEvent("els:setSceneLightState_s")
-AddEventHandler("els:setSceneLightState_s", function(state)
-	TriggerClientEvent("els:setSceneLightState_c", -1, source)
-end)
-
-RegisterServerEvent("els:setCruiseLights_s")
-AddEventHandler("els:setCruiseLights_s", function(state)
-	TriggerClientEvent("els:setCruiseLights_c", -1, source)
+	TriggerClientEvent("els:setTakedownState_c", -1, source, state)
 end)

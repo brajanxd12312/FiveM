@@ -1,5 +1,3 @@
-outputLoading = false
-
 vcf_files = {
 	'ambulance.xml',
 	'bcso1.xml',
@@ -55,7 +53,6 @@ vcf_files = {
 	'sheriff2.xml',
 	'sheriff3.xml',
 	'towtruck.xml',
-	
 }
 
 pattern_files = {
@@ -70,8 +67,16 @@ pattern_files = {
 	"T_ADVIS_FLASH.xml"
 }
 
-modelsWithFireSiren = {
-    "FIRETRUK",
+modelsWithTrafficAdvisor = {
+	'flatbed',
+	'hwaycar1',
+	'hwaycar5',
+	'police2'
+}
+
+modelsWithFireSiren =
+{
+    "FIRETRUK"
 }
 
 
@@ -79,23 +84,22 @@ modelsWithAmbWarnSiren =
 {   
     "AMBULANCE",
     "FIRETRUK",
-    "LGUARD",
+    "LGUARD"
 }
 
 stagethreewithsiren = false
 playButtonPressSounds = true
 vehicleStageThreeAdvisor = {
-    'flatbed',
+	'flatbed',
 	'hwaycar1',
 	'police2'
 }
 
 
 vehicleSyncDistance = 150
-envirementLightBrightness = 0.01
+envirementLightBrightness = 0.025
 
-panelOffsetX = 0.0
-panelOffsetY = 0.0
+build = "master"
 
 shared = {
 	horn = 86,
@@ -104,25 +108,22 @@ shared = {
 keyboard = {
 	modifyKey = 132,
 	stageChange = 85,
-	guiKey = 199,
-	takedown = 83,
+	guiKey = 243,
+	takedown = 245,
 	siren = {
 		tone_one = 157,
 		tone_two = 158,
 		tone_three = 160,
-		dual_toggle = 79,
-		dual_one = 164,
-		dual_two = 165,
-		dual_three = 159,
+		dual_toggle = 164,
+		dual_one = 165,
+		dual_two = 159,
+		dual_three = 161,
 	},
 	pattern = {
-		primary = 163,
-		secondary = 162,
-		warning = 161,
+		primary = 246,
+		secondary = 303,
+		advisor = 182,
 	},
-	warning = 246,
-	secondary = 303,
-	primary = 7,
 }
 
 controller = {
