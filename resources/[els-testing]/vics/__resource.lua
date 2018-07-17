@@ -13,7 +13,7 @@ files {
 data_file 'VEHICLE_METADATA_FILE' 'data/vehicles.meta'
 data_file 'VEHICLE_METADATA_FILE' 'data/vehicles_add.meta'
 data_file 'VEHICLE_METADATA_FILE' 'data/lspd_vehicles.meta'
-data_file 'VEHICLE_METADATA_FILE' 'data/boat_vehicles.meta'
+--data_file 'VEHICLE_METADATA_FILE' 'data/boat_vehicles.meta'
 data_file 'VEHICLE_VARIATION_FILE' 'data/carvariations.meta'
 data_file 'VEHICLE_VARIATION_FILE' 'data/carvariations_add.meta'
 data_file 'VEHICLE_VARIATION_FILE' 'data/lspd_carvariations.meta'
