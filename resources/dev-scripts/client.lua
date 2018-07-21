@@ -1,3 +1,15 @@
+local Keys = {
+    ["ESC"] = 322, ["F1"] = 288, ["F2"] = 289, ["F3"] = 170, ["F5"] = 166, ["F6"] = 167, ["F7"] = 168, ["F8"] = 169, ["F9"] = 56, ["F10"] = 57,
+    ["~"] = 243, ["1"] = 157, ["2"] = 158, ["3"] = 160, ["4"] = 164, ["5"] = 165, ["6"] = 159, ["7"] = 161, ["8"] = 162, ["9"] = 163, ["-"] = 84, ["="] = 83, ["BACKSPACE"] = 177,
+    ["TAB"] = 37, ["Q"] = 44, ["W"] = 32, ["E"] = 38, ["R"] = 45, ["T"] = 245, ["Y"] = 246, ["U"] = 303, ["P"] = 199, ["["] = 39, ["]"] = 40, ["ENTER"] = 18,
+    ["CAPS"] = 137, ["A"] = 34, ["S"] = 8, ["D"] = 9, ["F"] = 23, ["G"] = 47, ["H"] = 74, ["K"] = 311, ["L"] = 182,
+    ["LEFTSHIFT"] = 21, ["Z"] = 20, ["X"] = 73, ["C"] = 26, ["V"] = 0, ["B"] = 29, ["N"] = 249, ["M"] = 244, [","] = 82, ["."] = 81,
+    ["LEFTCTRL"] = 36, ["LEFTALT"] = 19, ["SPACE"] = 22, ["RIGHTCTRL"] = 70,
+    ["HOME"] = 213, ["PAGEUP"] = 10, ["PAGEDOWN"] = 11, ["DELETE"] = 178,
+    ["LEFT"] = 174, ["RIGHT"] = 175, ["TOP"] = 27, ["DOWN"] = 173,
+    ["NENTER"] = 201, ["N4"] = 108, ["N5"] = 60, ["N6"] = 107, ["N+"] = 96, ["N-"] = 97, ["N7"] = 117, ["N8"] = 61, ["N9"] = 118
+  }
+
 -- Set weapon to 'hands' after the player is given them. Prevents spawning in with weapon in hand.
 SetCurrentPedWeapon(GetPlayerPed(-1), 'WEAPON_UNARMED', 1)
 
@@ -35,9 +47,40 @@ end)
 
 -- test vehspawn
 --{vehspawnpoint, x: 530.68072509766, y: -169.94007873535, z: 54.908996582031, hdg: 180.43055725098},
-ESX = nil
-ESX.Game.SpawnVehicle('police', {
-    x = '530.68',
-    y = '-169.94',
-    z = '54.90'
-}, '180.43', nil)
+local vehicle = GetHashKey('lspd1')
+Citizen.CreateThread(function()
+	while true do
+		Citizen.Wait(0)
+		DrawMarker(1, 530.68, -169.94, 54.90, 0, 0, 0, 0, 0, 0, 2.001, 2.0001, 0.5001, 0, 155, 255, 200, 0, 0, 0, 0)
+				
+		if GetDistanceBetweenCoords(530.68, -169.94, 54.90, GetEntityCoords(LocalPed())) < 1 then
+			drawTxt('Press ~g~H~s~ to spawn a  ~b~something', 2, 1, 0.5, 0.8, 0.6, 255, 255, 255, 255)
+			if IsControlJustPressed(1, Keys["ENTER"]) then
+				--InitMenuHelico()
+                --Menu.hidden = not Menu.hidden
+                CreateVehicle(vehicle, 530.68, -169.94, 54.90, 180.43, true, false)
+			end
+		end
+		--Menu.renderGUI()
+	end
+end)
+
+
+--[[ RegisterNetEvent('farmg:c_classic')
+AddEventHandler('farmg:c_classic', function()
+	Citizen.Wait(0)
+	local myPed = GetPlayerPed(-1)
+	local player = PlayerId()
+	local vehicle = GetHashKey('lspd1')
+	RequestModel(vehicle)
+	while not HasModelLoaded(vehicle) do
+		Wait(1)
+	end
+	local plate = math.random(100, 900)
+	local coords = GetOffsetFromEntityInWorldCoords(GetPlayerPed(-1), 0, 15.0, 0)
+	local spawned_car = CreateVehicle(vehicle, coords, 2407.10864257813, 4958.5146484375, 44.6461868286133, true, false)
+	SetVehicleOnGroundProperly(spawned_car)
+	--SetPedIntoVehicle(myPed, spawned_car, - 1)
+	SetModelAsNoLongerNeeded(vehicle)
+	Citizen.InvokeNative(0xB736A491E64A32CF, Citizen.PointerValueIntInitialized(spawned_car))
+end) ]]
