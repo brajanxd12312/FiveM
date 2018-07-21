@@ -52,11 +52,11 @@ local vehicle = GetHashKey('12charger')
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
-		DrawMarker(23, 530.68, -169.94, 54.0, 0, 0, 0, 0, 0, 0, 2.001, 2.0001, 0.5001, 5, 196, 72, 200, 0, 0, 0, 0)
+		DrawMarker(23, 530.68, -169.94, 54.0, 0, 0, 0, 0, 0, 0, 2.001, 2.0001, 0.5001, 5, 196, 72, 100, 0, 0, 0, 0)
 				
 		if GetDistanceBetweenCoords(530.68, -169.94, 54.90, GetEntityCoords(GetPlayerPed(-1))) < 1 then
             SetTextComponentFormat('STRING')
-			AddTextComponentString('Press ~INPUT_CELLPHONE_SELECT~ to spawn it')
+			AddTextComponentString('Press ~INPUT_CELLPHONE_SELECT~ to interact with circle.')
 			DisplayHelpTextFromStringLabel(0, 0, 1, -1)
 			if IsControlJustPressed(1, 176) then
 				--InitMenuHelico()
