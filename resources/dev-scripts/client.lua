@@ -27,9 +27,8 @@ function ManageReticle()
     if ( DoesEntityExist( ped ) and not IsEntityDead( ped ) ) then
         local _, hash = GetCurrentPedWeapon( ped, true )
 
-        if ( GetFollowPedCamViewMode() ~= 4 and IsPlayerFreeAiming() and not HashInTable( hash ) ) then 
+        if ( IsPlayerFreeAiming() and not HashInTable( hash ) ) then 
             HideHudComponentThisFrame( 14 )
-            Citizen.Wait( 0 )
         end 
     end 
 end 
