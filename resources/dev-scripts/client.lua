@@ -57,7 +57,7 @@ Citizen.CreateThread(function()
             --drawTxt('Press ~g~H~s~ to spawn a  ~b~something', 2, 1, 0.5, 0.8, 0.6, 255, 255, 255, 255)
             --DisplayHelpTextThisFrame('Press ~g~ENTER~s~ to spawn it', false)
             SetTextComponentFormat('STRING')
-			AddTextComponentString('Press ~g~ENTER~s~ to spawn it')
+			AddTextComponentString('Press ' .. INPUT_CELLPHONE_SELECT .. ' to spawn it')
 			DisplayHelpTextFromStringLabel(0, 0, 1, -1)
 			if IsControlJustPressed(1, Keys["ENTER"]) then
 				--InitMenuHelico()
