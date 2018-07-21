@@ -59,13 +59,18 @@ Citizen.CreateThread(function()
 			AddTextComponentString('Press ~INPUT_CELLPHONE_SELECT~ to interact with circle.')
 			DisplayHelpTextFromStringLabel(0, 0, 1, -1)
 			if IsControlJustPressed(1, 176) then
-				--InitMenuHelico()
-                --Menu.hidden = not Menu.hidden
-                RequestModel(vehicle)
+				function EnableGui(enable)
+                    ...
+                    SendNUIMessage({
+                        type = "enableui",
+                        enable = enable
+                    })
+                end
+                --[[ RequestModel(vehicle)
                 while not HasModelLoaded(vehicle) do
                     Citizen.Wait(0)
                 end
-                CreateVehicle(vehicle,  533.78, -183.14,  53.89, 93.94, true, false)
+                CreateVehicle(vehicle,  533.78, -183.14,  53.89, 93.94, true, false) ]]
 			end
 		end
 		--Menu.renderGUI()
