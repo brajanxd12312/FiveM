@@ -29,7 +29,7 @@ function ManageReticle()
 
         if ( GetFollowPedCamViewMode() ~= 4 and IsPlayerFreeAiming() and not HashInTable( hash ) ) then 
             HideHudComponentThisFrame( 14 )
-            Citizen.Wait( 1 )
+            Citizen.Wait( 0 )
         end 
     end 
 end 
