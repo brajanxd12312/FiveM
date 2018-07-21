@@ -1,10 +1,10 @@
 print("Write /pos [comment] ingame to save the coords in a .txt in server's main folder")
 
 RegisterServerEvent("SaveCoords")
-AddEventHandler("SaveCoords", function( PlayerName , x , y , z , comment )
+AddEventHandler("SaveCoords", function( PlayerName , x , y , z , comment, hdg )
  file = io.open( PlayerName .. "-Coords.txt", "a")
     if file then
-        file:write("{x: " .. x .. ", y: " .. y .. ", z: " .. z .. ", desc: " .. comment .."},")
+        file:write("{" .. comment .. ", x: " .. x .. ", y: " .. y .. ", z: " .. z .. ", hdg: " .. hdg .. "},")
         file:write("\n")
     end
     file:close()
