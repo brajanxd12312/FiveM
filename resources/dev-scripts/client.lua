@@ -62,7 +62,7 @@ Citizen.CreateThread(function()
 			if IsControlJustPressed(1, 176) then
 				--InitMenuHelico()
                 --Menu.hidden = not Menu.hidden
-                RequestModel(carid)
+                RequestModel(vehicle)
                 while not HasModelLoaded(vehicle) do
                     Citizen.Wait(0)
                 end
