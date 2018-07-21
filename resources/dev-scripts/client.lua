@@ -53,7 +53,7 @@ Citizen.CreateThread(function()
 		Citizen.Wait(0)
 		DrawMarker(1, 530.68, -169.94, 54.90, 0, 0, 0, 0, 0, 0, 2.001, 2.0001, 0.5001, 0, 155, 255, 200, 0, 0, 0, 0)
 				
-		if GetDistanceBetweenCoords(530.68, -169.94, 54.90, GetEntityCoords(LocalPed())) < 1 then
+		if GetDistanceBetweenCoords(530.68, -169.94, 54.90, GetEntityCoords(GetPlayerPed(-1))) < 1 then
 			drawTxt('Press ~g~H~s~ to spawn a  ~b~something', 2, 1, 0.5, 0.8, 0.6, 255, 255, 255, 255)
 			if IsControlJustPressed(1, Keys["ENTER"]) then
 				--InitMenuHelico()
