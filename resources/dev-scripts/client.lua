@@ -32,3 +32,12 @@ Citizen.CreateThread(function()
 		end
 	end
 end)
+
+-- test vehspawn
+--{vehspawnpoint, x: 530.68072509766, y: -169.94007873535, z: 54.908996582031, hdg: 180.43055725098},
+
+ESX.Game.SpawnVehicle('police', {
+    x = '530.68',
+    y = '-169.94',
+    z = '54.90'
+}, '180.43', 'null')

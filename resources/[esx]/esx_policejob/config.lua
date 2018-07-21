@@ -39,12 +39,12 @@ Config.PoliceStations = {
     },
 
     AuthorizedVehicles = {
-      { name = 'police',  label = 'Véhicule de patrouille 1' },
-      { name = 'police2', label = 'Véhicule de patrouille 2' },
-      { name = 'police3', label = 'Véhicule de patrouille 3' },
-      { name = 'police4', label = 'Véhicule civil' },
-      { name = 'policeb', label = 'Moto' },
-      { name = 'policet', label = 'Van de transport' },
+      { name = 'police',  label = 'police' },
+      { name = 'police2', label = 'police2' },
+      { name = 'police3', label = 'police 3' },
+      { name = 'police4', label = 'police4' },
+      { name = 'policeb', label = 'bike' },
+      { name = 'policet', label = 'transport' },
     },
 
     Cloakrooms = {
