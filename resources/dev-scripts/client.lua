@@ -52,7 +52,7 @@ local vehicle = GetHashKey('12charger')
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
-		DrawMarker(23, 530.68, -169.94, 54.0, 0, 0, 0, 0, 0, 0, 2.001, 2.0001, 0.5001, 0, 155, 255, 200, 0, 0, 0, 0)
+		DrawMarker(23, 530.68, -169.94, 54.0, 0, 0, 0, 0, 0, 0, 2.001, 2.0001, 0.5001, 5, 196, 72, 200, 0, 0, 0, 0)
 				
 		if GetDistanceBetweenCoords(530.68, -169.94, 54.90, GetEntityCoords(GetPlayerPed(-1))) < 1 then
             SetTextComponentFormat('STRING')
