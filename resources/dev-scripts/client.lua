@@ -59,7 +59,7 @@ Citizen.CreateThread(function()
             SetTextComponentFormat('STRING')
 			AddTextComponentString('Press ~INPUT_CELLPHONE_SELECT~ to spawn it')
 			DisplayHelpTextFromStringLabel(0, 0, 1, -1)
-			if IsControlJustPressed(1, Keys["ENTER"]) then
+			if IsControlJustPressed(1, 176) then
 				--InitMenuHelico()
                 --Menu.hidden = not Menu.hidden
                 CreateVehicle(vehicle, 530.68, -169.94, 54.90, 180.43, true, false)
