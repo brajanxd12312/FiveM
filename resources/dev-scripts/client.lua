@@ -47,15 +47,14 @@ end)
 
 -- test vehspawn
 --{vehspawnpoint, x: 530.68072509766, y: -169.94007873535, z: 54.908996582031, hdg: 180.43055725098},
-local vehicle = GetHashKey('lspd1')
+--{djhbskjvd, x: 533.78875732422, y: -183.14451599121, z: 53.891761779785, hdg: 93.942649841309}
+local vehicle = GetHashKey('12charger')
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
 		DrawMarker(1, 530.68, -169.94, 54.90, 0, 0, 0, 0, 0, 0, 2.001, 2.0001, 0.5001, 0, 155, 255, 200, 0, 0, 0, 0)
 				
 		if GetDistanceBetweenCoords(530.68, -169.94, 54.90, GetEntityCoords(GetPlayerPed(-1))) < 1 then
-            --drawTxt('Press ~g~H~s~ to spawn a  ~b~something', 2, 1, 0.5, 0.8, 0.6, 255, 255, 255, 255)
-            --DisplayHelpTextThisFrame('Press ~g~ENTER~s~ to spawn it', false)
             SetTextComponentFormat('STRING')
 			AddTextComponentString('Press ~INPUT_CELLPHONE_SELECT~ to spawn it')
 			DisplayHelpTextFromStringLabel(0, 0, 1, -1)
@@ -66,7 +65,7 @@ Citizen.CreateThread(function()
                 while not HasModelLoaded(vehicle) do
                     Citizen.Wait(0)
                 end
-                CreateVehicle(vehicle, 530.68, -169.94, 54.90, 180.43, true, false)
+                CreateVehicle(vehicle,  533.78, -183.14,  53.89, 93.94, true, false)
 			end
 		end
 		--Menu.renderGUI()
