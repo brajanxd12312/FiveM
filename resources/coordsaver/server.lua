@@ -20,7 +20,7 @@ AddEventHandler("chatMessage", function(p, color, msg)
               comment = comment .. " " .. fullcmd[i]
           end
         end
-        if cmd == "/pos" then
+        if cmd == "/pos2" then
         	TriggerClientEvent("SaveCommand", p, comment)
         	CancelEvent()
         end
