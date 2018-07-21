@@ -2,41 +2,33 @@
 SetCurrentPedWeapon(GetPlayerPed(-1), 'WEAPON_UNARMED', 1)
 
 --[[------------------------------------------------------------------------
-    Remove Reticle on ADS (Third Person)
+    Remove Reticle on weapons
 ------------------------------------------------------------------------]]--
-local scopedWeapons = 
-{
-    100416529,  -- WEAPON_SNIPERRIFLE
-    205991906,  -- WEAPON_HEAVYSNIPER
-    3342088282  -- WEAPON_MARKSMANRIFLE
-}
+Citizen.CreateThread(function()
+	local isSniper = false
+	while true do
+		Citizen.Wait(0)
 
-function HashInTable( hash )
-    for k, v in pairs( scopedWeapons ) do 
-        if ( hash == v ) then 
-            return true 
-        end 
-    end 
+    	local ped = GetPlayerPed(-1)
 
-    return false 
-end 
+		
+		--print(GetHashKey("WEAPON_SNIPERRIFLE"))
+		local currentWeaponHash = GetSelectedPedWeapon(ped)
 
-function ManageReticle()
-    local ped = GetPlayerPed( -1 )
+		if currentWeaponHash == 100416529 then
+			isSniper = true
+		elseif currentWeaponHash == 205991906 then
+			isSniper = true
+		elseif currentWeaponHash == -952879014 then
+			isSniper = true
+		elseif currentWeaponHash == GetHashKey('WEAPON_HEAVYSNIPER_MK2') then
+			isSniper = true
+		else
+			isSniper = false
+		end
 
-    if ( DoesEntityExist( ped ) and not IsEntityDead( ped ) ) then
-        local _, hash = GetCurrentPedWeapon( ped, true )
-
-        if ( IsPlayerFreeAiming() and not HashInTable( hash ) ) then 
-            HideHudComponentThisFrame( 14 )
-        end 
-    end 
-end 
-
-Citizen.CreateThread( function()
-    while true do 
-        ManageReticle()
-
-        Citizen.Wait( 0 )
-    end 
-end )
+		if not isSniper then
+			HideHudComponentThisFrame(14)
+		end
+	end
+end)
