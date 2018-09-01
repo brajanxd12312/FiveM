@@ -45,16 +45,45 @@ Citizen.CreateThread(function()
 	end
 end)
 
+function Draw3DText(x,y,z,textInput,fontId,scaleX,scaleY)
+	local px,py,pz=table.unpack(GetGameplayCamCoords())
+	local dist = GetDistanceBetweenCoords(px,py,pz, x,y,z, 1)
+
+	local scale = (1/dist)*20
+	local fov = (1/GetGameplayCamFov())*100
+	local scale = scale*fov
+
+	SetTextScale(scaleX*scale, scaleY*scale)
+	SetTextFont(fontId)
+	SetTextProportional(1)
+	SetTextColour(255, 255, 255, 250)
+	SetTextDropshadow(1, 1, 1, 1, 255)
+	SetTextEdge(2, 0, 0, 0, 150)
+	SetTextDropShadow()
+	SetTextOutline()
+	SetTextEntry("STRING")
+	SetTextCentre(1)
+	AddTextComponentString(textInput)
+	SetDrawOrigin(x,y,z+2, 0)
+	DrawText(0.0, 0.0)
+	ClearDrawOrigin()
+   end
+
 -- test vehspawn
 --{vehspawnpoint, x: 530.68072509766, y: -169.94007873535, z: 54.908996582031, hdg: 180.43055725098},
 --{djhbskjvd, x: 533.78875732422, y: -183.14451599121, z: 53.891761779785, hdg: 93.942649841309}
 local vehicle = GetHashKey('12charger')
+local imploc = {x = 530.68, y = -169.94, z = 54.90}
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
 		DrawMarker(23, 530.68, -169.94, 54.0, 0, 0, 0, 0, 0, 0, 2.001, 2.0001, 0.5001, 5, 196, 72, 100, 0, 0, 0, 0)
+
+		if GetDistanceBetweenCoords( imploc.x, imploc.y, imploc.z, GetEntityCoords(GetPlayerPed(-1))) < 50.0 then
+			Draw3DText( imploc.x, imploc.y, imploc.z, "Import Cars", 7, 0.3, 0.2)
+		end
 				
-		if GetDistanceBetweenCoords(530.68, -169.94, 54.90, GetEntityCoords(GetPlayerPed(-1))) < 1 then
+		--[[ if GetDistanceBetweenCoords(530.68, -169.94, 54.90, GetEntityCoords(GetPlayerPed(-1))) < 1 then
             SetTextComponentFormat('STRING')
 			AddTextComponentString('Press ~INPUT_CELLPHONE_SELECT~ to interact with circle.')
 			DisplayHelpTextFromStringLabel(0, 0, 1, -1)
@@ -65,8 +94,7 @@ Citizen.CreateThread(function()
                 end
                 CreateVehicle(vehicle,  533.78, -183.14,  53.89, 93.94, true, false)
 			end
-		end
-		--Menu.renderGUI()
+		end ]]
 	end
 end)
 
