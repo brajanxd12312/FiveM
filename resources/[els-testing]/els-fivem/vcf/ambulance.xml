@@ -5,22 +5,22 @@
 	<INTERFACE>
 		<LstgActivationType>auto</LstgActivationType>
 		<DefaultSirenMode>standby</DefaultSirenMode>
-		<InfoPanelHeaderColor>blue</InfoPanelHeaderColor>
+		<InfoPanelHeaderColor>red</InfoPanelHeaderColor>
 		<InfoPanelButtonLightColor>red</InfoPanelButtonLightColor>
 	</INTERFACE>
 	<!-- EXTRAS OVERRIDE AND ENV LIGHTING-->
 	<EOVERRIDE>	
 		<Extra01 IsElsControlled="true" AllowEnvLight="true" Color="red" OffsetX="-0.70" OffsetY="-0.20" OffsetZ="0.50" />
 		<Extra02 IsElsControlled="true" AllowEnvLight="true" Color="red" OffsetX="-0.25" OffsetY="-0.20" OffsetZ="0.50" />
-		<Extra03 IsElsControlled="true" AllowEnvLight="true" Color="blue" OffsetX="0.25" OffsetY="-0.20" OffsetZ="0.50" />
-		<Extra04 IsElsControlled="true" AllowEnvLight="true" Color="blue" OffsetX="0.70" OffsetY="-0.20" OffsetZ="0.50" />
-		<Extra05 IsElsControlled="true" AllowEnvLight="true" Color="red" OffsetX="-0.70" OffsetY="-0.20" OffsetZ="0.50" />
-		<Extra06 IsElsControlled="true" AllowEnvLight="true" Color="blue" OffsetX="0.70" OffsetY="-0.20" OffsetZ="0.50" />
+		<Extra03 IsElsControlled="true" AllowEnvLight="true" Color="red" OffsetX="0.25" OffsetY="-0.20" OffsetZ="0.50" />
+		<Extra04 IsElsControlled="true" AllowEnvLight="true" Color="red" OffsetX="0.70" OffsetY="-0.20" OffsetZ="0.50" />
+		<Extra05 IsElsControlled="true" AllowEnvLight="true" Color="white" OffsetX="-0.70" OffsetY="-0.20" OffsetZ="0.50" />
+		<Extra06 IsElsControlled="true" AllowEnvLight="true" Color="white" OffsetX="0.70" OffsetY="-0.20" OffsetZ="0.50" />
 		<Extra07 IsElsControlled="true" AllowEnvLight="true" Color="amber" OffsetX="-0.40" OffsetY="-0.80" OffsetZ="0.40" TrafficAdvisor="true" />
-		<Extra08 IsElsControlled="true" AllowEnvLight="true" Color="red" OffsetX="0.00" OffsetY="-0.80" OffsetZ="0.40" />
-		<Extra09 IsElsControlled="true" AllowEnvLight="true" Color="blue" OffsetX="0.40" OffsetY="-0.80" OffsetZ="0.40" />
-		<Extra10 IsElsControlled="true" AllowEnvLight="true" Color="white" OffsetX="0.25" OffsetY="-0.20" OffsetZ="0.50" />
-		<Extra11 IsElsControlled="true" AllowEnvLight="true" Color="white" OffsetX="0.40" OffsetY="-0.80" OffsetZ="0.40" /> 
+		<Extra08 IsElsControlled="true" AllowEnvLight="true" Color="amber" OffsetX="0.00" OffsetY="-0.80" OffsetZ="0.40" />
+		<Extra09 IsElsControlled="true" AllowEnvLight="true" Color="amber" OffsetX="0.40" OffsetY="-0.80" OffsetZ="0.40" />
+		<Extra10 IsElsControlled="false" />
+		<Extra11 IsElsControlled="false" /> 
 		<Extra12 IsElsControlled="true" AllowEnvLight="true" Color="white" OffsetX="-0.40" OffsetY="-0.80" OffsetZ="0.40" /> 
 	</EOVERRIDE>
 	<!-- MISC -->
@@ -60,8 +60,8 @@
 	<!-- WRNL -->
 	<WRNL LightingFormat="leds" >
 		<PresetPatterns>
-			<Lstg2 Enabled="true" Pattern="35" />
-			<Lstg3 Enabled="true" Pattern="35" />
+			<Lstg2 Enabled="true" Pattern="53" />
+			<Lstg3 Enabled="true" Pattern="53" />
 		</PresetPatterns>
 		<ForcedPatterns>
 			<MainHorn Enabled="false" Pattern="17" />
@@ -81,8 +81,8 @@
 	<!-- PRML -->
 	<PRML LightingFormat="leds" ExtrasActiveAtLstg2="5and6" >
 		<PresetPatterns>
-			<Lstg2 Enabled="false" Pattern="67" />
-			<Lstg3 Enabled="true" Pattern="67" />
+			<Lstg2 Enabled="false" Pattern="125" />
+			<Lstg3 Enabled="true" Pattern="125" />
 		</PresetPatterns>
 		<ForcedPatterns>
 			<MainHorn Enabled="false" Pattern="17" />

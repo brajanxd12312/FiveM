@@ -1,5 +1,5 @@
 vcf_files = {
-	"ambulance.xml.xml",
+	"ambulance.xml",
 	"bcso1.xml",
 	"bcso2.xml",
 	"bcso3.xml",
