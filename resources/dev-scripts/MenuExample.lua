@@ -2,7 +2,7 @@ ketchup = false
 dish = "Banana"
 quantity = 1
 _menuPool = NativeUI.CreatePool()
-mainMenu = NativeUI.CreateMenu("Native UI", "~b~NATIVEUI SHOWCASE")
+mainMenu = NativeUI.CreateMenu("Import Cars", "~b~Import Vehicle Store")
 _menuPool:Add(mainMenu)
 
 function ShowNotification(text)
@@ -11,48 +11,6 @@ function ShowNotification(text)
     DrawNotification(false, false)
 end
 
-function AddMenuKetchup(menu)
-    local newitem = NativeUI.CreateCheckboxItem("Add ketchup?", ketchup, "Do you wish to add ketchup?")
-    menu:AddItem(newitem)
-    menu.OnCheckboxChange = function(sender, item, checked_)
-        if item == newitem then
-            ketchup = checked_
-            ShowNotification("~r~Ketchup status: ~b~"..tostring(ketchup))
-        end
-    end
-end
-
-function AddMenuFoods(menu)
-    local foods = {
-        "Banana",
-        "Apple",
-        "Pizza",
-        "Quartilicious",
-        "Steak",
-        0xF00D,
-    }
-    local newitem = NativeUI.CreateListItem("Food", foods, 1)
-    menu:AddItem(newitem)
-    menu.OnListChange = function(sender, item, index)
-        if item == newitem then
-            dish = item:IndexToItem(index)
-            ShowNotification("Preparing ~b~" .. dish .. "~w~...")
-        end
-    end
-end
-
-function AddMenuFoodCount(menu)
-    local amount = {}
-    for i = 1, 100 do amount[i] = i end
-    local newitem = NativeUI.CreateSliderItem("Quantity", amount, 1, false)
-    menu:AddItem(newitem)
-    menu.OnSliderChange = function(sender, item, index)
-        if item == newitem then
-            quantity = item:IndexToItem(index)
-            ShowNotification("Preparing ~r~" .. quantity .. " ~b~" .. dish .. "(s)~w~...")
-        end
-    end
-end
 
 function AddMenuCook(menu)
     local newitem = NativeUI.CreateItem("Cook!", "Cook the dish with the appropriate ingredients and ketchup.")
@@ -75,6 +33,17 @@ function AddMenuCook(menu)
     end
 end
 
+function AddVehicle16Charger(menu)
+    local newcar = NativeUI.CreateItem("Purcharse 2016 Dodge Charger", "$42,000")
+    menu:AddItem(newcar)
+    menu.OnItemSelect = function(sender, item, index)
+        if item == newitem then
+            local string = "You have ordered ~r~" .. quantity .. " ~b~"..dish.."(s)~w~ ~r~with~w~ ketchup."
+            ShowNotification(string)
+        end
+    end
+end
+
 function AddMenuAnotherMenu(menu)
     local submenu = _menuPool:AddSubMenu(menu, "Another Menu")
     for i = 1, 20, 1 do
@@ -82,9 +51,7 @@ function AddMenuAnotherMenu(menu)
     end
 end
 
-AddMenuKetchup(mainMenu)
-AddMenuFoods(mainMenu)
-AddMenuFoodCount(mainMenu)
+AddVehicle16Charger(mainmenu)
 AddMenuCook(mainMenu)
 AddMenuAnotherMenu(mainMenu)
 _menuPool:RefreshIndex()
@@ -93,8 +60,14 @@ Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
         _menuPool:ProcessMenus()
-        if IsControlJustPressed(1, 51) then
-            mainMenu:Visible(not mainMenu:Visible())
+        if GetDistanceBetweenCoords(530.68, -169.94, 54.90, GetEntityCoords(GetPlayerPed(-1))) < 1 then
+            SetTextComponentFormat('STRING')
+            AddTextComponentString('Press ~INPUT_CELLPHONE_SELECT~ to interact with circle.')
+            DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+            if IsControlJustPressed(1, 176) then
+                mainMenu:Visible(not mainMenu:Visible())
+            end
         end
     end
 end)
+

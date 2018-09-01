@@ -6394,6 +6394,18 @@
             
             </summary>
         </member>
+        <member name="F:CitizenFX.Core.Native.Hash.GET_RESOURCE_PATH">
+            <summary>
+            Returns the physical on-disk path of the specified resource.
+            
+            </summary>
+        </member>
+        <member name="F:CitizenFX.Core.Native.Hash.GET_RESOURCE_STATE">
+            <summary>
+            Returns the current state of the specified resource.
+            
+            </summary>
+        </member>
         <member name="F:CitizenFX.Core.Native.Hash.IS_DUPLICITY_VERSION">
             <summary>
             <summary>Gets whether or not this is the CitizenFX server.</summary>
@@ -6407,6 +6419,23 @@
             	If executed on the client, this file has to be included in `files` in the resource manifest.
             
             	Example: `local data = LoadResourceFile("devtools", "data.json")`
+            
+            </summary>
+        </member>
+        <member name="F:CitizenFX.Core.Native.Hash.REGISTER_RESOURCE_BUILD_TASK_FACTORY">
+            <summary>
+            Registers a build task factory for resources.
+            	The function should return an object (msgpack map) with the following fields:
+            	```
+            	{
+            		// returns whether the specific resource should be built
+            		shouldBuild = func(resourceName: string): bool,
+            		
+            		// asynchronously start building the specific resource.
+            		// call cb when completed
+            		build = func(resourceName: string, cb: func(success: bool, status: string): void): void
+            	}
+            	```
             
             </summary>
         </member>
@@ -6538,6 +6567,20 @@
             <param name="metadataKey">The key in the resource manifest.</param>
             <param name="index">The value index, in a range from [0..GET_NUM_RESOURCE_METDATA-1].</param>
         </member>
+        <member name="M:CitizenFX.Core.Native.API.GetResourcePath(System.String)">
+            <summary>
+            Returns the physical on-disk path of the specified resource.
+            </summary>
+            <param name="resourceName">The name of the resource.</param>
+            <returns>The resource directory name, possibly without trailing slash.</returns>
+        </member>
+        <member name="M:CitizenFX.Core.Native.API.GetResourceState(System.String)">
+            <summary>
+            Returns the current state of the specified resource.
+            </summary>
+            <param name="resourceName">The name of the resource.</param>
+            <returns>The resource state. One of `"missing", "started", "starting", "stopped", "stopping", "uninitialized" or "unknown"`.</returns>
+        </member>
         <member name="M:CitizenFX.Core.Native.API.IsDuplicityVersion">
             <summary>
             Gets whether or not this is the CitizenFX server.
@@ -6554,15 +6597,33 @@
             <param name="fileName">The file in the resource.</param>
             <returns>The file contents</returns>
         </member>
+        <member name="M:CitizenFX.Core.Native.API.RegisterResourceBuildTaskFactory(System.String,CitizenFX.Core.Native.InputArgument)">
+            <summary>
+            Registers a build task factory for resources.
+            The function should return an object (msgpack map) with the following fields:
+            ```
+            {
+            // returns whether the specific resource should be built
+            shouldBuild = func(resourceName: string): bool,
+            
+            // asynchronously start building the specific resource.
+            // call cb when completed
+            build = func(resourceName: string, cb: func(success: bool, status: string): void): void
+            }
+            ```
+            </summary>
+            <param name="factoryId">The identifier for the build task.</param>
+            <param name="factoryFn">The factory function.</param>
+        </member>
         <member name="M:CitizenFX.Core.Native.API.SaveResourceFile(System.String,System.String,System.String,System.Int32)">
             <summary>
             Writes the specified data to a file in the specified resource.
             Using a length of `-1` will automatically detect the length assuming the data is a C string.
             </summary>
             <param name="resourceName">The name of the resource.</param>
-            <param name="dataLength">The length of the written data.</param>
-            <param name="data">The data to write to the file.</param>
             <param name="fileName">The name of the file.</param>
+            <param name="data">The data to write to the file.</param>
+            <param name="dataLength">The length of the written data.</param>
             <returns>A value indicating if the write succeeded.</returns>
         </member>
         <member name="M:CitizenFX.Core.Native.API.SetEntityCoords(System.Int32,System.Single,System.Single,System.Single,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
@@ -6615,6 +6676,12 @@
             Returns whether or not the currently executing event was canceled. See https://wiki.fivem.net/wiki/WasEventCanceled
             </summary>
             <returns>A boolean.</returns>
+        </member>
+        <member name="M:CitizenFX.Core.Player.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:CitizenFX.Core.Player.GetHashCode">
+            <inheritdoc />
         </member>
         <member name="P:CitizenFX.Core.IdentifierCollection.Item(System.String)">
             <summary>
