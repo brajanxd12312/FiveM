@@ -15,7 +15,6 @@ vcf_files = {
 	"fbi4.xml",
 	"fbi6.xml",
 	"firetruk.xml",
-	"flatbed.xml",
 	"hwaycar1.xml",
 	"hwaycar2.xml",
 	"hwaycar3.xml",
