@@ -5,8 +5,8 @@ Config.AccountLabels            = { bank = 'Bank', black_money = 'Dirty Money' }
 -- Config.AccountLabels            = { bank = 'Bank', black_money = 'Dirty Money' } -- English
 Config.PaycheckInterval         = 7 * 60000
 Config.ShowDotAbovePlayer       = true
-Config.DisableWantedLevel       = true
+Config.DisableWantedLevel       = false
 Config.RemoveInventoryItemDelay = 5 * 60000
 Config.EnableWeaponPickup       = true
 Config.Locale                   = 'en'
-Config.EnableDebug              = false
+Config.EnableDebug              = true

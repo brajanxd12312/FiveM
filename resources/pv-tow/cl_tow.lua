@@ -21,19 +21,48 @@ AddEventHandler('pv:tow', function()
 					if vehicle ~= targetVehicle then
 						AttachEntityToEntity(targetVehicle, vehicle, 20, -0.5, -5.0, 1.0, 0.0, 0.0, 0.0, false, false, false, false, 20, true)
 						currentlyTowedVehicle = targetVehicle
-						TriggerEvent("chatMessage", "[TowScript]", {255, 255, 0}, "Vehicle successfully attached to towtruck!")
+						TriggerEvent("pNotify:SendNotification", {
+							text = "<font size='3'>Vehicle successfully attached to towtruck!</font>",
+							type = "success",
+							timeout = 5000,
+							layout = "centerRight",
+							queue = "global",
+							theme = "gta"
+						})
 					else
-						TriggerEvent("chatMessage", "[TowScript]", {191, 1, 1}, "Are you retarded? You cant tow your own towtruck with your own towtruck!")
+						TriggerEvent("pNotify:SendNotification", {
+							text = "<font size='3'>Are you retarded? You cant tow your own towtruck with your own towtruck!</font>",
+							type = "warning",
+							timeout = 5000,
+							layout = "centerRight",
+							queue = "global",
+							theme = "gta"
+						})
 					end
 				end
 			else
-				TriggerEvent("chatMessage", "[TowScript]", {255, 255, 0}, "Theres no vehicle to tow?")
+				TriggerEvent("pNotify:SendNotification", {
+					text = "<font size='3'>Theres no vehicle to tow?</font>",
+					type = "error",
+					timeout = 5000,
+					layout = "centerRight",
+					queue = "global",
+					theme = "gta"
+				})
 			end
 		else
 			AttachEntityToEntity(currentlyTowedVehicle, vehicle, 20, -0.5, -12.0, 1.0, 0.0, 0.0, 0.0, false, false, false, false, 20, true)
 			DetachEntity(currentlyTowedVehicle, true, true)
 			currentlyTowedVehicle = nil
 			TriggerEvent("chatMessage", "[TowScript]", {255, 255, 0}, "The vehicle has been successfully detached!")
+			TriggerEvent("pNotify:SendNotification", {
+				text = "<font size='3'>The vehicle has been successfully detached!</font>",
+				type = "success",
+				timeout = 5000,
+				layout = "centerRight",
+				queue = "global",
+				theme = "gta"
+			})
 		end
 	end
 end)

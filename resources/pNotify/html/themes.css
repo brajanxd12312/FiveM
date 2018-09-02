@@ -37,26 +37,26 @@
 
 .noty_theme__gta.noty_type__warning {
     background-color: rgb(40, 40, 40);
-    border-top: 2px solid #E89F3C;
+    border-top: 2px solid rgb(240, 143, 6);
     color: white;
 }
 
 .noty_theme__gta.noty_type__error {
     background-color: rgb(40, 40, 40);
-    border-top: 2px solid #CA5A65;
+    border-top: 2px solid rgb(196, 13, 31);
     color: #fff;
 }
 
 .noty_theme__gta.noty_type__info,
 .noty_theme__gta.noty_type__information {
     background-color: rgb(40, 40, 40);
-    border-top: 2px solid #7473E8;
+    border-top: 2px solid rgb(3, 171, 238);
     color: #fff;
 }
 
 .noty_theme__gta.noty_type__success {
     background-color: rgb(40, 40, 40);
-    border-top: 2px solid #A0B55C;
+    border-top: 2px solid rgb(10, 187, 10);
     color: #fff;
 }
 

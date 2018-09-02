@@ -379,7 +379,7 @@
     opacity: .6; }
 
 .noty_theme__sunset.noty_type__success {
-  background-color: #06D6A0;
+  background-color: rgb(6, 214, 75);
   color: #fff; }
 
 .noty_theme__bootstrap-v3.noty_bar {
@@ -431,7 +431,7 @@
 
 .noty_theme__bootstrap-v3.noty_type__success {
   background-color: #dff0d8;
-  color: #3c763d;
+  color: #1eda21;
   border-color: #d6e9c6; }
 
 .noty_theme__bootstrap-v4.noty_bar {
