@@ -15,13 +15,13 @@
 		<Extra03 IsElsControlled="true" AllowEnvLight="true" Color="blue" OffsetX="0.25" OffsetY="-0.20" OffsetZ="0.50" />
 		<Extra04 IsElsControlled="true" AllowEnvLight="true" Color="blue" OffsetX="-0.25" OffsetY="-0.20" OffsetZ="0.50" />
 		<Extra05 IsElsControlled="true" AllowEnvLight="true" Color="red" OffsetX="-0.70" OffsetY="-0.20" OffsetZ="0.50" />
-		<Extra06 IsElsControlled="true" AllowEnvLight="false" Color="blue" OffsetX="0.70" OffsetY="-0.20" OffsetZ="0.50" />
+		<Extra06 IsElsControlled="true" AllowEnvLight="false" Color="amber" OffsetX="0.70" OffsetY="-0.20" OffsetZ="0.50" />
 		<Extra07 IsElsControlled="true" AllowEnvLight="true" Color="blue" OffsetX="-0.40" OffsetY="-0.80" OffsetZ="-0.40" />
-		<Extra08 IsElsControlled="true" AllowEnvLight="true" Color="red" OffsetX="-0.40" OffsetY="-0.80" OffsetZ="-0.40" />
+		<Extra08 IsElsControlled="false" AllowEnvLight="false" Color="red" OffsetX="-0.40" OffsetY="-0.80" OffsetZ="-0.40" />
 		<Extra09 IsElsControlled="true" AllowEnvLight="true" Color="red" OffsetX="0.40" OffsetY="-0.80" OffsetZ="0.40" />
-		<Extra10 IsElsControlled="true" AllowEnvLight="false" Color="red" OffsetX="-0.40" OffsetY="-0.80" OffsetZ="-0.40" />
-		<Extra11 IsElsControlled="true" AllowEnvLight="false" Color="white" OffsetX="0.70" OffsetY="-0.20" OffsetZ="-0.50" />
-		<Extra12 IsElsControlled="true" />
+		<Extra10 IsElsControlled="false" AllowEnvLight="false" Color="red" OffsetX="-0.40" OffsetY="-0.80" OffsetZ="-0.40" />
+		<Extra11 IsElsControlled="true" AllowEnvLight="true" Color="white" OffsetX="0.70" OffsetY="-0.20" OffsetZ="-0.50" />
+		<Extra12 IsElsControlled="false" AllowEnvLight="false" Color="red" OffsetX="-0.40" OffsetY="-0.80" OffsetZ="-0.40" />
 	</EOVERRIDE>
 	<!-- MISC -->
 	<MISC>
